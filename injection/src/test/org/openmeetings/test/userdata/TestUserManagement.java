@@ -1,7 +1,10 @@
 package org.openmeetings.test.userdata;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
+
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +12,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmeetings.app.data.beans.basic.SearchResult;
-import org.openmeetings.app.data.user.Addressmanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.persistence.beans.basic.Sessiondata;
@@ -19,7 +21,6 @@ import org.openmeetings.app.remote.MainService;
 import org.openmeetings.app.remote.UserService;
 import org.openmeetings.test.AbstractOpenmeetingsSpringTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import static junit.framework.Assert.*;
 
 public class TestUserManagement extends AbstractOpenmeetingsSpringTest {
 	private final static String USER_NAME = "swagner";
@@ -27,6 +28,7 @@ public class TestUserManagement extends AbstractOpenmeetingsSpringTest {
 	private final static String ORG_PREFIX = "Test Organization";
 	private final static String ORG_COMMENT = "No comments";
 	private final Long LEVEL_ADMIN = 3L;
+	private Random rnd;
 	
 	@Autowired
 	private MainService mService;
@@ -34,9 +36,10 @@ public class TestUserManagement extends AbstractOpenmeetingsSpringTest {
 	private UserService uService;
 	@Autowired
 	private Usermanagement userManagement;
+	//FIXME incomplete @Autowired
+	//FIXME incomplete private UserService userService;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
-	private Random rnd;
 	
 	private static final Logger log = Logger.getLogger(TestUserManagement.class);	
 
@@ -97,13 +100,23 @@ public class TestUserManagement extends AbstractOpenmeetingsSpringTest {
 			addOrganisation(u.getUser_id(), createOrganisation(ORG_PREFIX, u.getUser_id()));
 		}
 	}
+
+	@Test
+	public void testAddOrganisationViaService() {
+		Sessiondata sessionData = mService.getsessiondata();
+		String sid = sessionData.getSession_id();
+		Users us = (Users) mService.loginUser(sid, USER_NAME, USER_PASS, false, 1L, -1L);
+		assertNotNull("Failed to login user", us);
+		
+		//FIXME incomplete Users us1 = userService.getUserById(sid, us.getUser_id());
+	}
 	
 	@Test
 	public void testUsers(){
 		
 		Sessiondata sessionData = mService.getsessiondata();
 		
-		Users us = (Users) mService.loginUser(sessionData.getSession_id(), USER_NAME, USER_PASS, false, 1L, -1L);
+		mService.loginUser(sessionData.getSession_id(), USER_NAME, USER_PASS, false, 1L, -1L);
 		
 		SearchResult users = uService.getUserList(sessionData.getSession_id(), 0, 100, "firstname", false);
 		

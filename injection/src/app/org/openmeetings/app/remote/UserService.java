@@ -56,9 +56,9 @@ public class UserService {
 			UserService.class, ScopeApplicationAdapter.webAppRootKey);
 
 	@Autowired
-	private final ClientListManager clientListManager = null;
+	private ClientListManager clientListManager;
 	@Autowired
-	private final ScopeApplicationAdapter scopeApplicationAdapter = null;
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
 	@Autowired
