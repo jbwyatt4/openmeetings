@@ -2,12 +2,19 @@
 
 <wiki:toc max_depth="2" />
 
+== Possible Features ==
+
+  * Emebd Links to conference rooms into Drupal articles
+  * Single Sing on using your Drupal login
+  * List recordings in Drupal <depending on requirements>
+  * Embed recording links in articles <depending on requirements>
+
 == Demo video showing the integration ==
 
 Add your content here.
 
 
-== Where to get the Joomla Module ==
+== Where to get the Drupal Module ==
 
 Contact: <a href="service@openmeetings.de">service@openmeetings.de</a><br/>
 Sebastian Wagner
