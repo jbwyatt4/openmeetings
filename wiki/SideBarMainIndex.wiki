@@ -20,6 +20,7 @@
       * [WordpressIntegration Wordpress Integration]
       * [ELGG ELGG Plugin]
       * [IliasPlugin ILIAS Plugin]
+      * [DrupalIntegration Drupal Integration]
     * Integration API
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
