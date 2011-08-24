@@ -4,6 +4,15 @@
 <wiki:toc max_depth="2" />
 
 
+== Possible Features ==
+
+  * Emebd Links to conference rooms into Joomla articles
+  * Single Sing on using your Joomla login
+  * Access control to conference rooms based in room configuration in Joomla
+  * List recordings in Joomla <depending on requirements>
+  * Embed recording links in articles <depending on requirements>
+
+
 == !OpenMeetings Joomla Integration Sample Video ==
 
 
