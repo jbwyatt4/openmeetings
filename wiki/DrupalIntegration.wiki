@@ -9,7 +9,7 @@ Add your content here.
 
 == Where to get the Joomla Module ==
 
-Contact:<br/>
+Contact: <a href="service@openmeetings.de">service@openmeetings.de</a><br/>
 Sebastian Wagner
 Kaiserstraße 66
 76133 Karlsruhe
