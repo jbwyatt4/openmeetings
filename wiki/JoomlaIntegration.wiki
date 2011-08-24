@@ -15,9 +15,9 @@
 == Where to get the Joomla Module ==
 
 Contact:<br/>
-<p>Sebastian Wagner</p>
-<p>Kaiserstraße 66</p>
-76133 Karlsruhe<br/>
+Sebastian Wagner
+Kaiserstraße 66
+76133 Karlsruhe
 
 Telefon: ++49 (0) 721 467 27327
 Telefax: ++49 (0) 721 467 27327
