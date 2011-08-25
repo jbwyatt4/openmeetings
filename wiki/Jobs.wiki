@@ -6,13 +6,9 @@
 
   Contact:<br/>
   Sebastian Wagner<br/>
-  Haid-und-Neu-Straße 7<br/>
-  76131 Karlsruhe<br/>
-  0049 (0) 721 467 27328<br/>
-  Mail: mailto:seba.wagner@gmail.com<br/>
-  Jabber: seba _dot_ wagner _at_ gmail _dot_ com<br/>
-  Web: http://www.webbase-design.de<br/>
-  Skype: s.wagner1<br/>
+  0049 (0) 721 467 27327<br/>
+  Mail: mailto:service@openmeetings.de<br/>
+  Web: http://www.openmeetings.de<br/>
 
   ==> [http://www.webbase-design.de/side/OpenMeetings%20Hosting.pdf Current Pricing for Installation and Services around OpenMeetings, contact us if you have any questions]
 
