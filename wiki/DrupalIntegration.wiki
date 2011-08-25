@@ -23,7 +23,6 @@ Kaiserstraße 66
 
 Telefon: ++49 (0) 721 467 27327
 Telefax: ++49 (0) 721 467 27327
-e-Mail: mailto:service@openmeetings.de
 Website: www.openmeetings.de
 <br/>
 If you need a Demo on our system contact us and we will give you an account in our sandbox.
