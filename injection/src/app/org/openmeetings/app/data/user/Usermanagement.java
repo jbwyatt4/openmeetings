@@ -225,8 +225,7 @@ public class Usermanagement {
 		return null;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public List getUserByMod(Long user_level, long user_id) {
+	public List<Users> getUserByMod(Long user_level, long user_id) {
 		return null;
 	}
 

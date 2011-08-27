@@ -556,23 +556,6 @@ public class Organisationmanagement {
 		return null;
 	}
 
-	@SuppressWarnings("unused")
-	private boolean checkUserContainsOrganisation(long users_id,
-			long organisation_id) {
-		try {
-			Users us = usersDao.getUser(users_id);
-			for (@SuppressWarnings("rawtypes")
-			Iterator it = us.getOrganisation_users().iterator(); it.hasNext();) {
-				Organisation_Users orguser = (Organisation_Users) it.next();
-				if (orguser.getOrganisation().getOrganisation_id() == organisation_id)
-					return true;
-			}
-		} catch (Exception ex2) {
-			log.error("[checkUserContainsOrganisation]", ex2);
-		}
-		return false;
-	}
-
 	public SearchResult getUsersSearchResultByOrganisationId(
 			long organisation_id, int start, int max, String orderby,
 			boolean asc) {
@@ -580,9 +563,8 @@ public class Organisationmanagement {
 
 			SearchResult sResult = new SearchResult();
 			sResult.setObjectName(Users.class.getName());
-			sResult.setRecords(this
-					.selectMaxUsersByOrganisationId(organisation_id));
-			sResult.setResult(this.getUsersByOrganisationId(organisation_id,
+			sResult.setRecords(selectMaxUsersByOrganisationId(organisation_id));
+			sResult.setResult(getUsersByOrganisationId(organisation_id,
 					start, max, orderby, asc));
 			return sResult;
 
@@ -620,14 +602,17 @@ public class Organisationmanagement {
 	 * @param asc
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
-	public List getUsersByOrganisationId(long organisation_id, int start,
+	public List<Users> getUsersByOrganisationId(long organisation_id, int start,
 			int max, String orderby, boolean asc) {
 		try {
-			// get all users
-			String hql = "select c from Organisation_Users c "
-					+ "where c.deleted = 'false' "
-					+ "AND c.organisation.organisation_id = :organisation_id ";
+			String hql = 
+				"SELECT c FROM Users c "
+				+ "WHERE c.deleted = 'false' "
+				+ "AND c.user_id IN ("
+				+ "	SELECT ou.user_id FROM Organisation_Users ou "
+				+ " WHERE ou.deleted = 'false' "
+				+ "		AND ou.organisation.organisation_id = :organisation_id "
+				+ ")";
 			if (orderby.startsWith("c.")) {
 				hql += "ORDER BY " + orderby;
 			} else {
@@ -643,23 +628,9 @@ public class Organisationmanagement {
 			q.setParameter("organisation_id", organisation_id);
 			q.setFirstResult(start);
 			q.setMaxResults(max);
+
 			@SuppressWarnings("unchecked")
-			List<Organisation_Users> userOrg = q.getResultList();
-			List<Users> userL = new LinkedList<Users>();
-			for (Iterator<Organisation_Users> it = userOrg.iterator(); it
-					.hasNext();) {
-				Organisation_Users us = it.next();
-
-				// Only add this single Organization add this point cause
-				// cause all the other are not needed at this point
-				Users user = usersDao.getUser(us.getUser_id());
-
-				user.setOrganisation_users(new LinkedList<Organisation_Users>());
-				user.getOrganisation_users().add(us);
-
-				userL.add(user);
-			}
-			// Collections.sort(userL,new UsersFirstnameComperator());
+			List<Users> userL = q.getResultList();
 			return userL;
 		} catch (Exception ex2) {
 			log.error("[getUsersByOrganisationId]", ex2);
