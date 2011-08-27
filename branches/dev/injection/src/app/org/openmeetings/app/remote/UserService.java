@@ -25,11 +25,13 @@ import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
 import org.openmeetings.app.data.user.dao.UserContactsDaoImpl;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.persistence.beans.adresses.Adresses;
+import org.openmeetings.app.persistence.beans.domain.Organisation;
 import org.openmeetings.app.persistence.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.persistence.beans.recording.RoomClient;
 import org.openmeetings.app.persistence.beans.rooms.Rooms;
 import org.openmeetings.app.persistence.beans.user.PrivateMessageFolder;
 import org.openmeetings.app.persistence.beans.user.PrivateMessages;
+import org.openmeetings.app.persistence.beans.user.Salutations;
 import org.openmeetings.app.persistence.beans.user.UserContacts;
 import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.app.remote.red5.ClientListManager;
@@ -163,7 +165,7 @@ public class UserService {
 	 * @param SID
 	 * @return
 	 */
-	public List getUserSalutations(String SID, long language_id) {
+	public List<Salutations> getUserSalutations(String SID, long language_id) {
 		return salutationmanagement.getUserSalutations(language_id);
 	}
 
@@ -180,7 +182,7 @@ public class UserService {
 	 * @param asc
 	 * @return
 	 */
-	public List searchUser(String SID, String searchcriteria,
+	public List<Users> searchUser(String SID, String searchcriteria,
 			String searchstring, int max, int start, String orderby, boolean asc) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
@@ -199,15 +201,13 @@ public class UserService {
 	 * @param asc
 	 * @return
 	 */
-	public List getOrgUserList(String SID, long organisation_id, int start,
+	public List<Users> getOrgUserList(String SID, long organisation_id, int start,
 			int max, String orderby, boolean asc) {
-		Long users_id = sessionManagement.checkSession(SID);
-		Long user_level = userManagement.getUserLevelByID(users_id);
 		return organisationmanagement.getUsersByOrganisationId(organisation_id,
 				start, max, orderby, asc);
 	}
 
-	public List getUserListByModForm(String SID) {
+	public List<Users> getUserListByModForm(String SID) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
 		return userManagement.getUserByMod(user_level, users_id);
@@ -224,7 +224,7 @@ public class UserService {
 	 * @param asc
 	 * @return
 	 */
-	public List getOrganisationListByUser(String SID, long client_user,
+	public List<Organisation> getOrganisationListByUser(String SID, long client_user,
 			int start, int max, String orderby, boolean asc) {
 		Long users_id = sessionManagement.checkSession(SID);
 		long user_level = userManagement.getUserLevelByID(users_id);
@@ -243,7 +243,7 @@ public class UserService {
 	 * @param asc
 	 * @return
 	 */
-	public List getRestOrganisationListByUser(String SID, long client_user,
+	public List<Organisation> getRestOrganisationListByUser(String SID, long client_user,
 			int start, int max, String orderby, boolean asc) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
@@ -288,8 +288,6 @@ public class UserService {
 	 */
 	public SearchResult getAllUserBySearchRange(String SID, String search,
 			int start, int max, String orderby, boolean asc) {
-		Long users_id = sessionManagement.checkSession(SID);
-		Long user_level = userManagement.getUserLevelByID(users_id);
 		return userManagement.getAllUserByRange(search, start, max, orderby,
 				asc);
 	}
