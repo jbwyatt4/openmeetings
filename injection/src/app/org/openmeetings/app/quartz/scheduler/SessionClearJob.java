@@ -12,7 +12,7 @@ public class SessionClearJob {
 	private Sessionmanagement sessionManagement;
 
 	public void doIt() {
-		log.debug("SessionClearJob.execute");
+		log.trace("SessionClearJob.execute");
 		try {
 			// TODO Generate report
 			sessionManagement.clearSessionTable();
