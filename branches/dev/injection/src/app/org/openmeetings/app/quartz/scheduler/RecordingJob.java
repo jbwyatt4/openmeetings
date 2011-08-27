@@ -12,7 +12,7 @@ public class RecordingJob {
 	private WhiteboardConvertionJobManager whiteboardConvertionJobManager;
 
 	public void doIt() {
-		log.debug("RecordingJob.execute");
+		log.trace("RecordingJob.execute");
 		try {
 			// TODO Generate report
 			this.whiteboardConvertionJobManager.initJobs();
