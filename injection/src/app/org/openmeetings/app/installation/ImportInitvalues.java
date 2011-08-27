@@ -551,7 +551,7 @@ public class ImportInitvalues {
 					defaultOrganisationName, user_id);
 
 			// Add user to default group
-			organisationmanagement.addUserToOrganisation(new Long(1),
+			organisationmanagement.addUserToOrganisation(user_id,
 					organisation_id, null, "");
 		} catch (Exception e) {
 			log.error("[loadInitUserAndOrganisation] ", e);

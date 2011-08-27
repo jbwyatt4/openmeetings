@@ -32,12 +32,16 @@ public class Organisation_Users implements Serializable {
 	
 	@Column(name = "starttime")
 	private Date starttime;
+	
 	@Column(name = "updatetime")
 	private Date updatetime;
+	
 	@Column(name = "deleted")
 	private String deleted;
+	
 	@Column(name = "is_moderator")
 	private Boolean isModerator;
+	
 	@Column(name = "comment_field")
 	private String comment;
 

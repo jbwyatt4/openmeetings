@@ -55,6 +55,7 @@ public class ScreenServlet extends HttpServlet {
     private Usermanagement userManagement;
 	private UsersDaoImpl usersDao;
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	private ClientListManager clientListManager;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -64,6 +65,7 @@ public class ScreenServlet extends HttpServlet {
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
 		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
+		clientListManager = (ClientListManager)config.getServletContext().getAttribute("clientListManager");
 	}
 	
 	/* (non-Javadoc)
@@ -142,7 +144,7 @@ public class ScreenServlet extends HttpServlet {
 					boolean userIsInRoom = false;
 					boolean doProcess = false;
 					
-					HashMap<String, RoomClient> clientList = ClientListManager.getInstance().getClientList();
+					HashMap<String, RoomClient> clientList = clientListManager.getClientList();
 					for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
 						RoomClient rcl = clientList.get(iter.next());
 						if (rcl.getPublicSID().equals(publicSID)) {
@@ -355,7 +357,7 @@ public class ScreenServlet extends HttpServlet {
 				boolean userIsInRoom = false;
 				boolean doProcess = false;
 			
-				HashMap<String, RoomClient> clientList = ClientListManager.getInstance().getClientList();
+				HashMap<String, RoomClient> clientList = clientListManager.getClientList();
 				for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
 					RoomClient rcl = clientList.get(iter.next());
 					if (rcl.getPublicSID().equals(publicSID)) {

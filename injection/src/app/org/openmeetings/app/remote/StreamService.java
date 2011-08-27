@@ -59,7 +59,7 @@ public class StreamService implements IPendingServiceCallback {
 	public static String folderForRecordings = "recorded";
 
 	@Autowired
-	private ClientListManager clientListManager = null;
+	private ClientListManager clientListManager;
 	@Autowired
 	private RecordingDaoImpl recordingDao;
 	@Autowired
@@ -311,7 +311,7 @@ public class StreamService implements IPendingServiceCallback {
 			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
 			currentClient.setRoomRecordingName("");
-			ClientListManager.getInstance().updateClientByStreamId(
+			clientListManager.updateClientByStreamId(
 					currentClient.getStreamid(), currentClient);
 
 			String conferenceType = roomRecording.getConferenceType();
@@ -324,7 +324,7 @@ public class StreamService implements IPendingServiceCallback {
 					if (conn != null) {
 						if (conn instanceof IServiceCapableConnection) {
 
-							RoomClient rcl = ClientListManager.getInstance()
+							RoomClient rcl = clientListManager
 									.getClientByStreamId(
 											conn.getClient().getId());
 							log.debug("is this users still alive? :" + rcl);

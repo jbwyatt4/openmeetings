@@ -36,8 +36,6 @@ public class TestUserManagement extends AbstractOpenmeetingsSpringTest {
 	private UserService uService;
 	@Autowired
 	private Usermanagement userManagement;
-	//FIXME incomplete @Autowired
-	//FIXME incomplete private UserService userService;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
 	
@@ -76,41 +74,50 @@ public class TestUserManagement extends AbstractOpenmeetingsSpringTest {
 		}
 	}
 	
-	private void addOrganisation(Long userId, Long orgId) {
-		int count = organisationmanagement.getOrganisationsByUserId(LEVEL_ADMIN, userId, 0, Integer.MAX_VALUE, "name", true).size();
-		addUserToOrganisation(userId, orgId);
+	private void checkOrganisationCount(int count, Long userId) throws Exception {
 		int count2 = organisationmanagement.getOrganisationsByUserId(LEVEL_ADMIN, userId, 0, Integer.MAX_VALUE, "name", true).size();
-		assertEquals("Organisation count is not incremented", count + 1, count2);
+		assertEquals("Organisation count is not changed", count, count2);
+		Users u = userManagement.getUserById(userId);
+		int count3 = u.getOrganisation_users().size();
+		assertEquals("Organisation count in Users object is not changed", count, count3);
+	}
+	
+	private void addOrganisation(Long userId, Long orgId) throws Exception {
+		int count = organisationmanagement.getOrganisationsByUserId(LEVEL_ADMIN, userId, 0, Integer.MAX_VALUE, "name", true).size();
+		System.err.println("count = " + count);
+		Users u = userManagement.getUserById(userId);
+		System.err.println("count(user) = " + u.getOrganisation_users().size());
+		addUserToOrganisation(userId, orgId);
+		
+		checkOrganisationCount(count + 1, userId);
 	}
 	
 	@Test
-	public void testAddAdditionalOrganisation() throws Exception {
+	public void testAddRemoveAdditionalOrganisation() throws Exception {
 		Users u = userManagement.getUserByLogin(USER_NAME);
 		assertNotNull("Failed to fetch user", u);
 		
+		Long orgId = -1L;
 		boolean found = false;
+		
 		for (Organisation o : organisationmanagement.getOrganisations(LEVEL_ADMIN)) {
 			if (organisationmanagement.getOrganisation_UserByUserAndOrganisation(u.getUser_id(), o.getOrganisation_id()) == null){
 				found = true;
-				addOrganisation(u.getUser_id(), o.getOrganisation_id());
+				orgId = o.getOrganisation_id();
+				addOrganisation(u.getUser_id(), orgId);
 				break;
 			}
 		}
 		if (!found) {
-			addOrganisation(u.getUser_id(), createOrganisation(ORG_PREFIX, u.getUser_id()));
+			orgId = createOrganisation(ORG_PREFIX, u.getUser_id());
+			addOrganisation(u.getUser_id(), orgId);
 		}
+		
+		int count = organisationmanagement.getOrganisationsByUserId(LEVEL_ADMIN, u.getUser_id(), 0, Integer.MAX_VALUE, "name", true).size();
+		assertTrue("Failed to delete user from organisation", organisationmanagement.deleteUserFromOrganisation(LEVEL_ADMIN, u.getUser_id(), orgId) > 0);
+		checkOrganisationCount(count - 1, u.getUser_id());
 	}
 
-	@Test
-	public void testAddOrganisationViaService() {
-		Sessiondata sessionData = mService.getsessiondata();
-		String sid = sessionData.getSession_id();
-		Users us = (Users) mService.loginUser(sid, USER_NAME, USER_PASS, false, 1L, -1L);
-		assertNotNull("Failed to login user", us);
-		
-		//FIXME incomplete Users us1 = userService.getUserById(sid, us.getUser_id());
-	}
-	
 	@Test
 	public void testUsers(){
 		

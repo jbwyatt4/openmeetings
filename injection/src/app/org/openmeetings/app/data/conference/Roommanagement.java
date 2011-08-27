@@ -59,6 +59,8 @@ public class Roommanagement {
 	private UsersDaoImpl usersDao;
 	@Autowired
 	private AuthLevelmanagement authLevelManagement;
+	@Autowired
+	private ClientListManager clientListManager;
 
 	/**
 	 * add a new Record to the table roomtypes
@@ -162,8 +164,8 @@ public class Roommanagement {
 				Rooms room = this.getRoomById(rooms_id);
 
 				if (room != null) {
-					HashMap<String, RoomClient> map = ClientListManager
-							.getInstance().getClientListByRoom(
+					HashMap<String, RoomClient> map = clientListManager
+							.getClientListByRoom(
 									room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());
@@ -294,8 +296,8 @@ public class Roommanagement {
 
 				for (Rooms room : rooms) {
 
-					HashMap<String, RoomClient> map = ClientListManager
-							.getInstance().getClientListByRoom(
+					HashMap<String, RoomClient> map = clientListManager
+							.getClientListByRoom(
 									room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());
@@ -326,8 +328,8 @@ public class Roommanagement {
 
 				for (Rooms room : rooms) {
 
-					HashMap<String, RoomClient> map = ClientListManager
-							.getInstance().getClientListByRoom(
+					HashMap<String, RoomClient> map = clientListManager
+							.getClientListByRoom(
 									room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());
@@ -359,8 +361,8 @@ public class Roommanagement {
 
 				for (Rooms room : rooms) {
 
-					HashMap<String, RoomClient> map = ClientListManager
-							.getInstance().getClientListByRoom(
+					HashMap<String, RoomClient> map = clientListManager
+							.getClientListByRoom(
 									room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());

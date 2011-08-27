@@ -25,11 +25,11 @@ public class RTPStreamingHandler {
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			RTPStreamingHandler.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
-	// FIXME
-	private static Sessionmanagement sessionManagement;
+	private Sessionmanagement sessionManagement;
 	@Autowired
-	// FIXME
-	static private Usermanagement userManagement;
+	private Usermanagement userManagement;
+	@Autowired
+	private ClientListManager clientListManager;
 
 	@Autowired
 	private static Roommanagement roommanagement;
@@ -95,7 +95,7 @@ public class RTPStreamingHandler {
 	 * Retrieving Session data for Room
 	 */
 	// ---------------------------------------------------------------------------------------------
-	public static RTPScreenSharingSession getSessionForRoom(String room,
+	public RTPScreenSharingSession getSessionForRoom(String room,
 			String sid, String publicSID) throws Exception {
 		log.debug("getSessionForRoom");
 
@@ -146,7 +146,7 @@ public class RTPStreamingHandler {
 	 *         Store Session for Room
 	 */
 	// ---------------------------------------------------------------------------------------------
-	public static RTPScreenSharingSession storeSessionForRoom(String room,
+	public RTPScreenSharingSession storeSessionForRoom(String room,
 			Long sharing_user_id, String publicSID, String hostIP, int the_port)
 			throws Exception {
 		log.debug("storeSessionForRoom : Room = " + room + ", publicSID : "
@@ -155,7 +155,7 @@ public class RTPStreamingHandler {
 		// Defining The IP of the Sharer (Moderator)
 		// Should be retrieved via Clientlist to receive the "extern" IP, seen
 		// by red5
-		RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(
+		RoomClient rcl = clientListManager.getClientByPublicSID(
 				publicSID);
 
 		if (rcl == null)
@@ -203,8 +203,8 @@ public class RTPStreamingHandler {
 		session.setIncomingRTPPort(port);
 
 		// Pre-Define Viewers
-		HashMap<String, RoomClient> clientsForRoom = ClientListManager
-				.getInstance().getClientListByRoom(Long.parseLong(room));
+		HashMap<String, RoomClient> clientsForRoom = clientListManager
+				.getClientListByRoom(Long.parseLong(room));
 
 		Iterator<String> siter = clientsForRoom.keySet().iterator();
 
@@ -246,7 +246,7 @@ public class RTPStreamingHandler {
 	 * Remove Session
 	 */
 	// ---------------------------------------------------------------------------------------------
-	public static void removeSessionForRoom(String room, String sid)
+	public void removeSessionForRoom(String room, String sid)
 			throws Exception {
 		log.debug("removeSessionForRoom : " + room);
 

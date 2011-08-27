@@ -459,25 +459,14 @@ public class Organisationmanagement {
 	public Long addUserToOrganisation(Long user_id, Long organisation_id,
 			Long insertedby, String comment) {
 		try {
-			if (this.getOrganisation_UserByUserAndOrganisation(user_id,
-					organisation_id) == null) {
-				Organisation org = this.getOrganisationById(organisation_id);
-				log.debug("org: " + org.getName());
-
+			if (this.getOrganisation_UserByUserAndOrganisation(user_id, organisation_id) == null) {
 				Organisation_Users orgUser = new Organisation_Users();
-				orgUser.setOrganisation(org);
+				orgUser.setOrganisation(getOrganisationById(organisation_id));
 				orgUser.setUser_id(user_id);
 				orgUser.setDeleted("false");
-				orgUser.setStarttime(new Date());
 				orgUser.setComment(comment);
 
-				orgUser = em.merge(orgUser);
-
-				long id = orgUser.getOrganisation_users_id();
-
-				em.flush();
-
-				return id;
+				return addOrganisationUserObj(orgUser);
 			} else {
 				return -35L;
 			}
@@ -489,13 +478,18 @@ public class Organisationmanagement {
 
 	public Long addOrganisationUserObj(Organisation_Users orgUser) {
 		try {
+			Users u = usersDao.getUser(orgUser.getUser_id());
+			
 			orgUser.setStarttime(new Date());
 			orgUser = em.merge(orgUser);
-			long id = orgUser.getOrganisation_users_id();
 
-			em.refresh(usersDao.getUser(orgUser.getUser_id()));
-
-			return id;
+			//user should be updated to have recent organisation_users list
+			List<Organisation_Users> l = u.getOrganisation_users();
+			l.add(orgUser);
+			u.setOrganisation_users(l);
+			usersDao.updateUser(u);
+			
+			return orgUser.getOrganisation_users_id();
 		} catch (Exception ex2) {
 			log.error("[addUserToOrganisation]", ex2);
 		}
@@ -510,7 +504,7 @@ public class Organisationmanagement {
 					+ "  " + organisation_id);
 
 			Query q = em
-					.createQuery("select c from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id AND c.user_id = :user_id");
+				.createQuery("select c from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id AND c.user_id = :user_id");
 			q.setParameter("organisation_id", organisation_id);
 			q.setParameter("user_id", user_id);
 			@SuppressWarnings("unchecked")
@@ -533,25 +527,22 @@ public class Organisationmanagement {
 
 				log.error("deleteUserFromOrganisation " + user_id + "  "
 						+ organisation_id);
-
-				Organisation_Users orgUser = this
-						.getOrganisation_UserByUserAndOrganisation(user_id,
-								organisation_id);
-				log.error("org: " + orgUser.getOrganisation().getName());
-				orgUser.setDeleted("true");
-				orgUser.setUpdatetime(new Date());
-
-				if (orgUser.getOrganisation_users_id() == null) {
-					em.persist(orgUser);
-				} else {
-					if (!em.contains(orgUser)) {
-						em.merge(orgUser);
+				//user should be updated to have recent organisation_users list
+				Long id = null;
+				Users u = usersDao.getUser(user_id);
+				List<Organisation_Users> l = u.getOrganisation_users();
+				for (Organisation_Users ou : l) {
+					if (ou.getOrganisation().getOrganisation_id().equals(organisation_id)) {
+						l.remove(ou);
+						id = ou.getOrganisation_users_id();
+						em.remove(ou);
+						break;
 					}
 				}
+				u.setOrganisation_users(l);
+				usersDao.updateUser(u);
 
-				em.refresh(usersDao.getUser(user_id));
-
-				return orgUser.getOrganisation_users_id();
+				return id;
 			} else {
 				log.error("[deleteUserFromOrganisation] authorization required");
 			}
@@ -600,7 +591,7 @@ public class Organisationmanagement {
 	private Long selectMaxUsersByOrganisationId(long organisation_id) {
 		try {
 			Query query = em
-					.createQuery("select c.organisation_users_id from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id");
+				.createQuery("select c.organisation_users_id from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id");
 			query.setParameter("organisation_id", organisation_id);
 
 			@SuppressWarnings("rawtypes")
@@ -725,25 +716,20 @@ public class Organisationmanagement {
 			long user_id, int start, int max, String orderby, boolean asc) {
 		try {
 			if (authLevelManagement.checkAdminLevel(user_level)) {
-				String hql = "select c from Organisation_Users c "
-						+ "where c.deleted = 'false' "
-						+ "AND c.user_id = :user_id "
-						+ "GROUP BY c.organisation.organisation_id";
+				String hql = 
+					"SELECT o FROM Organisation o "
+					+ "WHERE o.deleted = 'false' "
+					+ "AND o.organisation_id IN ("
+					+ "	SELECT ou.organisation.organisation_id FROM Organisation_Users ou "
+					+ " WHERE ou.deleted = 'false' "
+					+ "		AND ou.user_id = :user_id "
+					+ ")";
 				Query q = em.createQuery(hql);
 				q.setParameter("user_id", user_id);
 				q.setFirstResult(start);
 				q.setMaxResults(max);
 				@SuppressWarnings("unchecked")
-				List<Organisation_Users> userOrgIds = q.getResultList();
-
-				LinkedList<Organisation> userOrg = new LinkedList<Organisation>();
-
-				for (Iterator<Organisation_Users> it = userOrgIds.iterator(); it
-						.hasNext();) {
-					Long org_id = it.next().getOrganisation()
-							.getOrganisation_id();
-					userOrg.add(this.getOrganisationById(org_id));
-				}
+				List<Organisation> userOrg = q.getResultList();
 
 				return userOrg;
 			}

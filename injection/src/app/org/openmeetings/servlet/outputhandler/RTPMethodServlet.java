@@ -34,12 +34,16 @@ public class RTPMethodServlet extends HttpServlet{
 	
 	private Sessionmanagement sessionManagement;
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	private ClientListManager clientListManager;
+	private RTPStreamingHandler rtpStreamingHandler; 
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
 		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
+		clientListManager = (ClientListManager)config.getServletContext().getAttribute("clientListManager");
+		rtpStreamingHandler = (RTPStreamingHandler)config.getServletContext().getAttribute("rtpStreamingHandler");
 	}
 	
 	@Override
@@ -82,7 +86,7 @@ public class RTPMethodServlet extends HttpServlet{
 			if (publicSID == null) 
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter publicSID!");
 			
-			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
+			RTPScreenSharingSession session = rtpStreamingHandler.getSessionForRoom(room, sid, publicSID);
 			
 			session.getReceiver().stop();
 			
@@ -94,7 +98,7 @@ public class RTPMethodServlet extends HttpServlet{
 			scopeApplicationAdapter.sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 			
 			// Remove Session
-			RTPStreamingHandler.removeSessionForRoom(room, sid);
+			rtpStreamingHandler.removeSessionForRoom(room, sid);
 			
 			
 		} catch(Exception err){
@@ -150,11 +154,11 @@ public class RTPMethodServlet extends HttpServlet{
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter rtpport!");
 			
 			
-			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
+			RTPScreenSharingSession session = rtpStreamingHandler.getSessionForRoom(room, sid, publicSID);
 			
 			if(session == null){
 				Long users_id = sessionManagement.checkSession(sid);
-				session = RTPStreamingHandler.storeSessionForRoom(room, users_id, publicSID, hostIP, Integer.parseInt(sharersPort));
+				session = rtpStreamingHandler.storeSessionForRoom(room, users_id, publicSID, hostIP, Integer.parseInt(sharersPort));
 			}
 			
 			width=request.getParameter("width");
@@ -182,14 +186,14 @@ public class RTPMethodServlet extends HttpServlet{
 			}
 			
 			// Starting ReceiverThread
-			session.startReceiver();
+			session.startReceiver(clientListManager);
 			
 			log.debug("startStreaming values : IPAddress Sharer : " + sharerIP + ", width=" + width + ", height=" + height + ",room=" + room);
 			log.debug("startStreaming publicSID=" + publicSID);
 			
 			//we have to include the publicSID to get the RoomClient Object
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object
-			RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
+			RoomClient rcl = clientListManager.getClientByPublicSID(publicSID);
 			
 			HashMap<String, Integer> viewers = session.getViewers();
 			

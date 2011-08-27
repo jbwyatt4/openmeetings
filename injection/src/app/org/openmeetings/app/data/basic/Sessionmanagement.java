@@ -42,6 +42,8 @@ public class Sessionmanagement {
 
 	@Autowired
 	private ManageCryptStyle manageCryptStyle;
+	@Autowired
+	private ClientListManager clientListManager;
 
 	/**
 	 * creates a new session-object in the database
@@ -515,8 +517,8 @@ public class Sessionmanagement {
 	public void clearSessionByRoomId(Long room_id) {
 		try {
 
-			HashMap<String, RoomClient> MyUserList = ClientListManager
-					.getInstance().getClientListByRoom(room_id);
+			HashMap<String, RoomClient> MyUserList = clientListManager
+					.getClientListByRoom(room_id);
 
 			for (Iterator<String> iter = MyUserList.keySet().iterator(); iter
 					.hasNext();) {
