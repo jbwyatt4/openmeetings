@@ -114,7 +114,7 @@ public class UsersDaoImpl {
 		try {
 			// get all users
 			Query query = em.createQuery("select count(c.user_id) from Users c where c.deleted = 'false'");
-			List ll = query.getResultList();
+			List<?> ll = query.getResultList();
 			log.info("selectMaxFromUsers" + ll.get(0));
 			return (Long) ll.get(0);
 		} catch (Exception ex2) {
@@ -197,7 +197,7 @@ public class UsersDaoImpl {
 			Query query = em.createQuery(hql);
 
 			// log.debug("id: "+folderId);
-			List ll = query.getResultList();
+			List<?> ll = query.getResultList();
 
 			// log.error((Long)ll.get(0));
 			Long i = (Long) ll.get(0);
@@ -331,7 +331,7 @@ public class UsersDaoImpl {
 			// get all users
 			Query query = em.createQuery(hql);
 			query.setParameter("search", StringUtils.lowerCase(search));
-			List ll = query.getResultList();
+			List<?> ll = query.getResultList();
 			log.info("selectMaxFromUsers" + ll.get(0));
 			return (Long) ll.get(0);
 		} catch (Exception ex2) {

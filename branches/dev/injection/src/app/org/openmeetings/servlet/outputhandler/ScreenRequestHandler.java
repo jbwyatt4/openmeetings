@@ -32,6 +32,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 	private Configurationmanagement cfgManagement;
 	private Usermanagement userManagement;
 	private Fieldmanagment fieldmanagment;
+	private RTPStreamingHandler rtpStreamingHandler;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -40,6 +41,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		fieldmanagment = (Fieldmanagment)config.getServletContext().getAttribute("fieldmanagment");
+		rtpStreamingHandler = (RTPStreamingHandler)config.getServletContext().getAttribute("rtpStreamingHandler");
 	}
 	
 	@Override
@@ -282,7 +284,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					} else if (conf_i == 2) {
 
 						// Storing Session data
-						RTPScreenSharingSession session = RTPStreamingHandler
+						RTPScreenSharingSession session = rtpStreamingHandler
 								.storeSessionForRoom(room, users_id, publicSID,
 										rtmphostlocal, -1);
 

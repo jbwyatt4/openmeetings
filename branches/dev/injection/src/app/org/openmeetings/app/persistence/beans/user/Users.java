@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,6 +31,7 @@ public class Users implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Long user_id;
+	
 	@Column(name = "age")
 	private Date age;
 	@Column(name = "availible")
@@ -64,24 +66,25 @@ public class Users implements Serializable {
 	private String deleted;
 	@Column(name = "language_id")
 	private Long language_id;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "adresses_id", insertable = true, updatable = true)
-	private Adresses adresses;
 	@Column(name = "resethash")
 	private String resethash;
 	@Column(name = "activatehash")
 	private String activatehash;
 
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "adresses_id", insertable = true, updatable = true)
+	private Adresses adresses;
+	
 	@Transient
 	private Userlevel userlevel;
-
 	@Transient
 	private Userdata rechnungsaddressen;
 	@Transient
 	private Userdata lieferadressen;
 	private Usergroups[] usergroups;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", insertable = true, updatable = true)
 	private List<Organisation_Users> organisation_users;
 

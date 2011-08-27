@@ -97,6 +97,8 @@ public class Usermanagement {
 	private ResetPasswordTemplate resetPasswordTemplate;
 	@Autowired
 	private AuthLevelmanagement authLevelManagement;
+	@Autowired
+	private ClientListManager clientListManager;
 
 	/**
 	 * query for a list of users
@@ -495,11 +497,9 @@ public class Usermanagement {
 
 					// add or delete organisations from this user
 					if (organisations != null) {
-						organisationmanagement.updateUserOrganisationsByUser(
-								us, organisations);
+						organisationmanagement.updateUserOrganisationsByUser(us, organisations);
 					}
-
-					em.refresh(us);
+					us = usersDao.getUser(user_id);
 
 					us.setLastname(lastname);
 					us.setFirstname(firstname);
@@ -1508,7 +1508,6 @@ public class Usermanagement {
 		if (id == 0) {
 			return null;
 		}
-
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 		Root<Users> c = cq.from(Users.class);
@@ -1525,7 +1524,6 @@ public class Usermanagement {
 		}
 
 		return u;
-
 	}
 
 	public Users getUserByIdAndDeleted(Long id) throws Exception {
@@ -1665,8 +1663,8 @@ public class Usermanagement {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = getUserLevelByID(users_id);
-			HashMap<String, RoomClient> MyUserList = ClientListManager
-					.getInstance().getClientListByRoom(room_id);
+			HashMap<String, RoomClient> MyUserList = clientListManager
+					.getClientListByRoom(room_id);
 
 			// admins only
 			if (authLevelManagement.checkAdminLevel(user_level)) {
@@ -1714,7 +1712,7 @@ public class Usermanagement {
 			// admins only
 			if (authLevelManagement.checkAdminLevel(user_level)) {
 
-				RoomClient rcl = ClientListManager.getInstance()
+				RoomClient rcl = clientListManager
 						.getClientByPublicSID(publicSID);
 
 				if (rcl == null) {

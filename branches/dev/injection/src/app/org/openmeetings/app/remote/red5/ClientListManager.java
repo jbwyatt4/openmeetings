@@ -23,19 +23,6 @@ public class ClientListManager {
 	@Autowired
 	private ManageCryptStyle manageCryptStyle;
 
-	private static ClientListManager instance = null;
-
-	private ClientListManager() {
-	}
-
-	public static synchronized ClientListManager getInstance() {
-
-		if (instance == null) {
-			instance = new ClientListManager();
-		}
-		return instance;
-	}
-
 	public synchronized RoomClient addClientListItem(String streamId,
 			String scopeName, Integer remotePort, String remoteAddress,
 			String swfUrl) {

@@ -56,6 +56,8 @@ public class RoomServiceProxy {
 	private AuthLevelmanagement authLevelManagement;
 	@Autowired
 	private ConferenceService conferenceService;
+	@Autowired
+	private ClientListManager clientListManager;
 
 	// TODO: Not implemented yet
 	// public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID,
@@ -398,8 +400,8 @@ public class RoomServiceProxy {
 				int i = 0;
 				for (Rooms room : rooms) {
 
-					HashMap<String, RoomClient> map = ClientListManager
-							.getInstance().getClientListByRoom(
+					HashMap<String, RoomClient> map = clientListManager
+							.getClientListByRoom(
 									room.getRooms_id());
 
 					// room.setCurrentusers(new LinkedList<RoomClient>());
@@ -462,8 +464,8 @@ public class RoomServiceProxy {
 				roomReturn.setName(room.getName());
 				roomReturn.setRoom_id(room.getRooms_id());
 
-				HashMap<String, RoomClient> map = ClientListManager
-						.getInstance().getClientListByRoom(room.getRooms_id());
+				HashMap<String, RoomClient> map = clientListManager
+						.getClientListByRoom(room.getRooms_id());
 
 				RoomUser[] roomUsers = new RoomUser[map.size()];
 

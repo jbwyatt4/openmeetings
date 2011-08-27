@@ -36,12 +36,14 @@ public class RTPSharerServlet extends VelocityViewServlet{
 	
 	private Sessionmanagement sessionManagement;
     private Usermanagement userManagement;
+    private RTPStreamingHandler rtpStreamingHandler;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		rtpStreamingHandler = (RTPStreamingHandler)config.getServletContext().getAttribute("rtpStreamingHandler");
 	}
 	
 	@Override
@@ -86,7 +88,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				String template = "rtp_player_applet.vm";
 				
 				// Retrieve Data from RTPmanager
-				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
+				RTPScreenSharingSession rsss = rtpStreamingHandler.getSessionForRoom(room, sid, publicSID);
 				
 				if(rsss == null){
 					log.error("no RTPSharingSession available for room " + room);

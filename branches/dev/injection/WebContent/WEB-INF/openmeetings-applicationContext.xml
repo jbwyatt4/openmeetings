@@ -117,6 +117,12 @@
 				<entry key="fileProcessor">
                     <ref bean="openmeetings.FileProcessor"/>
                 </entry>
+				<entry key="clientListManager">
+                    <ref bean="openmeetings.ClientListManager"/>
+                </entry>
+				<entry key="rtpStreamingHandler">
+                    <ref bean="rtpStreamingHandler"/>
+                </entry>
                 <!-- 
                 <entry key="mainService">
                     <ref bean="xmlcrm.service"/>
@@ -224,6 +230,7 @@
 	<bean id="authLevelManagement" class="org.openmeetings.app.data.basic.AuthLevelmanagement" />
 	<bean id="generateSWF" class="org.openmeetings.app.documents.GenerateSWF" />
 	<bean id="fileUtils" class="org.openmeetings.app.data.file.FileUtils" />
+	<bean id="rtpStreamingHandler" class="org.openmeetings.app.rtp.RTPStreamingHandler" />
 	
 	<!--  Templates -->
 	<bean id="registerUserTemplate" class="org.openmeetings.app.templates.RegisterUserTemplate" />

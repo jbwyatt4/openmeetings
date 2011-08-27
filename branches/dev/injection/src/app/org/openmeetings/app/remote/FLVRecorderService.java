@@ -431,8 +431,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 					if (conn != null) {
 						if (conn instanceof IServiceCapableConnection) {
 
-							RoomClient rcl = ClientListManager.getInstance()
-									.getClientByStreamId(
+							RoomClient rcl = clientListManager.getClientByStreamId(
 											conn.getClient().getId());
 
 							// FIXME: Check if this function is really in use at
