@@ -1,5 +1,6 @@
 package org.openmeetings.app.data.user;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -485,6 +486,9 @@ public class Organisationmanagement {
 
 			//user should be updated to have recent organisation_users list
 			List<Organisation_Users> l = u.getOrganisation_users();
+			if (l == null) {
+				l = new ArrayList<Organisation_Users>();
+			}
 			l.add(orgUser);
 			u.setOrganisation_users(l);
 			usersDao.updateUser(u);
