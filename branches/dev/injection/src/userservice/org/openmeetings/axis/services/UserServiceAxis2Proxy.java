@@ -8,10 +8,16 @@ import org.apache.axis2.transport.http.HTTPConstants;
 import org.openmeetings.app.data.beans.basic.ErrorResult;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.persistence.beans.basic.Sessiondata;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+import org.red5.logging.Red5LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class UserServiceAxis2Proxy {
+
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			UserServiceAxis2Proxy.class, ScopeApplicationAdapter.webAppRootKey);
 
 	// private static final String SPRING_CONTEXT_XML =
 	// "openmeetings-applicationContext.xml";
@@ -33,16 +39,21 @@ public class UserServiceAxis2Proxy {
 	//
 	// }
 
-	private ServletContext getServletContext() {
+	private ServletContext getServletContext() throws Exception {
 		MessageContext mc = MessageContext.getCurrentMessageContext();
 		return (ServletContext) mc
 				.getProperty(HTTPConstants.MC_HTTP_SERVLETCONTEXT);
 	}
 
 	private UserWebService getUserServiceProxy() {
-		ApplicationContext context = WebApplicationContextUtils
-				.getWebApplicationContext(getServletContext());
-		return (UserWebService) context.getBean("userServiceSoapProxy");
+		try {
+			ApplicationContext context = WebApplicationContextUtils
+					.getWebApplicationContext(getServletContext());
+			return (UserWebService) context.getBean("userServiceSoapProxy");
+		} catch (Exception err) {
+			log.error("[getUserServiceProxy]", err);
+		}
+		return null;
 	}
 
 	/**
@@ -50,7 +61,7 @@ public class UserServiceAxis2Proxy {
 	 * 
 	 * @return Sessiondata-Object
 	 */
-	public Sessiondata getSession() {
+	public Sessiondata getSession() throws AxisFault {
 		return getUserServiceProxy().getSession();
 	}
 
@@ -64,7 +75,8 @@ public class UserServiceAxis2Proxy {
 	 *         invoke the Method getErrorByCode to get the Text-Description of
 	 *         that ErrorCode
 	 */
-	public Long loginUser(String SID, String username, String userpass) {
+	public Long loginUser(String SID, String username, String userpass)
+			throws AxisFault {
 		return getUserServiceProxy().loginUser(SID, username, userpass);
 	}
 
@@ -227,7 +239,7 @@ public class UserServiceAxis2Proxy {
 			String username, String firstname, String lastname,
 			String profilePictureUrl, String email, Long externalUserId,
 			String externalUserType, Long room_id, int becomeModeratorAsInt,
-			int showAudioVideoTestAsInt) {
+			int showAudioVideoTestAsInt) throws AxisFault {
 		return getUserServiceProxy().setUserObjectAndGenerateRoomHashByURL(SID,
 				username, firstname, lastname, profilePictureUrl, email,
 				externalUserId, externalUserType, room_id,
@@ -238,7 +250,7 @@ public class UserServiceAxis2Proxy {
 			String username, String firstname, String lastname,
 			String profilePictureUrl, String email, Long externalUserId,
 			String externalUserType, Long room_id, int becomeModeratorAsInt,
-			int showAudioVideoTestAsInt, int allowRecording) {
+			int showAudioVideoTestAsInt, int allowRecording) throws AxisFault {
 		return getUserServiceProxy()
 				.setUserObjectAndGenerateRoomHashByURLAndRecFlag(SID, username,
 						firstname, lastname, profilePictureUrl, email,
@@ -249,7 +261,8 @@ public class UserServiceAxis2Proxy {
 
 	public String setUserObjectMainLandingZone(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
-			String email, Long externalUserId, String externalUserType) {
+			String email, Long externalUserId, String externalUserType)
+			throws AxisFault {
 		return getUserServiceProxy().setUserObjectMainLandingZone(SID,
 				username, firstname, lastname, profilePictureUrl, email,
 				externalUserId, externalUserType);
@@ -259,7 +272,8 @@ public class UserServiceAxis2Proxy {
 			String firstname, String lastname, String profilePictureUrl,
 			String email, Long externalUserId, String externalUserType,
 			Long room_id, int becomeModeratorAsInt,
-			int showAudioVideoTestAsInt, int showNickNameDialogAsInt) {
+			int showAudioVideoTestAsInt, int showNickNameDialogAsInt)
+			throws AxisFault {
 		return getUserServiceProxy().setUserAndNickName(SID, username,
 				firstname, lastname, profilePictureUrl, email, externalUserId,
 				externalUserType, room_id, becomeModeratorAsInt,
@@ -268,7 +282,8 @@ public class UserServiceAxis2Proxy {
 
 	public String setUserObjectAndGenerateRecordingHashByURL(String SID,
 			String username, String firstname, String lastname,
-			Long externalUserId, String externalUserType, Long recording_id) {
+			Long externalUserId, String externalUserType, Long recording_id)
+			throws AxisFault {
 		return getUserServiceProxy()
 				.setUserObjectAndGenerateRecordingHashByURL(SID, username,
 						firstname, lastname, externalUserId, externalUserType,
@@ -276,19 +291,21 @@ public class UserServiceAxis2Proxy {
 	}
 
 	public Long addUserToOrganisation(String SID, Long user_id,
-			Long organisation_id, Long insertedby, String comment) {
+			Long organisation_id, Long insertedby, String comment)
+			throws AxisFault {
 		return getUserServiceProxy().addUserToOrganisation(SID, user_id,
 				organisation_id, insertedby, comment);
 	}
 
 	public SearchResult getUsersByOrganisation(String SID,
 			long organisation_id, int start, int max, String orderby,
-			boolean asc) {
+			boolean asc) throws AxisFault {
 		return getUserServiceProxy().getUsersByOrganisation(SID,
 				organisation_id, start, max, orderby, asc);
 	}
 
-	public Boolean kickUserByPublicSID(String SID, String publicSID) {
+	public Boolean kickUserByPublicSID(String SID, String publicSID)
+			throws AxisFault {
 		return getUserServiceProxy().kickUserByPublicSID(SID, publicSID);
 	}
 
