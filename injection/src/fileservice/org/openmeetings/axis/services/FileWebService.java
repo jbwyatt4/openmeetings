@@ -35,10 +35,10 @@ import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class FileServiceProxy {
+public class FileWebService {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
-			FileServiceProxy.class, ScopeApplicationAdapter.webAppRootKey);
+			FileWebService.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired

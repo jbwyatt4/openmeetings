@@ -31,7 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-public class UserWebService implements IUserWebService {
+public class UserWebService {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			UserWebService.class, ScopeApplicationAdapter.webAppRootKey);
@@ -59,7 +59,9 @@ public class UserWebService implements IUserWebService {
 	@Autowired
 	private AuthLevelmanagement authLevelManagement;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.openmeetings.axis.services.IUserWebService#getSession()
 	 */
 	public Sessiondata getSession() {
@@ -67,8 +69,12 @@ public class UserWebService implements IUserWebService {
 		return mainService.getsessiondata();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#loginUser(java.lang.String, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#loginUser(java.lang.String
+	 * , java.lang.String, java.lang.String)
 	 */
 	public Long loginUser(String SID, String username, String userpass) {
 		log.debug("UserService.loginuser");
@@ -91,8 +97,12 @@ public class UserWebService implements IUserWebService {
 		return new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#getErrorByCode(java.lang.String, java.lang.Long, java.lang.Long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#getErrorByCode(java.lang
+	 * .String, java.lang.Long, java.lang.Long)
 	 */
 	public ErrorResult getErrorByCode(String SID, Long errorid, Long language_id) {
 		log.debug("UserService.getErrorbyCode");
@@ -122,8 +132,14 @@ public class UserWebService implements IUserWebService {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#addNewUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, long, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#addNewUser(java.lang.String
+	 * , java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, long, java.lang.String, long, java.lang.String)
 	 */
 	public Long addNewUser(String SID, String username, String userpass,
 			String lastname, String firstname, String email,
@@ -180,8 +196,15 @@ public class UserWebService implements IUserWebService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#addNewUserWithTimeZone(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, long, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#addNewUserWithTimeZone
+	 * (java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, long, java.lang.String, long,
+	 * java.lang.String, java.lang.String)
 	 */
 	public Long addNewUserWithTimeZone(String SID, String username,
 			String userpass, String lastname, String firstname, String email,
@@ -230,8 +253,15 @@ public class UserWebService implements IUserWebService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#addNewUserWithExternalType(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, long, java.lang.String, java.lang.Long, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#addNewUserWithExternalType
+	 * (java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, long, java.lang.String, long,
+	 * java.lang.String, java.lang.Long, java.lang.String)
 	 */
 	public Long addNewUserWithExternalType(String SID, String username,
 			String userpass, String lastname, String firstname, String email,
@@ -286,8 +316,12 @@ public class UserWebService implements IUserWebService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#deleteUserById(java.lang.String, java.lang.Long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#deleteUserById(java.lang
+	 * .String, java.lang.Long)
 	 */
 	public Long deleteUserById(String SID, Long userId) throws AxisFault {
 		try {
@@ -325,8 +359,12 @@ public class UserWebService implements IUserWebService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#deleteUserByExternalUserIdAndType(java.lang.String, java.lang.Long, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmeetings.axis.services.IUserWebService#
+	 * deleteUserByExternalUserIdAndType(java.lang.String, java.lang.Long,
+	 * java.lang.String)
 	 */
 	public Long deleteUserByExternalUserIdAndType(String SID,
 			Long externalUserId, String externalUserType) throws AxisFault {
@@ -370,8 +408,13 @@ public class UserWebService implements IUserWebService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#setUserObject(java.lang
+	 * .String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String)
 	 */
 	public Long setUserObject(String SID, String username, String firstname,
 			String lastname, String profilePictureUrl, String email)
@@ -412,8 +455,13 @@ public class UserWebService implements IUserWebService {
 		// return new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectWithExternalUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#setUserObjectWithExternalUser
+	 * (java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.Long, java.lang.String)
 	 */
 	public Long setUserObjectWithExternalUser(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
@@ -457,8 +505,13 @@ public class UserWebService implements IUserWebService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRoomHash(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmeetings.axis.services.IUserWebService#
+	 * setUserObjectAndGenerateRoomHash(java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.Long, java.lang.String, java.lang.Long, int, int)
 	 */
 	public String setUserObjectAndGenerateRoomHash(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
@@ -525,8 +578,13 @@ public class UserWebService implements IUserWebService {
 		return "" + new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRoomHashByURL(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmeetings.axis.services.IUserWebService#
+	 * setUserObjectAndGenerateRoomHashByURL(java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.Long, java.lang.String, java.lang.Long, int, int)
 	 */
 	public String setUserObjectAndGenerateRoomHashByURL(String SID,
 			String username, String firstname, String lastname,
@@ -592,8 +650,14 @@ public class UserWebService implements IUserWebService {
 		return "" + new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRoomHashByURLAndRecFlag(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmeetings.axis.services.IUserWebService#
+	 * setUserObjectAndGenerateRoomHashByURLAndRecFlag(java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int,
+	 * int, int)
 	 */
 	public String setUserObjectAndGenerateRoomHashByURLAndRecFlag(String SID,
 			String username, String firstname, String lastname,
@@ -665,8 +729,13 @@ public class UserWebService implements IUserWebService {
 		return "" + new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectMainLandingZone(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#setUserObjectMainLandingZone
+	 * (java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.Long, java.lang.String)
 	 */
 	public String setUserObjectMainLandingZone(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
@@ -724,8 +793,14 @@ public class UserWebService implements IUserWebService {
 		return "" + new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserAndNickName(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#setUserAndNickName(java
+	 * .lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.Long, java.lang.String,
+	 * java.lang.Long, int, int, int)
 	 */
 	public String setUserAndNickName(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
@@ -796,8 +871,13 @@ public class UserWebService implements IUserWebService {
 		return "" + new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRecordingHashByURL(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmeetings.axis.services.IUserWebService#
+	 * setUserObjectAndGenerateRecordingHashByURL(java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.Long,
+	 * java.lang.String, java.lang.Long)
 	 */
 	public String setUserObjectAndGenerateRecordingHashByURL(String SID,
 			String username, String firstname, String lastname,
@@ -851,8 +931,13 @@ public class UserWebService implements IUserWebService {
 		return "" + new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#addUserToOrganisation(java.lang.String, java.lang.Long, java.lang.Long, java.lang.Long, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#addUserToOrganisation(
+	 * java.lang.String, java.lang.Long, java.lang.Long, java.lang.Long,
+	 * java.lang.String)
 	 */
 	public Long addUserToOrganisation(String SID, Long user_id,
 			Long organisation_id, Long insertedby, String comment) {
@@ -873,8 +958,12 @@ public class UserWebService implements IUserWebService {
 		return new Long(-1);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#getUsersByOrganisation(java.lang.String, long, int, int, java.lang.String, boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#getUsersByOrganisation
+	 * (java.lang.String, long, int, int, java.lang.String, boolean)
 	 */
 	public SearchResult getUsersByOrganisation(String SID,
 			long organisation_id, int start, int max, String orderby,
@@ -898,8 +987,12 @@ public class UserWebService implements IUserWebService {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openmeetings.axis.services.IUserWebService#kickUserByPublicSID(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.openmeetings.axis.services.IUserWebService#kickUserByPublicSID(java
+	 * .lang.String, java.lang.String)
 	 */
 	public Boolean kickUserByPublicSID(String SID, String publicSID) {
 		try {

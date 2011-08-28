@@ -15,7 +15,7 @@ import org.openmeetings.app.persistence.beans.rooms.Rooms;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class RoomService {
+public class RoomServiceAxis2Proxy {
 
 	private ServletContext getServletContext() {
 		MessageContext mc = MessageContext.getCurrentMessageContext();
@@ -23,10 +23,10 @@ public class RoomService {
 				.getProperty(HTTPConstants.MC_HTTP_SERVLETCONTEXT);
 	}
 
-	private RoomServiceProxy geRoomServiceProxy() {
+	private RoomWebService geRoomServiceProxy() {
 		ApplicationContext context = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
-		return (RoomServiceProxy) context.getBean("roomServiceSoapProxy");
+		return (RoomWebService) context.getBean("roomServiceSoapProxy");
 	}
 
 	// TODO: Not implemented yet
