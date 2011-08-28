@@ -52,8 +52,7 @@ public class Install extends VelocityViewServlet {
 	 */
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse, Context ctx)
-			throws ServletException, IOException {
+			HttpServletResponse httpServletResponse, Context ctx) {
 
 		try {
 
@@ -92,7 +91,7 @@ public class Install extends VelocityViewServlet {
 						ctx.put("error",
 								"Could not Create File, Permission set? ");
 						ctx.put("path", working_dir);
-						return getVelocityEngine().getTemplate(
+						return getVelocityView().getVelocityEngine().getTemplate(
 								"install_error_" + lang + ".vm");
 					} else {
 						InstallationDocumentHandler
@@ -103,7 +102,7 @@ public class Install extends VelocityViewServlet {
 										0);
 						// File has been created so follow first step of
 						// Installation
-						return getVelocityEngine().getTemplate(
+						return getVelocityView().getVelocityEngine().getTemplate(
 								"install_welcome_" + lang + ".vm");
 					}
 
@@ -150,7 +149,7 @@ public class Install extends VelocityViewServlet {
 
 						return tpl;
 					} else {
-						return getVelocityEngine().getTemplate(
+						return getVelocityView().getVelocityEngine().getTemplate(
 								"install_step2_" + lang + ".vm");
 					}
 				}
@@ -208,7 +207,7 @@ public class Install extends VelocityViewServlet {
 				} else {
 					ctx.put("error",
 							"This Step of the installation has already been done. continue with step 2 <A HREF='?command=step2'>continue with step 2</A>");
-					return getVelocityEngine().getTemplate(
+					return getVelocityView().getVelocityEngine().getTemplate(
 							"install_exception_" + lang + ".vm");
 				}
 
@@ -373,12 +372,12 @@ public class Install extends VelocityViewServlet {
 
 					// return
 					// getVelocityEngine().getTemplate("install_complete_"+lang+".vm");
-					return getVelocityEngine().getTemplate(
+					return getVelocityView().getVelocityEngine().getTemplate(
 							"install_step2_" + lang + ".vm");
 				} else {
 					ctx.put("error",
 							"This Step of the installation has already been done. continue with step 2 <A HREF='?command=step2'>continue with step 2</A>");
-					return getVelocityEngine().getTemplate(
+					return getVelocityView().getVelocityEngine().getTemplate(
 							"install_exception_" + lang + ".vm");
 				}
 

@@ -7,6 +7,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd" 
 >
+
+	<!--  filters -->
+	<bean id="defaultIndexFilter" class="org.openmeetings.filter.outputhandler.DefaultIndexFilter" />
+	
+	<!-- beans -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="openmeetings" />
 	</bean>

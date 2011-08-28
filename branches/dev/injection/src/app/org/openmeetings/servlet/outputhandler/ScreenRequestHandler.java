@@ -46,8 +46,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse, Context ctx)
-			throws ServletException, IOException {
+			HttpServletResponse httpServletResponse, Context ctx) {
 
 		try {
 
@@ -386,7 +385,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 
 			log.debug("template " + template);
 
-			return getVelocityEngine().getTemplate(template);
+			return getVelocityView().getVelocityEngine().getTemplate(template);
 
 			// }
 

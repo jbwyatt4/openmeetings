@@ -40,8 +40,7 @@ public class ActivateUser extends VelocityViewServlet {
 	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse, Context ctx)
-			throws ServletException, IOException {
+			HttpServletResponse httpServletResponse, Context ctx) {
 
 		try {
 			String hash = httpServletRequest.getParameter("u");
@@ -63,7 +62,7 @@ public class ActivateUser extends VelocityViewServlet {
 				ctx.put("link",
 						"<a href='" + loginURL + "'>" + labelid672.getValue()
 								+ "</a>");
-				return getVelocityEngine()
+				return getVelocityView().getVelocityEngine()
 						.getTemplate("activation_template.vm");
 			}
 			//
@@ -84,7 +83,7 @@ public class ActivateUser extends VelocityViewServlet {
 				ctx.put("link",
 						"<a href='" + loginURL + "'>" + labelid672.getValue()
 								+ "</a>");
-				return getVelocityEngine()
+				return getVelocityView().getVelocityEngine()
 						.getTemplate("activation_template.vm");
 
 			} else if (user.getStatus() == 1) {
@@ -102,7 +101,7 @@ public class ActivateUser extends VelocityViewServlet {
 				ctx.put("link",
 						"<a href='" + loginURL + "'>" + labelid672.getValue()
 								+ "</a>");
-				return getVelocityEngine()
+				return getVelocityView().getVelocityEngine()
 						.getTemplate("activation_template.vm");
 
 			} else if (user.getStatus() == 0) {
@@ -125,7 +124,7 @@ public class ActivateUser extends VelocityViewServlet {
 				ctx.put("link",
 						"<a href='" + loginURL + "'>" + labelid672.getValue()
 								+ "</a>");
-				return getVelocityEngine()
+				return getVelocityView().getVelocityEngine()
 						.getTemplate("activation_template.vm");
 
 			} else {
@@ -141,7 +140,7 @@ public class ActivateUser extends VelocityViewServlet {
 				ctx.put("link",
 						"<a href='" + loginURL + "'>" + labelid672.getValue()
 								+ "</a>");
-				return getVelocityEngine()
+				return getVelocityView().getVelocityEngine()
 						.getTemplate("activation_template.vm");
 
 			}
