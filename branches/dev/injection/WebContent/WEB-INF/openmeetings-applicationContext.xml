@@ -261,8 +261,8 @@
 	 
 	<!-- Axis2 Service Proxy's -->
   	<bean id="userWebService" class="org.openmeetings.axis.services.UserWebService" />
-  	<bean id="roomServiceSoapProxy" class="org.openmeetings.axis.services.RoomServiceProxy" />
-  	<bean id="fileServiceSoapProxy" class="org.openmeetings.axis.services.FileServiceProxy" />
+  	<bean id="roomWebService" class="org.openmeetings.axis.services.RoomWebService" />
+  	<bean id="fileWebService" class="org.openmeetings.axis.services.FileWebService" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	

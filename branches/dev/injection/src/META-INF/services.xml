@@ -10,10 +10,13 @@
 	</operation>
   </service>
    -->
-   
+   <!-- 
+   Testing Spring Integration for Axis2
   <service name="UserService" >
 	<description>User Service</description>
-	<parameter name="ServiceTCCL">composite</parameter>
+	
+	<schema schemaNamespace="openmeetings"/> 
+	
 	<parameter name="ServiceObjectSupplier" locked="xsd:false">org.apache.axis2.extensions.spring.receivers.SpringServletContextObjectSupplier</parameter>
 	<parameter name="SpringBeanName" locked="xsd:false">userServiceSoapProxy</parameter>
     <messageReceivers>
@@ -48,7 +51,19 @@
 	<operation name="kickUserByPublicSID" />
 	
   </service>
-  
+   -->
+  <service name="UserService">
+	<description>User Service</description>
+	<messageReceivers>
+        <messageReceiver 
+            mep="http://www.w3.org/2004/08/wsdl/in-only"
+			class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+        <messageReceiver
+            mep="http://www.w3.org/2004/08/wsdl/in-out"
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </messageReceivers>
+    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.UserServiceAxis2Proxy</parameter>
+  </service>
   <service name="RoomService">
 	<description>Room Service</description>
 	<messageReceivers>
@@ -59,7 +74,7 @@
             mep="http://www.w3.org/2004/08/wsdl/in-out"
 			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
-    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.RoomService</parameter>
+    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.RoomServiceAxis2Proxy</parameter>
   </service>
   <service name="FileService">
 	<description>File Service</description>
@@ -71,6 +86,6 @@
             mep="http://www.w3.org/2004/08/wsdl/in-out"
 			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
-    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.FileService</parameter>
+    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.FileServiceAxis2Proxy</parameter>
   </service>
 </serviceGroup>

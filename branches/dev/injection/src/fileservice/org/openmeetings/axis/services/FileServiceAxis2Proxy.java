@@ -11,7 +11,7 @@ import org.openmeetings.app.persistence.beans.files.FileExplorerItem;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class FileService {
+public class FileServiceAxis2Proxy {
 
 	private ServletContext getServletContext() {
 		MessageContext mc = MessageContext.getCurrentMessageContext();
@@ -19,10 +19,10 @@ public class FileService {
 				.getProperty(HTTPConstants.MC_HTTP_SERVLETCONTEXT);
 	}
 
-	private FileServiceProxy geFileServiceProxy() {
+	private FileWebService geFileServiceProxy() {
 		ApplicationContext context = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
-		return (FileServiceProxy) context.getBean("fileServiceSoapProxy");
+		return (FileWebService) context.getBean("fileServiceSoapProxy");
 	}
 
 	/**
