@@ -43,15 +43,15 @@ public class ErrorService {
 			ErrorValues eValues = errorManagement.getErrorValuesById(-1
 					* errorid);
 			if (eValues != null) {
-				log.debug("" + eValues.getFieldvalues());
+				log.debug("" + eValues.getFieldvalues_id());
 				// log.debug(eValues.getFieldvalues().getFieldvalues_id());
 				// log.debug(eValues.getErrorType());
 				// log.debug(eValues.getErrorType().getErrortype_id());
 				// log.debug(eValues.getErrorType().getFieldvalues());
 				// log.debug(eValues.getErrorType().getFieldvalues().getFieldvalues_id());
 				Fieldlanguagesvalues errorValue = fieldmanagment
-						.getFieldByIdAndLanguage(eValues.getFieldvalues()
-								.getFieldvalues_id(), language_id);
+						.getFieldByIdAndLanguage(eValues.getFieldvalues_id(),
+								language_id);
 				Fieldlanguagesvalues typeValue = fieldmanagment
 						.getFieldByIdAndLanguage(eValues.getErrorType()
 								.getFieldvalues_id(), language_id);
