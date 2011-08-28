@@ -166,6 +166,11 @@
 		<copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/red5-services">
 			<fileset dir="${webcontent.src.dir}/WEB-INF/red5-services" includes="*.xml"/>
 		</copy>
+		<copy todir="${dist.dir}/red5/webapps/${project.distname}">
+			<fileset dir="${webcontent.src.dir}">
+				<include name="*.html"/>
+			</fileset>
+		</copy>
 		<copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF">
 			<fileset dir="${webcontent.src.dir}/WEB-INF">
 				<include name="*.xml"/>

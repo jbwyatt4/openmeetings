@@ -48,8 +48,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse, Context ctx) throws ServletException,
-			IOException {
+			HttpServletResponse httpServletResponse, Context ctx) {
 
 		try {
 			
@@ -161,7 +160,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 					
 				//rsss.addNewViewer(ip, port);
 				
-				return getVelocityEngine().getTemplate(template);
+				return getVelocityView().getVelocityEngine().getTemplate(template);
 			
 			
 			}
