@@ -79,8 +79,7 @@ public class ErrorManagement {
 			eValue.setErrorType(getErrorType(errortype_id));
 			eValue.setDeleted("false");
 			eValue.setStarttime(new Date());
-			eValue.setFieldvalues(fieldmanagment
-					.getFieldvaluesById(fieldvalues_id));
+			eValue.setFieldvalues_id(fieldvalues_id);
 			eValue = em.merge(eValue);
 			return eValue.getErrorvalues_id();
 		} catch (Exception ex2) {
@@ -94,8 +93,7 @@ public class ErrorManagement {
 			ErrorValues eValue = new ErrorValues();
 			eValue.setErrortype_id(errortype_id);
 			eValue.setStarttime(new Date());
-			eValue.setFieldvalues(fieldmanagment
-					.getFieldvaluesById(fieldvalues_id));
+			eValue.setFieldvalues_id(fieldvalues_id);
 			eValue = em.merge(eValue);
 			Long newerrorvalues_id = eValue.getErrorvalues_id();
 			return newerrorvalues_id;
