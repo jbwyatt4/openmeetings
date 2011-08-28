@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
+import org.apache.velocity.tools.view.VelocityViewServlet;
 import org.openmeetings.app.documents.InstallationDocumentHandler;
 import org.openmeetings.app.installation.ImportInitvalues;
 import org.openmeetings.app.persistence.beans.basic.OmTimeZone;

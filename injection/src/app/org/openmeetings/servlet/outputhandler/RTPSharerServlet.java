@@ -1,6 +1,5 @@
 package org.openmeetings.servlet.outputhandler;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
+import org.apache.velocity.tools.view.VelocityViewServlet;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
