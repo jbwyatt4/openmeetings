@@ -12,21 +12,32 @@ import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.persistence.beans.flvrecord.FlvRecording;
 import org.openmeetings.app.persistence.beans.rooms.RoomTypes;
 import org.openmeetings.app.persistence.beans.rooms.Rooms;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+import org.red5.logging.Red5LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class RoomServiceAxis2Proxy {
 
-	private ServletContext getServletContext() {
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			RoomServiceAxis2Proxy.class, ScopeApplicationAdapter.webAppRootKey);
+
+	private ServletContext getServletContext() throws Exception {
 		MessageContext mc = MessageContext.getCurrentMessageContext();
 		return (ServletContext) mc
 				.getProperty(HTTPConstants.MC_HTTP_SERVLETCONTEXT);
 	}
 
 	private RoomWebService geRoomServiceProxy() {
-		ApplicationContext context = WebApplicationContextUtils
-				.getWebApplicationContext(getServletContext());
-		return (RoomWebService) context.getBean("roomServiceSoapProxy");
+		try {
+			ApplicationContext context = WebApplicationContextUtils
+					.getWebApplicationContext(getServletContext());
+			return (RoomWebService) context.getBean("roomServiceSoapProxy");
+		} catch (Exception err) {
+			log.error("[geRoomServiceProxy]", err);
+		}
+		return null;
 	}
 
 	// TODO: Not implemented yet
@@ -101,7 +112,8 @@ public class RoomServiceAxis2Proxy {
 	 * @return
 	 */
 	@Deprecated
-	public Rooms getRoomWithCurrentUsersById(String SID, long rooms_id) {
+	public Rooms getRoomWithCurrentUsersById(String SID, long rooms_id)
+			throws AxisFault {
 		return this.geRoomServiceProxy().getRoomWithCurrentUsersById(SID,
 				rooms_id);
 	}
@@ -113,13 +125,13 @@ public class RoomServiceAxis2Proxy {
 	}
 
 	public SearchResult getRooms(String SID, int start, int max,
-			String orderby, boolean asc) {
+			String orderby, boolean asc) throws AxisFault {
 		return this.geRoomServiceProxy()
 				.getRooms(SID, start, max, orderby, asc);
 	}
 
 	public SearchResult getRoomsWithCurrentUsers(String SID, int start,
-			int max, String orderby, boolean asc) {
+			int max, String orderby, boolean asc) throws AxisFault {
 		return this.geRoomServiceProxy().getRoomsWithCurrentUsers(SID, start,
 				max, orderby, asc);
 	}
@@ -162,7 +174,7 @@ public class RoomServiceAxis2Proxy {
 			Integer whiteBoardPanelHeight, Integer whiteBoardPanelWidth,
 			Boolean showFilesPanel, Integer filesPanelXPosition,
 			Integer filesPanelYPosition, Integer filesPanelHeight,
-			Integer filesPanelWidth) {
+			Integer filesPanelWidth) throws AxisFault {
 		return this.geRoomServiceProxy().addRoom(SID, name, roomtypes_id,
 				comment, numberOfPartizipants, ispublic, videoPodWidth,
 				videoPodHeight, videoPodXPosition, videoPodYPosition,
@@ -176,7 +188,7 @@ public class RoomServiceAxis2Proxy {
 	public Long addRoomWithModeration(String SID, String name,
 			Long roomtypes_id, String comment, Long numberOfPartizipants,
 			Boolean ispublic, Boolean appointment, Boolean isDemoRoom,
-			Integer demoTime, Boolean isModeratedRoom) {
+			Integer demoTime, Boolean isModeratedRoom) throws AxisFault {
 		return this.geRoomServiceProxy().addRoomWithModeration(SID, name,
 				roomtypes_id, comment, numberOfPartizipants, ispublic,
 				appointment, isDemoRoom, demoTime, isModeratedRoom);
@@ -204,7 +216,7 @@ public class RoomServiceAxis2Proxy {
 			Long roomtypes_id, String comment, Long numberOfPartizipants,
 			Boolean ispublic, Boolean appointment, Boolean isDemoRoom,
 			Integer demoTime, Boolean isModeratedRoom,
-			Boolean allowUserQuestions) {
+			Boolean allowUserQuestions) throws AxisFault {
 		return this.geRoomServiceProxy().addRoomWithModerationAndQuestions(SID,
 				name, roomtypes_id, comment, numberOfPartizipants, ispublic,
 				appointment, isDemoRoom, demoTime, isModeratedRoom,
@@ -289,7 +301,7 @@ public class RoomServiceAxis2Proxy {
 			Integer whiteBoardPanelHeight, Integer whiteBoardPanelWidth,
 			Boolean showFilesPanel, Integer filesPanelXPosition,
 			Integer filesPanelYPosition, Integer filesPanelHeight,
-			Integer filesPanelWidth, Boolean appointment) {
+			Integer filesPanelWidth, Boolean appointment) throws AxisFault {
 		return this.geRoomServiceProxy().updateRoom(SID, rooms_id, name,
 				roomtypes_id, comment, numberOfPartizipants, ispublic,
 				videoPodWidth, videoPodHeight, videoPodXPosition,
@@ -303,7 +315,7 @@ public class RoomServiceAxis2Proxy {
 	public Long updateRoomWithModeration(String SID, Long room_id, String name,
 			Long roomtypes_id, String comment, Long numberOfPartizipants,
 			Boolean ispublic, Boolean appointment, Boolean isDemoRoom,
-			Integer demoTime, Boolean isModeratedRoom) {
+			Integer demoTime, Boolean isModeratedRoom) throws AxisFault {
 		return this.geRoomServiceProxy().updateRoomWithModeration(SID, room_id,
 				name, roomtypes_id, comment, numberOfPartizipants, ispublic,
 				appointment, isDemoRoom, demoTime, isModeratedRoom);
@@ -313,24 +325,25 @@ public class RoomServiceAxis2Proxy {
 			String name, Long roomtypes_id, String comment,
 			Long numberOfPartizipants, Boolean ispublic, Boolean appointment,
 			Boolean isDemoRoom, Integer demoTime, Boolean isModeratedRoom,
-			Boolean allowUserQuestions) {
+			Boolean allowUserQuestions) throws AxisFault {
 		return this.geRoomServiceProxy().updateRoomWithModeration(SID, room_id,
 				name, roomtypes_id, comment, numberOfPartizipants, ispublic,
 				appointment, isDemoRoom, demoTime, isModeratedRoom);
 	}
 
-	public Long deleteRoom(String SID, long rooms_id) {
+	public Long deleteRoom(String SID, long rooms_id) throws AxisFault {
 		return this.geRoomServiceProxy().deleteRoom(SID, rooms_id);
 	}
 
-	public Boolean kickUser(String SID_Admin, Long room_id) {
+	public Boolean kickUser(String SID_Admin, Long room_id) throws AxisFault {
 		return this.geRoomServiceProxy().kickUser(SID_Admin, room_id);
 	}
 
 	public Long addRoomWithModerationAndExternalType(String SID, String name,
 			Long roomtypes_id, String comment, Long numberOfPartizipants,
 			Boolean ispublic, Boolean appointment, Boolean isDemoRoom,
-			Integer demoTime, Boolean isModeratedRoom, String externalRoomType) {
+			Integer demoTime, Boolean isModeratedRoom, String externalRoomType)
+			throws AxisFault {
 		return this.geRoomServiceProxy().addRoomWithModerationAndExternalType(
 				SID, name, roomtypes_id, comment, numberOfPartizipants,
 				ispublic, appointment, isDemoRoom, demoTime, isModeratedRoom,
@@ -342,7 +355,7 @@ public class RoomServiceAxis2Proxy {
 			Long numberOfPartizipants, Boolean ispublic, Boolean appointment,
 			Boolean isDemoRoom, Integer demoTime, Boolean isModeratedRoom,
 			String externalRoomType, Boolean allowUserQuestions,
-			Boolean isAudioOnly) {
+			Boolean isAudioOnly) throws AxisFault {
 		return this.geRoomServiceProxy()
 				.addRoomWithModerationExternalTypeAndAudioType(SID, name,
 						roomtypes_id, comment, numberOfPartizipants, ispublic,
@@ -355,7 +368,7 @@ public class RoomServiceAxis2Proxy {
 			Boolean ispublic, Boolean appointment, Boolean isDemoRoom,
 			Integer demoTime, Boolean isModeratedRoom, String externalRoomType,
 			Boolean allowUserQuestions, Boolean isAudioOnly,
-			Boolean waitForRecording, Boolean allowRecording) {
+			Boolean waitForRecording, Boolean allowRecording) throws AxisFault {
 		return this.geRoomServiceProxy()
 				.addRoomWithModerationAndRecordingFlags(SID, name,
 						roomtypes_id, comment, numberOfPartizipants, ispublic,
@@ -370,7 +383,7 @@ public class RoomServiceAxis2Proxy {
 			Boolean isDemoRoom, Integer demoTime, Boolean isModeratedRoom,
 			String externalRoomType, Boolean allowUserQuestions,
 			Boolean isAudioOnly, Boolean waitForRecording,
-			Boolean allowRecording, Boolean hideTopBar) {
+			Boolean allowRecording, Boolean hideTopBar) throws AxisFault {
 		return this.geRoomServiceProxy()
 				.addRoomWithModerationExternalTypeAndTopBarOption(SID, name,
 						roomtypes_id, comment, numberOfPartizipants, ispublic,
