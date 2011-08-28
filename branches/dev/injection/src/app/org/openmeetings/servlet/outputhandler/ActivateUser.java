@@ -1,6 +1,5 @@
 package org.openmeetings.servlet.outputhandler;
 
-import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.ServletConfig;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
+import org.apache.velocity.tools.view.VelocityViewServlet;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -20,7 +19,6 @@ import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class ActivateUser extends VelocityViewServlet {
 	private static final long serialVersionUID = -8892729047921796170L;
