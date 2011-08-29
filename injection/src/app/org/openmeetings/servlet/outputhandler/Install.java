@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +19,8 @@ import org.openmeetings.app.persistence.beans.basic.OmTimeZone;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class Install extends VelocityViewServlet {
 
@@ -29,15 +29,18 @@ public class Install extends VelocityViewServlet {
 	 */
 	private static final long serialVersionUID = 3684381243236013771L;
 
-	private ImportInitvalues importInitvalues;
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		importInitvalues = (ImportInitvalues) config.getServletContext()
-				.getAttribute("importInitvalues");
-		log.debug("in init: cfgManagement is null ? "
-				+ (null == importInitvalues) + " ; " + importInitvalues);
+	private ImportInitvalues getImportInitvalues() {
+		try {
+			if (!ScopeApplicationAdapter.initComplete) {
+				return null;
+			}
+			ApplicationContext context = WebApplicationContextUtils
+					.getWebApplicationContext(getServletContext());
+			return (ImportInitvalues) context.getBean("importInitvalues");
+		} catch (Exception err) {
+			log.error("[getImportInitvalues]", err);
+		}
+		return null;
 	}
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
@@ -55,6 +58,11 @@ public class Install extends VelocityViewServlet {
 			HttpServletResponse httpServletResponse, Context ctx) {
 
 		try {
+
+			if (getImportInitvalues() == null) {
+				return getVelocityView().getVelocityEngine().getTemplate(
+						"booting_install.vm");
+			}
 
 			ctx.put("APPLICATION_NAME", getServletContext()
 					.getServletContextName());
@@ -91,8 +99,8 @@ public class Install extends VelocityViewServlet {
 						ctx.put("error",
 								"Could not Create File, Permission set? ");
 						ctx.put("path", working_dir);
-						return getVelocityView().getVelocityEngine().getTemplate(
-								"install_error_" + lang + ".vm");
+						return getVelocityView().getVelocityEngine()
+								.getTemplate("install_error_" + lang + ".vm");
 					} else {
 						InstallationDocumentHandler
 								.getInstance()
@@ -102,8 +110,8 @@ public class Install extends VelocityViewServlet {
 										0);
 						// File has been created so follow first step of
 						// Installation
-						return getVelocityView().getVelocityEngine().getTemplate(
-								"install_welcome_" + lang + ".vm");
+						return getVelocityView().getVelocityEngine()
+								.getTemplate("install_welcome_" + lang + ".vm");
 					}
 
 				} else {
@@ -112,7 +120,7 @@ public class Install extends VelocityViewServlet {
 					if (i == 0) {
 						String filePath = getServletContext().getRealPath("/")
 								+ ImportInitvalues.languageFolderName;
-						LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = importInitvalues
+						LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = getImportInitvalues()
 								.getLanguageFiles(filePath);
 						LinkedHashMap<Integer, String> allLanguages = new LinkedHashMap<Integer, String>();
 						for (Iterator<Integer> iter = allLanguagesAll.keySet()
@@ -129,7 +137,7 @@ public class Install extends VelocityViewServlet {
 						allFonts.put("Arial", "Arial");
 
 						LinkedHashMap<String, String> allTimeZones = new LinkedHashMap<String, String>();
-						List<OmTimeZone> omTimeZoneList = importInitvalues
+						List<OmTimeZone> omTimeZoneList = getImportInitvalues()
 								.getTimeZones(filePath);
 						log.debug("omTimeZoneList :: " + omTimeZoneList.size());
 						for (OmTimeZone omTimeZone : omTimeZoneList) {
@@ -149,8 +157,8 @@ public class Install extends VelocityViewServlet {
 
 						return tpl;
 					} else {
-						return getVelocityView().getVelocityEngine().getTemplate(
-								"install_step2_" + lang + ".vm");
+						return getVelocityView().getVelocityEngine()
+								.getTemplate("install_step2_" + lang + ".vm");
 					}
 				}
 
@@ -167,7 +175,7 @@ public class Install extends VelocityViewServlet {
 
 					String filePath = getServletContext().getRealPath("/")
 							+ ImportInitvalues.languageFolderName;
-					LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = importInitvalues
+					LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = getImportInitvalues()
 							.getLanguageFiles(filePath);
 					LinkedHashMap<Integer, String> allLanguages = new LinkedHashMap<Integer, String>();
 					for (Iterator<Integer> iter = allLanguagesAll.keySet()
@@ -184,7 +192,7 @@ public class Install extends VelocityViewServlet {
 					allFonts.put("Arial", "Arial");
 
 					LinkedHashMap<String, String> allTimeZones = new LinkedHashMap<String, String>();
-					List<OmTimeZone> omTimeZoneList = importInitvalues
+					List<OmTimeZone> omTimeZoneList = getImportInitvalues()
 							.getTimeZones(filePath);
 					log.debug("omTimeZoneList :: " + omTimeZoneList.size());
 					for (OmTimeZone omTimeZone : omTimeZoneList) {
@@ -327,15 +335,15 @@ public class Install extends VelocityViewServlet {
 							"url_feed");
 					String url_feed2 = getServletContext().getInitParameter(
 							"url_feed2");
-					importInitvalues.loadInitLanguages(filePath);
+					getImportInitvalues().loadInitLanguages(filePath);
 
-					importInitvalues.loadMainMenu();
+					getImportInitvalues().loadMainMenu();
 
-					importInitvalues.loadErrorMappingsFromXML(filePath);
+					getImportInitvalues().loadErrorMappingsFromXML(filePath);
 
-					importInitvalues.loadSalutations();
+					getImportInitvalues().loadSalutations();
 
-					importInitvalues.loadConfiguration(crypt_ClassName,
+					getImportInitvalues().loadConfiguration(crypt_ClassName,
 							configdefault, configsmtp, configsmtpport,
 							configreferer, configmailuser, configmailpass,
 							mailusetls, configdefaultLang, swf_path, im_path,
@@ -350,16 +358,16 @@ public class Install extends VelocityViewServlet {
 							openxg_adminid, sip_language_phonecode,
 							sip_phonerange_start, sip_phonerange);
 
-					importInitvalues.loadInitUserAndOrganisation(username,
+					getImportInitvalues().loadInitUserAndOrganisation(username,
 							userpass, useremail, orgname, timeZone);
 
-					importInitvalues.loadDefaultRooms();
+					getImportInitvalues().loadDefaultRooms();
 
 					// AppointMent Categories
-					importInitvalues.loadInitAppointmentCategories();
+					getImportInitvalues().loadInitAppointmentCategories();
 
 					// Appointment Remindertypes
-					importInitvalues.loadInitAppointmentReminderTypes();
+					getImportInitvalues().loadInitAppointmentReminderTypes();
 
 					// update to next step
 					log.debug("add level to install file");
