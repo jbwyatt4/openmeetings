@@ -14,10 +14,10 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class UserServiceAxis2Proxy {
+public class UserWebServiceFacade {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
-			UserServiceAxis2Proxy.class, ScopeApplicationAdapter.webAppRootKey);
+			UserWebServiceFacade.class, ScopeApplicationAdapter.webAppRootKey);
 
 	// private static final String SPRING_CONTEXT_XML =
 	// "openmeetings-applicationContext.xml";

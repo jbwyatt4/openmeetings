@@ -18,10 +18,10 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class RoomServiceAxis2Proxy {
+public class RoomWebServiceFacade {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
-			RoomServiceAxis2Proxy.class, ScopeApplicationAdapter.webAppRootKey);
+			RoomWebServiceFacade.class, ScopeApplicationAdapter.webAppRootKey);
 
 	private ServletContext getServletContext() throws Exception {
 		MessageContext mc = MessageContext.getCurrentMessageContext();

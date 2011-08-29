@@ -14,10 +14,10 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class FileServiceAxis2Proxy {
+public class FileWebServiceFacade {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
-			FileServiceAxis2Proxy.class, ScopeApplicationAdapter.webAppRootKey);
+			FileWebServiceFacade.class, ScopeApplicationAdapter.webAppRootKey);
 
 	private ServletContext getServletContext() throws Exception {
 		MessageContext mc = MessageContext.getCurrentMessageContext();
