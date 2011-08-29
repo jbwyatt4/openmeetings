@@ -24,11 +24,9 @@ public class DefaultIndex extends VelocityViewServlet {
 
 	private Configurationmanagement getConfigurationmanagement() {
 		try {
-			if (Configurationmanagement.autowiredComplete()) {
-				ApplicationContext context = WebApplicationContextUtils
-						.getWebApplicationContext(getServletContext());
-				return (Configurationmanagement) context.getBean("cfgManagement");
-			}
+			ApplicationContext context = WebApplicationContextUtils
+					.getWebApplicationContext(getServletContext());
+			return (Configurationmanagement) context.getBean("cfgManagement");
 		} catch (Exception err) {
 			log.error("[getConfigurationmanagement]", err);
 		}
@@ -41,8 +39,10 @@ public class DefaultIndex extends VelocityViewServlet {
 
 		try {
 
-			if (getConfigurationmanagement() == null) {
-				return getVelocityView().getVelocityEngine().getTemplate("booting.vm");
+			if (getConfigurationmanagement() == null
+					|| !ScopeApplicationAdapter.initComplete) {
+				return getVelocityView().getVelocityEngine().getTemplate(
+						"booting.vm");
 			}
 
 			String template = "sip_template.vm";
@@ -138,8 +138,8 @@ public class DefaultIndex extends VelocityViewServlet {
 			// Load params from URL and set into wrapper code
 			if (httpServletRequest.getParameterMap() != null) {
 				for (@SuppressWarnings("unchecked")
-				Iterator<String> iter = httpServletRequest
-						.getParameterMap().keySet().iterator(); iter.hasNext();) {
+				Iterator<String> iter = httpServletRequest.getParameterMap()
+						.keySet().iterator(); iter.hasNext();) {
 					String paramKey = iter.next();
 					SWF_FLASHVARS += paramKey
 							+ "="

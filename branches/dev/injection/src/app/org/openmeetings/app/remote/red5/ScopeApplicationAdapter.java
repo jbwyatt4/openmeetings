@@ -101,6 +101,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 	private static long broadCastCounter = 0;
 
+	public static boolean initComplete = false;
+
 	public synchronized void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
 	}
@@ -146,6 +148,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				log.debug("scopeName :: " + scopeName);
 
 			}
+
+			ScopeApplicationAdapter.initComplete = true;
 
 			// OpenXGHttpClient.getInstance().openSIPgUserCreateTest();
 			// OpenXGWrapperClient.getInstance().testConnection();
