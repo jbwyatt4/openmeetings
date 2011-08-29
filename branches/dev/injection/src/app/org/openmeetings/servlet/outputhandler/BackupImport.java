@@ -19,9 +19,8 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -75,33 +74,56 @@ import org.openmeetings.utils.math.CalendarPatterns;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class BackupImport extends HttpServlet {
-	private static final long serialVersionUID = 2786696080712127872L;
+public class BackupImport {
 
-	private static final Logger log = Red5LoggerFactory.getLogger(BackupImport.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			BackupImport.class, ScopeApplicationAdapter.webAppRootKey);
 
+	@Autowired
 	private AppointmentDaoImpl appointmentDao;
+	@Autowired
 	private Sessionmanagement sessionManagement;
+	@Autowired
 	private Configurationmanagement cfgManagement;
+	@Autowired
 	private Usermanagement userManagement;
+	@Autowired
 	private Statemanagement statemanagement;
+	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
 	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
+	@Autowired
 	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
+	@Autowired
 	private UsersDaoImpl usersDao;
+	@Autowired
 	private FlvRecordingDaoImpl flvRecordingDao;
+	@Autowired
 	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDao;
+	@Autowired
 	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
+	@Autowired
 	private PrivateMessagesDaoImpl privateMessagesDao;
+	@Autowired
 	private MeetingMemberDaoImpl meetingMemberDao;
+	@Autowired
 	private LdapConfigDaoImpl ldapConfigDao;
+	@Autowired
 	private RoomModeratorsDaoImpl roomModeratorsDao;
+	@Autowired
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
+	@Autowired
 	private UserContactsDaoImpl userContactsDao;
+	@Autowired
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	@Autowired
 	private AuthLevelmanagement authLevelManagement;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
@@ -116,44 +138,9 @@ public class BackupImport extends HttpServlet {
 		USERS, ORGANISATIONS, APPOINTMENTS, ROOMS, MESSAGEFOLDERS, USERCONTACTS, FILEEXPLORERITEMS
 	};
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		appointmentDao = (AppointmentDaoImpl)config.getServletContext().getAttribute("appointmentDao");
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		statemanagement = (Statemanagement)config.getServletContext().getAttribute("statemanagement");
-		omTimeZoneDaoImpl = (OmTimeZoneDaoImpl)config.getServletContext().getAttribute("omTimeZoneDaoImpl");
-		organisationmanagement = (Organisationmanagement)config.getServletContext().getAttribute("organisationmanagement");
-		roommanagement = (Roommanagement)config.getServletContext().getAttribute("roommanagement");
-		appointmentCategoryDaoImpl = (AppointmentCategoryDaoImpl)config.getServletContext().getAttribute("appointmentCategoryDaoImpl");
-		appointmentReminderTypDaoImpl = (AppointmentReminderTypDaoImpl)config.getServletContext().getAttribute("appointmentReminderTypDaoImpl");
-		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
-		flvRecordingDao = (FlvRecordingDaoImpl)config.getServletContext().getAttribute("flvRecordingDao");
-		flvRecordingMetaDataDao = (FlvRecordingMetaDataDaoImpl)config.getServletContext().getAttribute("flvRecordingMetaDataDao");
-		privateMessageFolderDao = (PrivateMessageFolderDaoImpl)config.getServletContext().getAttribute("privateMessageFolderDao");
-		privateMessagesDao = (PrivateMessagesDaoImpl)config.getServletContext().getAttribute("privateMessagesDao");
-		meetingMemberDao = (MeetingMemberDaoImpl)config.getServletContext().getAttribute("meetingMemberDao");
-		ldapConfigDao = (LdapConfigDaoImpl)config.getServletContext().getAttribute("ldapConfigDao");
-		roomModeratorsDao = (RoomModeratorsDaoImpl)config.getServletContext().getAttribute("roomModeratorsDao");
-		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
-		userContactsDao = (UserContactsDaoImpl)config.getServletContext().getAttribute("userContactsDao");
-		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
-		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest
-	 * , javax.servlet.http.HttpServletResponse)
-	 */
-	@Override
-	protected void service(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws ServletException,
-			IOException {
+	public void service(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, ServletContext servletCtx)
+			throws ServletException, IOException {
 
 		try {
 
@@ -176,10 +163,9 @@ public class BackupImport extends HttpServlet {
 				Long users_id = sessionManagement.checkSession(sid);
 				Long user_level = userManagement.getUserLevelByID(users_id);
 
-				if (authLevelManagement.checkAdminLevel(
-						user_level)) {
+				if (authLevelManagement.checkAdminLevel(user_level)) {
 
-					String current_dir = getServletContext().getRealPath("/");
+					String current_dir = servletCtx.getRealPath("/");
 					String working_dir = current_dir + "upload"
 							+ File.separatorChar + "import"
 							+ File.separatorChar;
@@ -490,7 +476,8 @@ public class BackupImport extends HttpServlet {
 					hs.put("error", "");
 					hs.put("fileName", completeName);
 
-					scopeApplicationAdapter.sendMessageWithClientByPublicSID(hs, publicSID);
+					scopeApplicationAdapter.sendMessageWithClientByPublicSID(
+							hs, publicSID);
 
 				}
 
@@ -891,16 +878,19 @@ public class BackupImport extends HttpServlet {
 
 		for (FlvRecording flvRecording : flvRecordings) {
 
-			Long flvRecordingId = flvRecordingDao.addFlvRecordingObj(flvRecording);
+			Long flvRecordingId = flvRecordingDao
+					.addFlvRecordingObj(flvRecording);
 
 			for (FlvRecordingMetaData flvRecordingMetaData : flvRecording
 					.getFlvRecordingMetaData()) {
 
-				FlvRecording flvRecordingSaved = flvRecordingDao.getFlvRecordingById(flvRecordingId);
+				FlvRecording flvRecordingSaved = flvRecordingDao
+						.getFlvRecordingById(flvRecordingId);
 
 				flvRecordingMetaData.setFlvRecording(flvRecordingSaved);
 
-				flvRecordingMetaDataDao.addFlvRecordingMetaDataObj(flvRecordingMetaData);
+				flvRecordingMetaDataDao
+						.addFlvRecordingMetaDataObj(flvRecordingMetaData);
 
 			}
 
@@ -1126,10 +1116,12 @@ public class BackupImport extends HttpServlet {
 		for (PrivateMessageFolder privateMessageFolder : privateMessageFolders) {
 
 			Long folderId = privateMessageFolder.getPrivateMessageFolderId();
-			PrivateMessageFolder storedFolder = privateMessageFolderDao.getPrivateMessageFolderById(folderId);
+			PrivateMessageFolder storedFolder = privateMessageFolderDao
+					.getPrivateMessageFolderById(folderId);
 			if (storedFolder == null) {
 				privateMessageFolder.setPrivateMessageFolderId(0);
-				Long newFolderId = privateMessageFolderDao.addPrivateMessageFolderObj(privateMessageFolder);
+				Long newFolderId = privateMessageFolderDao
+						.addPrivateMessageFolderObj(privateMessageFolder);
 				messageFoldersMap.put(folderId, newFolderId);
 			}
 		}
@@ -1297,7 +1289,8 @@ public class BackupImport extends HttpServlet {
 
 		for (UserContacts uc : ucList) {
 			Long userContactId = uc.getUserContactId();
-			UserContacts storedUC = userContactsDao.getUserContacts(userContactId);
+			UserContacts storedUC = userContactsDao
+					.getUserContacts(userContactId);
 
 			if (storedUC == null) {
 				uc.setUserContactId(0);
@@ -1968,7 +1961,8 @@ public class BackupImport extends HttpServlet {
 								roomModerators
 										.setIsSuperModerator(is_supermoderator);
 
-								roomModeratorsDao.addRoomModeratorByObj(roomModerators);
+								roomModeratorsDao
+										.addRoomModeratorByObj(roomModerators);
 
 							}
 
@@ -1996,7 +1990,8 @@ public class BackupImport extends HttpServlet {
 			long itemId = fileExplorerItem.getFileExplorerItemId();
 
 			fileExplorerItem.setFileExplorerItemId(0);
-			long newItemId = fileExplorerItemDao.addFileExplorerItem(fileExplorerItem);
+			long newItemId = fileExplorerItemDao
+					.addFileExplorerItem(fileExplorerItem);
 			fileExplorerItemsMap.put(itemId, newItemId);
 
 		}

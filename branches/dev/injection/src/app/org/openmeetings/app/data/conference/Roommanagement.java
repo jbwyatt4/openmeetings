@@ -165,8 +165,7 @@ public class Roommanagement {
 
 				if (room != null) {
 					HashMap<String, RoomClient> map = clientListManager
-							.getClientListByRoom(
-									room.getRooms_id());
+							.getClientListByRoom(room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());
 
@@ -297,8 +296,7 @@ public class Roommanagement {
 				for (Rooms room : rooms) {
 
 					HashMap<String, RoomClient> map = clientListManager
-							.getClientListByRoom(
-									room.getRooms_id());
+							.getClientListByRoom(room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());
 
@@ -329,8 +327,7 @@ public class Roommanagement {
 				for (Rooms room : rooms) {
 
 					HashMap<String, RoomClient> map = clientListManager
-							.getClientListByRoom(
-									room.getRooms_id());
+							.getClientListByRoom(room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());
 
@@ -362,8 +359,7 @@ public class Roommanagement {
 				for (Rooms room : rooms) {
 
 					HashMap<String, RoomClient> map = clientListManager
-							.getClientListByRoom(
-									room.getRooms_id());
+							.getClientListByRoom(room.getRooms_id());
 
 					room.setCurrentusers(new LinkedList<RoomClient>());
 
@@ -506,6 +502,7 @@ public class Roommanagement {
 		try {
 			CriteriaBuilder cb = em.getCriteriaBuilder();
 			CriteriaQuery<Rooms> cq = cb.createQuery(Rooms.class);
+			Root<Rooms> c = cq.from(Rooms.class);
 			TypedQuery<Rooms> q = em.createQuery(cq);
 			List<Rooms> ll = q.getResultList();
 			return ll;
@@ -1190,6 +1187,7 @@ public class Roommanagement {
 			CriteriaBuilder cb = em.getCriteriaBuilder();
 			CriteriaQuery<Rooms_Organisation> cq = cb
 					.createQuery(Rooms_Organisation.class);
+			Root<Rooms_Organisation> c = cq.from(Rooms_Organisation.class);
 			TypedQuery<Rooms_Organisation> q = em.createQuery(cq);
 			List<Rooms_Organisation> ll = q.getResultList();
 			return ll;
