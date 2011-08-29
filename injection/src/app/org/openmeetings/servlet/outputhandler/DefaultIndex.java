@@ -24,6 +24,9 @@ public class DefaultIndex extends VelocityViewServlet {
 
 	private Configurationmanagement getConfigurationmanagement() {
 		try {
+			if (!ScopeApplicationAdapter.initComplete) {
+				return null;
+			}
 			ApplicationContext context = WebApplicationContextUtils
 					.getWebApplicationContext(getServletContext());
 			return (Configurationmanagement) context.getBean("cfgManagement");
@@ -39,8 +42,7 @@ public class DefaultIndex extends VelocityViewServlet {
 
 		try {
 
-			if (getConfigurationmanagement() == null
-					|| !ScopeApplicationAdapter.initComplete) {
+			if (getConfigurationmanagement() == null) {
 				return getVelocityView().getVelocityEngine().getTemplate(
 						"booting.vm");
 			}
