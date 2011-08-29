@@ -24,9 +24,11 @@ public class DefaultIndex extends VelocityViewServlet {
 
 	private Configurationmanagement getConfigurationmanagement() {
 		try {
-			ApplicationContext context = WebApplicationContextUtils
-					.getWebApplicationContext(getServletContext());
-			return (Configurationmanagement) context.getBean("cfgManagement");
+			if (Configurationmanagement.autowiredComplete()) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Configurationmanagement) context.getBean("cfgManagement");
+			}
 		} catch (Exception err) {
 			log.error("[getConfigurationmanagement]", err);
 		}
@@ -135,7 +137,8 @@ public class DefaultIndex extends VelocityViewServlet {
 
 			// Load params from URL and set into wrapper code
 			if (httpServletRequest.getParameterMap() != null) {
-				for (Iterator<String> iter = httpServletRequest
+				for (@SuppressWarnings("unchecked")
+				Iterator<String> iter = httpServletRequest
 						.getParameterMap().keySet().iterator(); iter.hasNext();) {
 					String paramKey = iter.next();
 					SWF_FLASHVARS += paramKey
