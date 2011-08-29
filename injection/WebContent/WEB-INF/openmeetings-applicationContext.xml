@@ -262,6 +262,10 @@
   	<bean id="userWebService" class="org.openmeetings.axis.services.UserWebService" />
   	<bean id="roomWebService" class="org.openmeetings.axis.services.RoomWebService" />
   	<bean id="fileWebService" class="org.openmeetings.axis.services.FileWebService" />
+  	
+  	<!-- Servlet Facade Beans -->
+  	<bean id="backupExport" class="org.openmeetings.servlet.outputhandler.BackupExport" />
+  	<bean id="backupImport" class="org.openmeetings.servlet.outputhandler.BackupImport" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	
