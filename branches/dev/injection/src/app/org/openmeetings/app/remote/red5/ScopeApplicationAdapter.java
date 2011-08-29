@@ -203,11 +203,11 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return true;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public synchronized Map screenSharerAction(Map map) {
 		try {
 
 			IConnection current = Red5.getConnectionLocal();
-			IServiceCapableConnection service = (IServiceCapableConnection) current;
 
 			RoomClient currentClient = this.clientListManager
 					.getClientByStreamId(current.getClient().getId());
@@ -377,6 +377,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return null;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public synchronized Map setConnectionAsSharingClient(Map map) {
 		try {
 
@@ -1174,6 +1175,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return -1L;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setNewCursorPosition(Object item) {
 		try {
 
@@ -1184,6 +1186,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 			// log.debug("[setNewCursorPosition]"+item);
 
+			@SuppressWarnings("rawtypes")
 			Map cursor = (Map) item;
 			cursor.put("streamPublishName",
 					currentClient.getStreamPublishName());
@@ -1359,7 +1362,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	public synchronized Long applyForModeration(String publicSID) {
 		try {
 
-			IConnection current = Red5.getConnectionLocal();
+			// IConnection current = Red5.getConnectionLocal();
 			// String streamid = current.getClient().getId();
 
 			RoomClient currentClient = this.clientListManager
@@ -1430,7 +1433,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			RoomClient currentClient = this.clientListManager
 					.getClientByStreamId(streamid);
 			currentClient.setAvsettings(avsettings);
-			Long room_id = currentClient.getRoom_id();
+			// Long room_id = currentClient.getRoom_id();
 			this.clientListManager.updateClientByStreamId(streamid,
 					currentClient);
 
@@ -2247,7 +2250,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 					+ currentClient.getUsername());
 			currentClient.setUsercolor(colorObj);
 			currentClient.setUserpos(userPos);
-			Long room_id = currentClient.getRoom_id();
+			// Long room_id = currentClient.getRoom_id();
 
 			// Notify all clients of the same scope (room)
 			Collection<Set<IConnection>> conCollection = current.getScope()
@@ -2414,6 +2417,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param whiteboardObj
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public synchronized void sendVars(ArrayList whiteboardObjParam) {
 		//
 		try {
@@ -2471,7 +2475,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				WhiteboardManagement.getInstance().addWhiteBoardObject(room_id,
 						whiteboardObj);
 			}
-			int numberOfUsers = 0;
+			// int numberOfUsers = 0;
 
 			// This is no longer necessary
 			// boolean ismod = currentClient.getIsMod();
@@ -2518,7 +2522,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 													this);
 									// log.debug("sending sendVarsToWhiteboard to "
 									// + conn + " rcl " + rcl);
-									numberOfUsers++;
+									// numberOfUsers++;
 								}
 							}
 						}
@@ -2542,6 +2546,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param whiteboardObj
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public synchronized void sendVarsByWhiteboardId(
 			ArrayList whiteboardObjParam, Long whiteboardId) {
 		//
@@ -2619,8 +2624,6 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 			}
 
-			int numberOfUsers = 0;
-
 			// This is no longer necessary
 			// boolean ismod = currentClient.getIsMod();
 
@@ -2668,7 +2671,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 															sendObject }, this);
 									// log.debug("sending sendVarsToWhiteboard to "
 									// + conn + " rcl " + rcl);
-									numberOfUsers++;
+									// numberOfUsers++;
 								}
 							}
 						}
@@ -2692,7 +2695,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager
 					.getClientByStreamId(current.getClient().getId());
-			Long room_id = currentClient.getRoom_id();
+			// Long room_id = currentClient.getRoom_id();
 
 			log.debug("***** id: " + currentClient.getStreamid());
 
@@ -2786,6 +2789,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return 1;
 	}
 
+	@SuppressWarnings({ "rawtypes" })
 	public synchronized int sendBrowserMessageToMembers(Object newMessage) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
@@ -2903,7 +2907,6 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager
 					.getClientByStreamId(current.getClient().getId());
-			Long room_id = currentClient.getRoom_id();
 
 			HashMap<String, Object> hsm = new HashMap<String, Object>();
 			hsm.put("client", currentClient);
@@ -2956,8 +2959,6 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	public synchronized int sendMessageById(Object newMessage, String clientId,
 			IScope scope) {
 		try {
-			IConnection current = Red5.getConnectionLocal();
-
 			log.debug("### sendMessageById ###" + clientId);
 
 			HashMap<String, Object> hsm = new HashMap<String, Object>();
@@ -3761,14 +3762,12 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return null;
 	}
 
+	@SuppressWarnings({ "rawtypes" })
 	public synchronized Boolean sendRemoteCursorEvent(String streamid,
 			Map messageObj) {
 		try {
 
 			IConnection current = Red5.getConnectionLocal();
-
-			boolean found = false;
-			Long flvRecordingId = null;
 
 			Collection<Set<IConnection>> conCollection = current.getScope()
 					.getConnections();
