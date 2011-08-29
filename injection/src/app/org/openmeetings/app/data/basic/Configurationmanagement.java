@@ -33,11 +33,28 @@ public class Configurationmanagement {
 
 	@PersistenceContext
 	private EntityManager em;
-	@Autowired
+	
 	private UsersDaoImpl usersDao;
-	@Autowired
 	private AuthLevelmanagement authLevelManagement;
 
+	private static int autowiredComplete = 0;
+	
+	public static boolean autowiredComplete() {
+		return autowiredComplete > 1;
+	}
+	
+	@Autowired
+	public void setUsersDao(UsersDaoImpl usersDao) {
+		autowiredComplete ++;
+		this.usersDao = usersDao;
+	}
+	
+	@Autowired
+	public void setAuthLevelmanagement(AuthLevelmanagement authLevelmanagement) {
+		autowiredComplete ++;
+		this.authLevelManagement = authLevelmanagement;
+	}
+	
 	public Configuration getConfKey(long user_level, String CONF_KEY) {
 		try {
 			if (authLevelManagement.checkUserLevel(user_level)) {
@@ -47,6 +64,7 @@ public class Configurationmanagement {
 				query.setParameter("conf_key", CONF_KEY);
 				query.setParameter("deleted", "false");
 
+				@SuppressWarnings("unchecked")
 				List<Configuration> configs = query.getResultList();
 
 				if (configs != null && configs.size() > 0) {
@@ -148,7 +166,8 @@ public class Configurationmanagement {
 			// get all users
 			Query query = em
 					.createQuery("select count(c.configuration_id) from Configuration c where c.deleted = 'false'");
-			List ll = query.getResultList();
+			@SuppressWarnings("unchecked")
+			List<Long> ll = query.getResultList();
 			log.debug("selectMaxFromConfigurations" + ll.get(0));
 			return (Long) ll.get(0);
 		} catch (Exception ex2) {
