@@ -26,9 +26,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class Import extends HttpServlet {
 	private static final long serialVersionUID = 582610358088411294L;
-	private static final Logger log = Red5LoggerFactory.getLogger(Import.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(Import.class,
+			ScopeApplicationAdapter.webAppRootKey);
 
-    public Sessionmanagement getSessionManagement() {
+	public Sessionmanagement getSessionManagement() {
 		try {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
@@ -72,7 +73,8 @@ public class Import extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (ScopeApplicationAdapter) context.getBean("scopeApplicationAdapter");
+				return (ScopeApplicationAdapter) context
+						.getBean("scopeApplicationAdapter");
 			}
 		} catch (Exception err) {
 			log.error("[getScopeApplicationAdapter]", err);
@@ -85,19 +87,21 @@ public class Import extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (AuthLevelmanagement) context.getBean("authLevelManagement");
+				return (AuthLevelmanagement) context
+						.getBean("authLevelManagement");
 			}
 		} catch (Exception err) {
 			log.error("[getAuthLevelManagement]", err);
 		}
 		return null;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
-	 *      javax.servlet.http.HttpServletResponse)
+	 * @see
+	 * javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest
+	 * , javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	protected void service(HttpServletRequest httpServletRequest,
@@ -105,6 +109,13 @@ public class Import extends HttpServlet {
 			IOException {
 
 		try {
+
+			if (getUserManagement() == null || getAuthLevelManagement() == null
+					|| getScopeApplicationAdapter() == null
+					|| getSessionManagement() == null || getUsersDao() == null) {
+				return;
+			}
+
 			String sid = httpServletRequest.getParameter("sid");
 			if (sid == null) {
 				sid = "default";
@@ -117,12 +128,11 @@ public class Import extends HttpServlet {
 			}
 			System.out.println("moduleName: " + moduleName);
 			Long users_id = getSessionManagement().checkSession(sid);
-			Long user_level = getUserManagement().getUserLevelByID(
-					users_id);
-			
+			Long user_level = getUserManagement().getUserLevelByID(users_id);
+
 			String publicSID = httpServletRequest.getParameter("publicSID");
 			if (publicSID == null) {
-				//Always ask for Public SID
+				// Always ask for Public SID
 				return;
 			}
 
@@ -134,52 +144,61 @@ public class Import extends HttpServlet {
 			if (getAuthLevelManagement().checkAdminLevel(user_level)) {
 				if (moduleName.equals("users")) {
 					log.error("Import Users");
-					String organisation = httpServletRequest.getParameter("secondid");
+					String organisation = httpServletRequest
+							.getParameter("secondid");
 					if (organisation == null) {
 						organisation = "0";
 					}
-					Long organisation_id = Long.valueOf(organisation).longValue();
+					Long organisation_id = Long.valueOf(organisation)
+							.longValue();
 					log.debug("organisation_id: " + organisation_id);
 
-					ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max100 mb
+					ServletMultipartRequest upload = new ServletMultipartRequest(
+							httpServletRequest, 104857600); // max100 mb
 					InputStream is = upload.getFileContents("Filedata");
-					
+
 					UserImport.getInstance().addUsersByDocument(is);
 
 				} else if (moduleName.equals("language")) {
 					log.error("Import Language");
-					String language = httpServletRequest.getParameter("secondid");
+					String language = httpServletRequest
+							.getParameter("secondid");
 					if (language == null) {
 						language = "0";
 					}
 					Long language_id = Long.valueOf(language).longValue();
 					System.out.println("language_id: " + language_id);
 
-					ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max100 mb
+					ServletMultipartRequest upload = new ServletMultipartRequest(
+							httpServletRequest, 104857600); // max100 mb
 					InputStream is = upload.getFileContents("Filedata");
-					
-					LanguageImport.getInstance().addLanguageByDocument(language_id, is);
-					
+
+					LanguageImport.getInstance().addLanguageByDocument(
+							language_id, is);
+
 				}
 			} else {
-				System.out.println("ERROR LangExport: not authorized FileDownload "+ (new Date()));
-			}	
-			
+				System.out
+						.println("ERROR LangExport: not authorized FileDownload "
+								+ (new Date()));
+			}
+
 			log.debug("Return And Close");
-			
-			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+
+			LinkedHashMap<String, Object> hs = new LinkedHashMap<String, Object>();
 			hs.put("user", getUsersDao().getUser(users_id));
 			hs.put("message", "library");
 			hs.put("action", "import");
-			
-			log.debug("moduleName.equals(userprofile) ? "+moduleName);
-			
+
+			log.debug("moduleName.equals(userprofile) ? " + moduleName);
+
 			log.debug("moduleName.equals(userprofile) ! ");
-				
-			getScopeApplicationAdapter().sendMessageWithClientByPublicSID(hs,publicSID);
-			
+
+			getScopeApplicationAdapter().sendMessageWithClientByPublicSID(hs,
+					publicSID);
+
 			return;
-	
+
 		} catch (Exception er) {
 			log.error("ERROR ", er);
 			System.out.println("Error exporting: " + er);

@@ -20,12 +20,12 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-
 public class DownloadHandler extends HttpServlet {
 	private static final long serialVersionUID = 7243653203578587544L;
 
-	private static final Logger log = Red5LoggerFactory.getLogger(DownloadHandler.class);
-	
+	private static final Logger log = Red5LoggerFactory
+			.getLogger(DownloadHandler.class);
+
 	private static final String defaultImageName = "deleted.jpg";
 	private static final String defaultProfileImageName = "profile_pic.jpg";
 	private static final String defaultProfileImageNameBig = "_big_profile_pic.jpg";
@@ -33,7 +33,7 @@ public class DownloadHandler extends HttpServlet {
 	private static final String defaultSWFName = "deleted.swf";
 	private static final String defaultPDFName = "deleted.pdf";
 
-    public Sessionmanagement getSessionManagement() {
+	public Sessionmanagement getSessionManagement() {
 		try {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
@@ -58,12 +58,13 @@ public class DownloadHandler extends HttpServlet {
 		}
 		return null;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
-	 *      javax.servlet.http.HttpServletResponse)
+	 * @see
+	 * javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest
+	 * , javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	protected void service(HttpServletRequest httpServletRequest,
@@ -71,19 +72,26 @@ public class DownloadHandler extends HttpServlet {
 			IOException {
 
 		try {
+
+			if (getUserManagement() == null || getSessionManagement() == null) {
+				return;
+			}
+
 			httpServletRequest.setCharacterEncoding("UTF-8");
-			
+
 			log.debug("\nquery = " + httpServletRequest.getQueryString());
-			log.debug("\n\nfileName = " + httpServletRequest.getParameter("fileName"));
-			log.debug("\n\nparentPath = " + httpServletRequest.getParameter("parentPath"));
-			
+			log.debug("\n\nfileName = "
+					+ httpServletRequest.getParameter("fileName"));
+			log.debug("\n\nparentPath = "
+					+ httpServletRequest.getParameter("parentPath"));
+
 			String queryString = httpServletRequest.getQueryString();
 			if (queryString == null) {
 				queryString = "";
 			}
-			
+
 			String sid = httpServletRequest.getParameter("sid");
-			
+
 			if (sid == null) {
 				sid = "default";
 			}
@@ -92,45 +100,49 @@ public class DownloadHandler extends HttpServlet {
 			Long users_id = getSessionManagement().checkSession(sid);
 			Long user_level = getUserManagement().getUserLevelByID(users_id);
 
-			if (user_level!=null && user_level > 0) {
+			if (user_level != null && user_level > 0) {
 				String room_id = httpServletRequest.getParameter("room_id");
-				if(room_id == null){
+				if (room_id == null) {
 					room_id = "default";
-				}	
-				
-				String moduleName = httpServletRequest.getParameter("moduleName");
+				}
+
+				String moduleName = httpServletRequest
+						.getParameter("moduleName");
 				if (moduleName == null) {
 					moduleName = "nomodule";
-				}			
-				
-				String parentPath = httpServletRequest.getParameter("parentPath");
+				}
+
+				String parentPath = httpServletRequest
+						.getParameter("parentPath");
 				if (parentPath == null) {
 					parentPath = "nomodule";
 				}
-				
-				String requestedFile = httpServletRequest.getParameter("fileName");				
+
+				String requestedFile = httpServletRequest
+						.getParameter("fileName");
 				if (requestedFile == null) {
 					requestedFile = "";
 				}
-				
-				//make a complete name out of domain(organisation) + roomname
+
+				// make a complete name out of domain(organisation) + roomname
 				String roomName = room_id;
-				//trim whitespaces cause it is a directory name
+				// trim whitespaces cause it is a directory name
 				roomName = StringUtils.deleteWhitespace(roomName);
 
-				//Get the current User-Directory
-				
+				// Get the current User-Directory
+
 				String current_dir = getServletContext().getRealPath("/");
 
 				String working_dir = "";
 
-				working_dir = current_dir+"upload"+File.separatorChar;
-				
+				working_dir = current_dir + "upload" + File.separatorChar;
+
 				// Add the Folder for the Room
 				if (moduleName.equals("lzRecorderApp")) {
-				
-					working_dir = current_dir + "streams" + File.separatorChar + "hibernate" + File.separatorChar;
-					
+
+					working_dir = current_dir + "streams" + File.separatorChar
+							+ "hibernate" + File.separatorChar;
+
 				} else if (moduleName.equals("videoconf1")) {
 					if (parentPath.length() != 0) {
 						if (parentPath.equals("/")) {
@@ -138,14 +150,14 @@ public class DownloadHandler extends HttpServlet {
 									+ File.separatorChar;
 						} else {
 							working_dir = working_dir + roomName
-										+ File.separatorChar + parentPath
-										+ File.separatorChar;
+									+ File.separatorChar + parentPath
+									+ File.separatorChar;
 						}
 					} else {
 						working_dir = current_dir + roomName
 								+ File.separatorChar;
 					}
-				} else if (moduleName.equals("userprofile")){
+				} else if (moduleName.equals("userprofile")) {
 					working_dir += "profiles" + File.separatorChar;
 					File f = new File(working_dir);
 					if (!f.exists()) {
@@ -154,8 +166,9 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-					
-					working_dir += ScopeApplicationAdapter.profilesPrefix+users_id + File.separatorChar;
+
+					working_dir += ScopeApplicationAdapter.profilesPrefix
+							+ users_id + File.separatorChar;
 					File f2 = new File(working_dir);
 					if (!f2.exists()) {
 						boolean c = f2.mkdir();
@@ -163,7 +176,7 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-				} else if (moduleName.equals("remoteuserprofile")){
+				} else if (moduleName.equals("remoteuserprofile")) {
 					working_dir += "profiles" + File.separatorChar;
 					File f = new File(working_dir);
 					if (!f.exists()) {
@@ -172,13 +185,15 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-					
-					String remoteUser_id = httpServletRequest.getParameter("remoteUserid");
-					if(remoteUser_id == null){
+
+					String remoteUser_id = httpServletRequest
+							.getParameter("remoteUserid");
+					if (remoteUser_id == null) {
 						remoteUser_id = "0";
 					}
-					
-					working_dir += ScopeApplicationAdapter.profilesPrefix+remoteUser_id + File.separatorChar;
+
+					working_dir += ScopeApplicationAdapter.profilesPrefix
+							+ remoteUser_id + File.separatorChar;
 					File f2 = new File(working_dir);
 					if (!f2.exists()) {
 						boolean c = f2.mkdir();
@@ -186,10 +201,8 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-					
-					
-					
-				} else if (moduleName.equals("remoteuserprofilebig")){
+
+				} else if (moduleName.equals("remoteuserprofilebig")) {
 					working_dir += "profiles" + File.separatorChar;
 					File f = new File(working_dir);
 					if (!f.exists()) {
@@ -198,13 +211,15 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-					
-					String remoteUser_id = httpServletRequest.getParameter("remoteUserid");
-					if(remoteUser_id == null){
+
+					String remoteUser_id = httpServletRequest
+							.getParameter("remoteUserid");
+					if (remoteUser_id == null) {
 						remoteUser_id = "0";
 					}
-					
-					working_dir += ScopeApplicationAdapter.profilesPrefix+remoteUser_id + File.separatorChar;
+
+					working_dir += ScopeApplicationAdapter.profilesPrefix
+							+ remoteUser_id + File.separatorChar;
 					File f2 = new File(working_dir);
 					if (!f2.exists()) {
 						boolean c = f2.mkdir();
@@ -212,11 +227,11 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-					
+
 					requestedFile = this.getBigProfileUserName(working_dir);
-					
-				} else if (moduleName.equals("chat")){
-					
+
+				} else if (moduleName.equals("chat")) {
+
 					working_dir += "profiles" + File.separatorChar;
 					File f = new File(working_dir);
 					if (!f.exists()) {
@@ -225,13 +240,15 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-					
-					String remoteUser_id = httpServletRequest.getParameter("remoteUserid");
-					if(remoteUser_id == null){
+
+					String remoteUser_id = httpServletRequest
+							.getParameter("remoteUserid");
+					if (remoteUser_id == null) {
 						remoteUser_id = "0";
-					}	
-					
-					working_dir += ScopeApplicationAdapter.profilesPrefix+remoteUser_id + File.separatorChar;
+					}
+
+					working_dir += ScopeApplicationAdapter.profilesPrefix
+							+ remoteUser_id + File.separatorChar;
 					File f2 = new File(working_dir);
 					if (!f2.exists()) {
 						boolean c = f2.mkdir();
@@ -239,114 +256,131 @@ public class DownloadHandler extends HttpServlet {
 							log.error("cannot write to directory");
 						}
 					}
-					
+
 					requestedFile = this.getChatUserName(working_dir);
-					
+
 				} else {
 					working_dir = working_dir + roomName + File.separatorChar;
 				}
-				
+
 				if (!moduleName.equals("nomodule")) {
 
-					
-					log.debug("requestedFile: " + requestedFile + " current_dir: "+working_dir);
+					log.debug("requestedFile: " + requestedFile
+							+ " current_dir: " + working_dir);
 
 					String full_path = working_dir + requestedFile;
-					
+
 					File f = new File(full_path);
-					
-					//If the File does not exist or is not readable show/load a place-holder picture
-					
+
+					// If the File does not exist or is not readable show/load a
+					// place-holder picture
+
 					if (!f.exists() || !f.canRead()) {
-						if (!f.canRead()){
+						if (!f.canRead()) {
 							log.debug("LOG DownloadHandler: The request file is not readable");
 						} else {
 							log.debug("LOG DownloadHandler: The request file does not exist / has already been deleted");
 						}
-						log.debug("LOG ERROR requestedFile: "+requestedFile);
-						//replace the path with the default picture/document
-						
-						if (requestedFile.endsWith(".jpg")){
+						log.debug("LOG ERROR requestedFile: " + requestedFile);
+						// replace the path with the default picture/document
+
+						if (requestedFile.endsWith(".jpg")) {
 							log.debug("LOG endsWith d.jpg");
-							
-							log.debug("LOG moduleName: "+moduleName);
+
+							log.debug("LOG moduleName: " + moduleName);
 
 							requestedFile = DownloadHandler.defaultImageName;
 							if (moduleName.equals("remoteuserprofile")) {
 								requestedFile = DownloadHandler.defaultProfileImageName;
-							} else if (moduleName.equals("remoteuserprofilebig")) {
+							} else if (moduleName
+									.equals("remoteuserprofilebig")) {
 								requestedFile = DownloadHandler.defaultProfileImageNameBig;
 							} else if (moduleName.equals("userprofile")) {
 								requestedFile = DownloadHandler.defaultProfileImageName;
 							} else if (moduleName.equals("chat")) {
 								requestedFile = DownloadHandler.defaultChatImageName;
 							}
-							//request for an image
-							full_path = current_dir + File.separatorChar + "default" + 
-									File.separatorChar + requestedFile;
-						} else if (requestedFile.endsWith(".swf")){
+							// request for an image
+							full_path = current_dir + File.separatorChar
+									+ "default" + File.separatorChar
+									+ requestedFile;
+						} else if (requestedFile.endsWith(".swf")) {
 							requestedFile = DownloadHandler.defaultSWFName;
-							//request for a SWFPresentation
-							full_path = current_dir + File.separatorChar + "default" + 
-									File.separatorChar + DownloadHandler.defaultSWFName;
+							// request for a SWFPresentation
+							full_path = current_dir + File.separatorChar
+									+ "default" + File.separatorChar
+									+ DownloadHandler.defaultSWFName;
 						} else {
-							//Any document, must be a download request
-							//OR a Moodle Loggedin User
+							// Any document, must be a download request
+							// OR a Moodle Loggedin User
 							requestedFile = DownloadHandler.defaultImageName;
-							full_path = current_dir + File.separatorChar + "default" + 
-								File.separatorChar + DownloadHandler.defaultImageName;
+							full_path = current_dir + File.separatorChar
+									+ "default" + File.separatorChar
+									+ DownloadHandler.defaultImageName;
 						}
 					}
-					
-					log.debug("full_path: "+full_path);
-					
+
+					log.debug("full_path: " + full_path);
+
 					File f2 = new File(full_path);
 					if (!f2.exists() || !f2.canRead()) {
-						if (!f2.canRead()){
+						if (!f2.canRead()) {
 							log.debug("DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
 						} else {
 							log.debug("DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
 						}
-						//no file to handle abort processing
+						// no file to handle abort processing
 						return;
 					}
-					
-					//Get file and handle download
+
+					// Get file and handle download
 					RandomAccessFile rf = new RandomAccessFile(full_path, "r");
 
-					//Default type - Explorer, Chrome and others
+					// Default type - Explorer, Chrome and others
 					int browserType = 0;
-					
-					//Firefox and Opera browsers
-					if ((httpServletRequest.getHeader("User-Agent").contains("Firefox"))||
-						(httpServletRequest.getHeader("User-Agent").contains("Opera")))
-					{
+
+					// Firefox and Opera browsers
+					if ((httpServletRequest.getHeader("User-Agent")
+							.contains("Firefox"))
+							|| (httpServletRequest.getHeader("User-Agent")
+									.contains("Opera"))) {
 						browserType = 1;
 					}
-					
-					log.debug("Detected browser type:"+browserType);
-					
+
+					log.debug("Detected browser type:" + browserType);
+
 					httpServletResponse.reset();
 					httpServletResponse.resetBuffer();
 					OutputStream out = httpServletResponse.getOutputStream();
-					
+
 					if (requestedFile.endsWith(".swf")) {
-						//trigger download to SWF => THIS is a workaround for Flash Player 10, FP 10 does not seem
-						//to accept SWF-Downloads with the Content-Disposition in the Header
-						httpServletResponse.setContentType("application/x-shockwave-flash");
-						httpServletResponse.setHeader("Content-Length", ""+ rf.length());
+						// trigger download to SWF => THIS is a workaround for
+						// Flash Player 10, FP 10 does not seem
+						// to accept SWF-Downloads with the Content-Disposition
+						// in the Header
+						httpServletResponse
+								.setContentType("application/x-shockwave-flash");
+						httpServletResponse.setHeader("Content-Length",
+								"" + rf.length());
 					} else {
-						httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-						if ( browserType == 0)
-						{
-							httpServletResponse.setHeader("Content-Disposition","attachment; filename=" + java.net.URLEncoder.encode(requestedFile,"UTF-8") );
+						httpServletResponse
+								.setContentType("APPLICATION/OCTET-STREAM");
+						if (browserType == 0) {
+							httpServletResponse.setHeader(
+									"Content-Disposition",
+									"attachment; filename="
+											+ java.net.URLEncoder.encode(
+													requestedFile, "UTF-8"));
+						} else {
+							httpServletResponse.setHeader(
+									"Content-Disposition",
+									"attachment; filename*=UTF-8'en'"
+											+ java.net.URLEncoder.encode(
+													requestedFile, "UTF-8"));
 						}
-						else
-						{
-							httpServletResponse.setHeader("Content-Disposition","attachment; filename*=UTF-8'en'" + java.net.URLEncoder.encode(requestedFile,"UTF-8") );							
-						}
-						
-						httpServletResponse.setHeader("Content-Length", ""+ rf.length());
+
+						httpServletResponse.setHeader("Content-Length",
+								"" + rf.length());
 					}
 
 					byte[] buffer = new byte[1024];
@@ -363,39 +397,44 @@ public class DownloadHandler extends HttpServlet {
 
 				}
 			} else {
-				System.out.println("ERROR DownloadHandler: not authorized FileDownload "+(new Date()));
+				System.out
+						.println("ERROR DownloadHandler: not authorized FileDownload "
+								+ (new Date()));
 			}
 
 		} catch (Exception er) {
-			log.error("Error downloading: " , er);
-			//er.printStackTrace();
+			log.error("Error downloading: ", er);
+			// er.printStackTrace();
 		}
 	}
-	
-	private String getChatUserName(String userprofile_folder) throws Exception{
-		
+
+	private String getChatUserName(String userprofile_folder) throws Exception {
+
 		File f = new File(userprofile_folder);
 		if (f.exists() && f.isDirectory()) {
 			String filesString[] = f.list();
-			for (int i=0;i<filesString.length;i++) {
+			for (int i = 0; i < filesString.length; i++) {
 				String fileName = filesString[i];
-				if (fileName.startsWith("_chat_")) return fileName;
+				if (fileName.startsWith("_chat_"))
+					return fileName;
 			}
 		}
 		return "_no.jpg";
 	}
-	
-	private String getBigProfileUserName(String userprofile_folder) throws Exception{
-		
+
+	private String getBigProfileUserName(String userprofile_folder)
+			throws Exception {
+
 		File f = new File(userprofile_folder);
 		if (f.exists() && f.isDirectory()) {
 			String filesString[] = f.list();
-			for (int i=0;i<filesString.length;i++) {
+			for (int i = 0; i < filesString.length; i++) {
 				String fileName = filesString[i];
-				if (fileName.startsWith("_big_")) return fileName;
+				if (fileName.startsWith("_big_"))
+					return fileName;
 			}
 		}
 		return "_no.jpg";
-	}	
+	}
 
 }

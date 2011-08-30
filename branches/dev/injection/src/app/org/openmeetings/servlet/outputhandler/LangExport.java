@@ -36,7 +36,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class LangExport extends HttpServlet {
 	private static final long serialVersionUID = 243294279856160463L;
-	private static final Logger log = Red5LoggerFactory.getLogger(LangExport.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			LangExport.class, ScopeApplicationAdapter.webAppRootKey);
 
 	public Sessionmanagement getSessionManagement() {
 		try {
@@ -82,14 +83,15 @@ public class LangExport extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (FieldLanguageDaoImpl) context.getBean("fieldLanguageDaoImpl");
+				return (FieldLanguageDaoImpl) context
+						.getBean("fieldLanguageDaoImpl");
 			}
 		} catch (Exception err) {
 			log.error("[getFieldLanguageDaoImpl]", err);
 		}
 		return null;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -103,6 +105,14 @@ public class LangExport extends HttpServlet {
 			IOException {
 
 		try {
+
+			if (getUserManagement() == null
+					|| getFieldLanguageDaoImpl() == null
+					|| getFieldmanagment() == null
+					|| getSessionManagement() == null) {
+				return;
+			}
+
 			String sid = httpServletRequest.getParameter("sid");
 			if (sid == null) {
 				sid = "default";

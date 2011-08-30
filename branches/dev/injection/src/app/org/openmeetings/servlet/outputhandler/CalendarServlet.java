@@ -35,8 +35,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class CalendarServlet extends HttpServlet {
 	private static final long serialVersionUID = 2192254610711799347L;
-	private static final Logger log = Red5LoggerFactory.getLogger(Calendar.class, ScopeApplicationAdapter.webAppRootKey);
-	
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			Calendar.class, ScopeApplicationAdapter.webAppRootKey);
+
 	public AppointmentLogic getAppointmentLogic() {
 		try {
 			if (ScopeApplicationAdapter.initComplete) {
@@ -68,7 +69,8 @@ public class CalendarServlet extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (Configurationmanagement) context.getBean("cfgManagement");
+				return (Configurationmanagement) context
+						.getBean("cfgManagement");
 			}
 		} catch (Exception err) {
 			log.error("[getCfgManagement]", err);
@@ -102,12 +104,20 @@ public class CalendarServlet extends HttpServlet {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
 
 		try {
+
+			if (getUserManagement() == null || getOmTimeZoneDaoImpl() == null
+					|| getCfgManagement() == null
+					|| getSessionManagement() == null
+					|| getAppointmentLogic() == null) {
+				return;
+			}
 
 			String sid = httpServletRequest.getParameter("sid");
 
@@ -184,24 +194,24 @@ public class CalendarServlet extends HttpServlet {
 						if (conf != null) {
 							jNameTimeZone = conf.getConf_value();
 						}
-						omTimeZone = getOmTimeZoneDaoImpl()
-								.getOmTimeZone(jNameTimeZone);
+						omTimeZone = getOmTimeZoneDaoImpl().getOmTimeZone(
+								jNameTimeZone);
 
 					} else {
 
 						// System.out.println("CalendarServlet TimeZone "+jNameTimeZone
 						// );
-						omTimeZone = getOmTimeZoneDaoImpl().getOmTimeZoneById(Long
-								.valueOf(timeZoneIdAsStr).longValue());
+						omTimeZone = getOmTimeZoneDaoImpl().getOmTimeZoneById(
+								Long.valueOf(timeZoneIdAsStr).longValue());
 
 						if (omTimeZone == null) {
-							Configuration conf = getCfgManagement().getConfKey(3L,
-									"default.timezone");
+							Configuration conf = getCfgManagement().getConfKey(
+									3L, "default.timezone");
 							if (conf != null) {
 								jNameTimeZone = conf.getConf_value();
 							}
-							omTimeZone = getOmTimeZoneDaoImpl()
-									.getOmTimeZone(jNameTimeZone);
+							omTimeZone = getOmTimeZoneDaoImpl().getOmTimeZone(
+									jNameTimeZone);
 						}
 
 					}
