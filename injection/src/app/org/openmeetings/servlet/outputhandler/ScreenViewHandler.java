@@ -5,34 +5,50 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+import org.red5.logging.Red5LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class ScreenViewHandler extends HttpServlet {
 	private static final long serialVersionUID = -2221780306064491855L;
 	private static final Logger log = Red5LoggerFactory.getLogger(ScreenViewHandler.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private Sessionmanagement sessionManagement;
-    private Usermanagement userManagement;
-	
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
 	}
-	
+
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,8 +67,8 @@ public class ScreenViewHandler extends HttpServlet {
 			}
 			System.out.println("sid: " + sid);
 
-			Long users_id = sessionManagement.checkSession(sid);
-			long user_level = userManagement.getUserLevelByID(users_id);
+			Long users_id = getSessionManagement().checkSession(sid);
+			long user_level = getUserManagement().getUserLevelByID(users_id);
 
 			if (user_level > 0) {
 				String room = httpServletRequest.getParameter("room");
