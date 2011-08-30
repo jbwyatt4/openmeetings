@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +26,8 @@ import org.openmeetings.app.persistence.beans.lang.Fieldvalues;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * 
@@ -37,18 +38,56 @@ public class LangExport extends HttpServlet {
 	private static final long serialVersionUID = 243294279856160463L;
 	private static final Logger log = Red5LoggerFactory.getLogger(LangExport.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private Sessionmanagement sessionManagement;
-	private Usermanagement userManagement;
-	private Fieldmanagment fieldmanagment;
-	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
+	}
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		fieldmanagment = (Fieldmanagment)config.getServletContext().getAttribute("fieldmanagment");
-		fieldLanguageDaoImpl = (FieldLanguageDaoImpl)config.getServletContext().getAttribute("fieldLanguageDaoImpl");
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public Fieldmanagment getFieldmanagment() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Fieldmanagment) context.getBean("fieldmanagment");
+			}
+		} catch (Exception err) {
+			log.error("[getFieldmanagment]", err);
+		}
+		return null;
+	}
+
+	public FieldLanguageDaoImpl getFieldLanguageDaoImpl() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (FieldLanguageDaoImpl) context.getBean("fieldLanguageDaoImpl");
+			}
+		} catch (Exception err) {
+			log.error("[getFieldLanguageDaoImpl]", err);
+		}
+		return null;
 	}
 	
 	/*
@@ -77,17 +116,17 @@ public class LangExport extends HttpServlet {
 			Long language_id = Long.valueOf(language).longValue();
 			log.debug("language_id: " + language_id);
 
-			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = userManagement.getUserLevelByID(users_id);
+			Long users_id = getSessionManagement().checkSession(sid);
+			Long user_level = getUserManagement().getUserLevelByID(users_id);
 
 			log.debug("users_id: " + users_id);
 			log.debug("user_level: " + user_level);
 
 			if (user_level != null && user_level > 0) {
-				FieldLanguage fl = fieldLanguageDaoImpl
+				FieldLanguage fl = getFieldLanguageDaoImpl()
 						.getFieldLanguageById(language_id);
 
-				List<Fieldvalues> fvList = fieldmanagment
+				List<Fieldvalues> fvList = getFieldmanagment()
 						.getMixedFieldValuesList(language_id);
 
 				if (fl != null && fvList != null) {
@@ -143,7 +182,7 @@ public class LangExport extends HttpServlet {
 				value.addText(fv.getFieldlanguagesvalue().getValue());
 			} else {
 				// Add english default text
-				Fieldlanguagesvalues flv = fieldmanagment
+				Fieldlanguagesvalues flv = getFieldmanagment()
 						.getFieldByIdAndLanguage(fv.getFieldvalues_id(), 1L);
 				if (flv != null) {
 					value.addText(flv.getValue());
