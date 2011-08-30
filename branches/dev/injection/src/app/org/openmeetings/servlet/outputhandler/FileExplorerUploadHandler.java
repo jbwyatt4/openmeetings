@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,19 +14,37 @@ import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class FileExplorerUploadHandler extends UploadHandler {
     private static final long serialVersionUID = 2848421357849982426L;
     private static final Logger log = Red5LoggerFactory.getLogger(FileExplorerUploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private FileExplorerItemDaoImpl fileExplorerItemDao;
-	private FileProcessor fileProcessor;
+	public FileExplorerItemDaoImpl getFileExplorerItemDao() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (FileExplorerItemDaoImpl) context.getBean("fileExplorerItemDao");
+			}
+		} catch (Exception err) {
+			log.error("[getFileExplorerItemDao]", err);
+		}
+		return null;
+	}
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
-		fileProcessor = (FileProcessor)config.getServletContext().getAttribute("fileProcessor");
+	public FileProcessor getFileProcessor() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (FileProcessor) context.getBean("fileProcessor");
+			}
+		} catch (Exception err) {
+			log.error("[getFileProcessor]", err);
+		}
+		return null;
 	}
 	
     @Override
@@ -67,7 +84,7 @@ public class FileExplorerUploadHandler extends UploadHandler {
         String fileSystemName = upload.getBaseFilename("Filedata");
         log.debug("fileSystemName: " + fileSystemName);
 
-        HashMap<String, HashMap<String, Object>> returnError = fileProcessor.processFile(userId, room_id_to_Store, 
+        HashMap<String, HashMap<String, Object>> returnError = getFileProcessor().processFile(userId, room_id_to_Store, 
         		isOwner, is, parentFolderId, fileSystemName, current_dir, hs,
         		0L, ""); //externalFilesId, externalType
         
@@ -77,7 +94,7 @@ public class FileExplorerUploadHandler extends UploadHandler {
         // httpServletResponse.getWriter().print(returnError);
         hs.put("message", "library");
         hs.put("action", "newFile");
-        hs.put("fileExplorerItem", fileExplorerItemDao.getFileExplorerItemsById(Long.parseLong(returnAttributes.get("fileExplorerItemId").toString())));
+        hs.put("fileExplorerItem", getFileExplorerItemDao().getFileExplorerItemsById(Long.parseLong(returnAttributes.get("fileExplorerItemId").toString())));
         hs.put("error", returnError);
         hs.put("fileName", returnAttributes.get("completeName"));
 
