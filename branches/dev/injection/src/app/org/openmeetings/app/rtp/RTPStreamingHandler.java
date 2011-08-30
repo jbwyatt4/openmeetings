@@ -24,15 +24,15 @@ public class RTPStreamingHandler {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			RTPStreamingHandler.class, ScopeApplicationAdapter.webAppRootKey);
+	
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Usermanagement userManagement;
 	@Autowired
 	private ClientListManager clientListManager;
-
 	@Autowired
-	private static Roommanagement roommanagement;
+	private Roommanagement roommanagement;
 
 	/** Contains all RTPSessions */
 	private static HashMap<Rooms, RTPScreenSharingSession> rtpSessions = new HashMap<Rooms, RTPScreenSharingSession>();
@@ -51,38 +51,7 @@ public class RTPStreamingHandler {
 	public static int getNextFreeRTPPort() {
 		log.debug("getNextFreeRTPPort");
 
-		/*
-		 * Iterator<Rooms> riter = rtpSessions.keySet().iterator();
-		 * 
-		 * int currentPort = minimalRTPPort;
-		 * 
-		 * if(rtpSessions.size() < 1){ log.debug("getNextFreeRTPPort : " +
-		 * currentPort); return currentPort; }
-		 * 
-		 * // TODO also use maximum RTP Port to give admins a chance to
-		 * administrate a range // of ports that should be open ;-)
-		 * 
-		 * boolean portBlocked = true;
-		 * 
-		 * while(portBlocked){
-		 * 
-		 * while(riter.hasNext()){ Rooms r = riter.next();
-		 * RTPScreenSharingSession session = rtpSessions.get(r);
-		 * 
-		 * log.debug("trying Port " + currentPort);
-		 * 
-		 * if(session.getIncomingRTPPort() == currentPort){ portBlocked = true;
-		 * currentPort= currentPort +2; } else portBlocked = false; }
-		 * 
-		 * // Checked all portBlocked = false;
-		 * 
-		 * }
-		 */
-
 		last_used_port = last_used_port + 2;
-
-		// TODO Check for Range and start from minimal again - checking
-		// openSession, if port is still in use...
 
 		log.debug("getNextFreeRTPPort : " + last_used_port);
 		return last_used_port;
