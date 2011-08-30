@@ -13,7 +13,6 @@ import org.openmeetings.app.persistence.beans.basic.ErrorValues;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -23,8 +22,6 @@ public class ErrorManagement {
 
 	@PersistenceContext
 	private EntityManager em;
-	@Autowired
-	private Fieldmanagment fieldmanagment;
 
 	public Long addErrorType(Long errortype_id, Long fieldvalues_id) {
 		try {
@@ -66,7 +63,7 @@ public class ErrorManagement {
 			query.setParameter("errortype_id", errortype_id);
 			return (ErrorType) query.getSingleResult();
 		} catch (Exception ex2) {
-			log.error("[getErrorType]", ex2);
+			log.error("[getErrorType(" + errortype_id + ")]", ex2);
 		}
 		return null;
 	}
@@ -76,7 +73,7 @@ public class ErrorManagement {
 		try {
 			ErrorValues eValue = new ErrorValues();
 			eValue.setErrorvalues_id(errorvalues_id);
-			eValue.setErrorType(getErrorType(errortype_id));
+			eValue.setErrortype_id(errortype_id);
 			eValue.setDeleted("false");
 			eValue.setStarttime(new Date());
 			eValue.setFieldvalues_id(fieldvalues_id);

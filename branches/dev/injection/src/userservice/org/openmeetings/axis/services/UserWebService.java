@@ -115,7 +115,7 @@ public class UserWebService {
 							.getFieldByIdAndLanguage(
 									eValues.getFieldvalues_id(), language_id);
 					Fieldlanguagesvalues typeValue = fieldmanagment
-							.getFieldByIdAndLanguage(eValues.getErrorType()
+							.getFieldByIdAndLanguage(errorManagement.getErrorType(eValues.getErrortype_id())
 									.getFieldvalues_id(), language_id);
 					if (errorValue != null) {
 						return new ErrorResult(errorid, errorValue.getValue(),
