@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,25 +20,9 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.data.basic.dao.LdapConfigDaoImpl;
 import org.openmeetings.app.data.basic.dao.OmTimeZoneDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
-import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
 import org.openmeetings.app.data.calendar.management.AppointmentLogic;
-import org.openmeetings.app.data.conference.Roommanagement;
-import org.openmeetings.app.data.conference.dao.RoomModeratorsDaoImpl;
-import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
-import org.openmeetings.app.data.flvrecord.FlvRecordingDaoImpl;
-import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDataDaoImpl;
-import org.openmeetings.app.data.user.Organisationmanagement;
-import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.data.user.dao.PrivateMessageFolderDaoImpl;
-import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
-import org.openmeetings.app.data.user.dao.UserContactsDaoImpl;
-import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.persistence.beans.basic.Configuration;
 import org.openmeetings.app.persistence.beans.basic.OmTimeZone;
 import org.openmeetings.app.persistence.beans.calendar.Appointment;
@@ -47,28 +30,78 @@ import org.openmeetings.app.persistence.beans.calendar.MeetingMember;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class CalendarServlet extends HttpServlet {
 	private static final long serialVersionUID = 2192254610711799347L;
 	private static final Logger log = Red5LoggerFactory.getLogger(Calendar.class, ScopeApplicationAdapter.webAppRootKey);
 	
-	private AppointmentLogic appointmentLogic;
-	private Sessionmanagement sessionManagement;
-	private Configurationmanagement cfgManagement;
-	private Usermanagement userManagement;
-	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		appointmentLogic = (AppointmentLogic)config.getServletContext().getAttribute("appointmentLogic");
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		omTimeZoneDaoImpl = (OmTimeZoneDaoImpl)config.getServletContext().getAttribute("omTimeZoneDaoImpl");
+	public AppointmentLogic getAppointmentLogic() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (AppointmentLogic) context.getBean("appointmentLogic");
+			}
+		} catch (Exception err) {
+			log.error("[getAppointmentLogic]", err);
+		}
+		return null;
 	}
-	
+
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
+	}
+
+	public Configurationmanagement getCfgManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Configurationmanagement) context.getBean("cfgManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getCfgManagement]", err);
+		}
+		return null;
+	}
+
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public OmTimeZoneDaoImpl getOmTimeZoneDaoImpl() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (OmTimeZoneDaoImpl) context.getBean("omTimeZoneDaoImpl");
+			}
+		} catch (Exception err) {
+			log.error("[getOmTimeZoneDaoImpl]", err);
+		}
+		return null;
+	}
+
 	@Override
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
@@ -83,8 +116,8 @@ public class CalendarServlet extends HttpServlet {
 			}
 			log.debug("sid: " + sid);
 
-			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = userManagement.getUserLevelByID(users_id);
+			Long users_id = getSessionManagement().checkSession(sid);
+			Long user_level = getUserManagement().getUserLevelByID(users_id);
 
 			if (user_level != null && user_level > 0) {
 
@@ -115,7 +148,7 @@ public class CalendarServlet extends HttpServlet {
 					userToShowId = Long.parseLong(userStr);
 				}
 
-				List<Appointment> appointements = appointmentLogic
+				List<Appointment> appointements = getAppointmentLogic()
 						.getAppointmentByRange(userToShowId,
 								new Date(starttime.getTimeInMillis()),
 								new Date(endtime.getTimeInMillis()));
@@ -146,28 +179,28 @@ public class CalendarServlet extends HttpServlet {
 
 					if (timeZoneIdAsStr == null) {
 
-						Configuration conf = cfgManagement.getConfKey(3L,
+						Configuration conf = getCfgManagement().getConfKey(3L,
 								"default.timezone");
 						if (conf != null) {
 							jNameTimeZone = conf.getConf_value();
 						}
-						omTimeZone = omTimeZoneDaoImpl
+						omTimeZone = getOmTimeZoneDaoImpl()
 								.getOmTimeZone(jNameTimeZone);
 
 					} else {
 
 						// System.out.println("CalendarServlet TimeZone "+jNameTimeZone
 						// );
-						omTimeZone = omTimeZoneDaoImpl.getOmTimeZoneById(Long
+						omTimeZone = getOmTimeZoneDaoImpl().getOmTimeZoneById(Long
 								.valueOf(timeZoneIdAsStr).longValue());
 
 						if (omTimeZone == null) {
-							Configuration conf = cfgManagement.getConfKey(3L,
+							Configuration conf = getCfgManagement().getConfKey(3L,
 									"default.timezone");
 							if (conf != null) {
 								jNameTimeZone = conf.getConf_value();
 							}
-							omTimeZone = omTimeZoneDaoImpl
+							omTimeZone = getOmTimeZoneDaoImpl()
 									.getOmTimeZone(jNameTimeZone);
 						}
 
