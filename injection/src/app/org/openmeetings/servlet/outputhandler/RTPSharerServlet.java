@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +18,8 @@ import org.openmeetings.app.rtp.RTPScreenSharingSession;
 import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * 
@@ -33,18 +33,45 @@ public class RTPSharerServlet extends VelocityViewServlet{
 	private static final long serialVersionUID = -3803050458625713769L;
 	private static final Logger log = Red5LoggerFactory.getLogger(RTPSharerServlet.class, ScopeApplicationAdapter.webAppRootKey);
 	
-	private Sessionmanagement sessionManagement;
-    private Usermanagement userManagement;
-    private RTPStreamingHandler rtpStreamingHandler;
-	
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		rtpStreamingHandler = (RTPStreamingHandler)config.getServletContext().getAttribute("rtpStreamingHandler");
+    public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
 	}
-	
+
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public RTPStreamingHandler getRtpStreamingHandler() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (RTPStreamingHandler) context.getBean("rtpStreamingHandler");
+			}
+		} catch (Exception err) {
+			log.error("[getRtpStreamingHandler]", err);
+		}
+		return null;
+	}
+
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Context ctx) {
@@ -58,8 +85,8 @@ public class RTPSharerServlet extends VelocityViewServlet{
 			
 			log.debug("sid: " + sid);
 
-			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = userManagement.getUserLevelByID(users_id);
+			Long users_id = getSessionManagement().checkSession(sid);
+			Long user_level = getUserManagement().getUserLevelByID(users_id);
 
 			if (user_level > 0) {
 				
@@ -86,7 +113,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				String template = "rtp_player_applet.vm";
 				
 				// Retrieve Data from RTPmanager
-				RTPScreenSharingSession rsss = rtpStreamingHandler.getSessionForRoom(room, sid, publicSID);
+				RTPScreenSharingSession rsss = getRtpStreamingHandler().getSessionForRoom(room, sid, publicSID);
 				
 				if(rsss == null){
 					log.error("no RTPSharingSession available for room " + room);
