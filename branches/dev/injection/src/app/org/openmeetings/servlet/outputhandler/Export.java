@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +28,8 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * 
@@ -39,22 +40,71 @@ public class Export extends HttpServlet {
 	private static final long serialVersionUID = 8527093674786692472L;
 	private static final Logger log = Red5LoggerFactory.getLogger(Export.class, ScopeApplicationAdapter.webAppRootKey);
 	
-	private Sessionmanagement sessionManagement;
-	private Usermanagement userManagement;
-	private Organisationmanagement organisationmanagement;
-	private UsersDaoImpl usersDao;
-	private AuthLevelmanagement authLevelManagement;
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		organisationmanagement = (Organisationmanagement)config.getServletContext().getAttribute("organisationmanagement");
-		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
-		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
 	}
-	
+
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public Organisationmanagement getOrganisationmanagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Organisationmanagement) context.getBean("organisationmanagement");
+			}
+		} catch (Exception err) {
+			log.error("[getOrganisationmanagement]", err);
+		}
+		return null;
+	}
+
+	public UsersDaoImpl getUsersDao() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (UsersDaoImpl) context.getBean("usersDao");
+			}
+		} catch (Exception err) {
+			log.error("[getUsersDao]", err);
+		}
+		return null;
+	}
+
+	public AuthLevelmanagement getAuthLevelManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (AuthLevelmanagement) context.getBean("authLevelManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getAuthLevelManagement]", err);
+		}
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -74,14 +124,14 @@ public class Export extends HttpServlet {
 			}
 			System.out.println("sid: " + sid);
 
-			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = userManagement.getUserLevelByID(users_id);
+			Long users_id = getSessionManagement().checkSession(sid);
+			Long user_level = getUserManagement().getUserLevelByID(users_id);
 
 			System.out.println("users_id: " + users_id);
 			System.out.println("user_level: " + user_level);
 
 			// if (user_level!=null && user_level > 0) {
-			if (authLevelManagement.checkUserLevel(user_level)) {
+			if (getAuthLevelManagement().checkUserLevel(user_level)) {
 
 				String moduleName = httpServletRequest
 						.getParameter("moduleName");
@@ -104,19 +154,17 @@ public class Export extends HttpServlet {
 					List<Users> uList = null;
 					String downloadName = "users";
 					if (moduleName.equals("userorganisations")) {
-						Organisation orga = organisationmanagement
+						Organisation orga = getOrganisationmanagement()
 								.getOrganisationById(organisation_id);
 						downloadName += "_" + orga.getName();
-						uList = organisationmanagement
+						uList = getOrganisationmanagement()
 								.getUsersByOrganisationId(organisation_id);
 					} else {
-						uList = usersDao.getAllUsers();
+						uList = getUsersDao().getAllUsers();
 					}
 
 					if (uList != null) {
 						Document doc = this.createDocument(uList);
-
-						String requestedFile = "users.xml";
 
 						httpServletResponse.reset();
 						httpServletResponse.resetBuffer();
