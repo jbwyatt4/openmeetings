@@ -19,26 +19,6 @@ public class UserWebServiceFacade {
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			UserWebServiceFacade.class, ScopeApplicationAdapter.webAppRootKey);
 
-	// private static final String SPRING_CONTEXT_XML =
-	// "openmeetings-applicationContext.xml";
-	//
-	// public void shutDown(ConfigurationContext ctx, AxisService service) {
-	// try {
-	// ClassLoader classLoader = service.getClassLoader();
-	// ClassPathXmlApplicationContext applicationContext = new
-	// ClassPathXmlApplicationContext(
-	// new String[] { SPRING_CONTEXT_XML }, false);
-	// applicationContext.setClassLoader(classLoader);
-	// applicationContext.refresh();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// public void startUp(ConfigurationContext arg0, AxisService arg1) {
-	//
-	// }
-
 	private ServletContext getServletContext() throws Exception {
 		MessageContext mc = MessageContext.getCurrentMessageContext();
 		return (ServletContext) mc
@@ -49,7 +29,7 @@ public class UserWebServiceFacade {
 		try {
 			ApplicationContext context = WebApplicationContextUtils
 					.getWebApplicationContext(getServletContext());
-			return (UserWebService) context.getBean("userServiceSoapProxy");
+			return (UserWebService) context.getBean("userWebService");
 		} catch (Exception err) {
 			log.error("[getUserServiceProxy]", err);
 		}
