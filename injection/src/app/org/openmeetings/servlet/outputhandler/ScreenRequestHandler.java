@@ -1,7 +1,5 @@
 package org.openmeetings.servlet.outputhandler;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +10,6 @@ import org.apache.velocity.tools.view.VelocityViewServlet;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.persistence.beans.basic.Configuration;
 import org.openmeetings.app.persistence.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
@@ -21,25 +18,63 @@ import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.openmeetings.server.socket.ServerSocketMinaProcess;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class ScreenRequestHandler extends VelocityViewServlet {
 	private static final long serialVersionUID = 2381722235536488913L;
 	private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, ScopeApplicationAdapter.webAppRootKey);
 	
-	private Sessionmanagement sessionManagement;
-	private Configurationmanagement cfgManagement;
-	private Usermanagement userManagement;
-	private Fieldmanagment fieldmanagment;
-	private RTPStreamingHandler rtpStreamingHandler;
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
+	}
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		fieldmanagment = (Fieldmanagment)config.getServletContext().getAttribute("fieldmanagment");
-		rtpStreamingHandler = (RTPStreamingHandler)config.getServletContext().getAttribute("rtpStreamingHandler");
+	public Configurationmanagement getCfgManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Configurationmanagement) context.getBean("cfgManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getCfgManagement]", err);
+		}
+		return null;
+	}
+
+	public Fieldmanagment getFieldmanagment() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Fieldmanagment) context.getBean("fieldmanagment");
+			}
+		} catch (Exception err) {
+			log.error("[getFieldmanagment]", err);
+		}
+		return null;
+	}
+
+	public RTPStreamingHandler getRtpStreamingHandler() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (RTPStreamingHandler) context.getBean("rtpStreamingHandler");
+			}
+		} catch (Exception err) {
+			log.error("[getRtpStreamingHandler]", err);
+		}
+		return null;
 	}
 	
 	@Override
@@ -54,10 +89,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 			}
 			log.debug("sid: " + sid);
 
-			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = userManagement.getUserLevelByID(users_id);
-
-			// if (user_level > 0) {
+			Long users_id = getSessionManagement().checkSession(sid);
 
 			String publicSID = httpServletRequest.getParameter("publicSID");
 			if (publicSID == null) {
@@ -156,7 +188,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					"Inline; filename=\"" + requestedFile + "\"");
 
 			// Check , which screenviewer is to be used
-			org.openmeetings.app.persistence.beans.basic.Configuration conf = cfgManagement
+			org.openmeetings.app.persistence.beans.basic.Configuration conf = getCfgManagement()
 					.getConfKey(3L, "screen_viewer");
 
 			String template = "screencast_odsp_sharertemplate.vm";
@@ -165,6 +197,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 
 			log.debug("language_id :: " + language_id);
 
+			Fieldmanagment fieldmanagment = getFieldmanagment();
 			Fieldlanguagesvalues fValue728 = fieldmanagment
 					.getFieldByIdAndLanguage(728L, language_id);
 			Fieldlanguagesvalues fValue729 = fieldmanagment
@@ -281,7 +314,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					} else if (conf_i == 2) {
 
 						// Storing Session data
-						RTPScreenSharingSession session = rtpStreamingHandler
+						RTPScreenSharingSession session = getRtpStreamingHandler()
 								.storeSessionForRoom(room, users_id, publicSID,
 										rtmphostlocal, -1);
 
@@ -342,7 +375,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 								ScopeApplicationAdapter.webAppRootKey + "/"
 										+ room);
 
-						Configuration configuration = cfgManagement.getConfKey(
+						Configuration configuration = getCfgManagement().getConfKey(
 								3L, "default.quality.screensharing");
 						String default_quality_screensharing = "1";
 						if (configuration != null) {
