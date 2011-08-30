@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,25 +21,76 @@ import org.openmeetings.app.xmlimport.LanguageImport;
 import org.openmeetings.app.xmlimport.UserImport;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class Import extends HttpServlet {
 	private static final long serialVersionUID = 582610358088411294L;
 	private static final Logger log = Red5LoggerFactory.getLogger(Import.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private Sessionmanagement sessionManagement;
-    private Usermanagement userManagement;
-	private UsersDaoImpl usersDao;
-	private ScopeApplicationAdapter scopeApplicationAdapter;
-	private AuthLevelmanagement authLevelManagement;
-	
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
-		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
-		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
+    public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
+	}
+
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public UsersDaoImpl getUsersDao() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (UsersDaoImpl) context.getBean("usersDao");
+			}
+		} catch (Exception err) {
+			log.error("[getUsersDao]", err);
+		}
+		return null;
+	}
+
+	public ScopeApplicationAdapter getScopeApplicationAdapter() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (ScopeApplicationAdapter) context.getBean("scopeApplicationAdapter");
+			}
+		} catch (Exception err) {
+			log.error("[getScopeApplicationAdapter]", err);
+		}
+		return null;
+	}
+
+	public AuthLevelmanagement getAuthLevelManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (AuthLevelmanagement) context.getBean("authLevelManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getAuthLevelManagement]", err);
+		}
+		return null;
 	}
 	
 	/*
@@ -66,8 +116,8 @@ public class Import extends HttpServlet {
 				moduleName = "moduleName";
 			}
 			System.out.println("moduleName: " + moduleName);
-			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = userManagement.getUserLevelByID(
+			Long users_id = getSessionManagement().checkSession(sid);
+			Long user_level = getUserManagement().getUserLevelByID(
 					users_id);
 			
 			String publicSID = httpServletRequest.getParameter("publicSID");
@@ -81,7 +131,7 @@ public class Import extends HttpServlet {
 			log.debug("moduleName: " + moduleName);
 
 			// if (user_level!=null && user_level > 0) {
-			if (authLevelManagement.checkAdminLevel(user_level)) {
+			if (getAuthLevelManagement().checkAdminLevel(user_level)) {
 				if (moduleName.equals("users")) {
 					log.error("Import Users");
 					String organisation = httpServletRequest.getParameter("secondid");
@@ -118,16 +168,15 @@ public class Import extends HttpServlet {
 			log.debug("Return And Close");
 			
 			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-			hs.put("user", usersDao.getUser(users_id));
+			hs.put("user", getUsersDao().getUser(users_id));
 			hs.put("message", "library");
 			hs.put("action", "import");
 			
 			log.debug("moduleName.equals(userprofile) ? "+moduleName);
 			
-			//if (!moduleName.equals("userprofile")) {
-				log.debug("moduleName.equals(userprofile) ! ");
+			log.debug("moduleName.equals(userprofile) ! ");
 				
-			scopeApplicationAdapter.sendMessageWithClientByPublicSID(hs,publicSID);
+			getScopeApplicationAdapter().sendMessageWithClientByPublicSID(hs,publicSID);
 			
 			return;
 	
