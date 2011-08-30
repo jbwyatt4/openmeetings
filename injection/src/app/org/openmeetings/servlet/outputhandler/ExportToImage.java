@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.Writer;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,9 +35,10 @@ import org.w3c.dom.Element;
 
 public class ExportToImage extends HttpServlet {
 	private static final long serialVersionUID = -3535998254746084297L;
-	private static final Logger log = Red5LoggerFactory.getLogger(ExportToImage.class, ScopeApplicationAdapter.webAppRootKey);
-	
-    public Sessionmanagement getSessionManagement() {
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			ExportToImage.class, ScopeApplicationAdapter.webAppRootKey);
+
+	public Sessionmanagement getSessionManagement() {
 		try {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
@@ -63,7 +63,7 @@ public class ExportToImage extends HttpServlet {
 		}
 		return null;
 	}
-	
+
 	public GenerateImage getGenerateImage() {
 		try {
 			if (ScopeApplicationAdapter.initComplete) {
@@ -76,12 +76,13 @@ public class ExportToImage extends HttpServlet {
 		}
 		return null;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
-	 *      javax.servlet.http.HttpServletResponse)
+	 * @see
+	 * javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest
+	 * , javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	protected void service(HttpServletRequest httpServletRequest,
@@ -89,25 +90,28 @@ public class ExportToImage extends HttpServlet {
 			IOException {
 
 		try {
-			
-			
+			if (getUserManagement() == null || getSessionManagement() == null
+					|| getGenerateImage() == null) {
+				return;
+			}
+
 			String sid = httpServletRequest.getParameter("sid");
 			if (sid == null) {
 				sid = "default";
 			}
 			log.debug("sid: " + sid);
-			
+
 			String hash = httpServletRequest.getParameter("hash");
 			if (hash == null) {
 				hash = "";
 			}
 			log.debug("hash: " + hash);
-			
+
 			String fileName = httpServletRequest.getParameter("fileName");
 			if (fileName == null) {
 				fileName = "file_xyz";
 			}
-			
+
 			String exportType = httpServletRequest.getParameter("exportType");
 			if (exportType == null) {
 				exportType = "svg";
@@ -116,99 +120,103 @@ public class ExportToImage extends HttpServlet {
 			Long users_id = getSessionManagement().checkSession(sid);
 			Long user_level = getUserManagement().getUserLevelByID(users_id);
 
-			log.debug("users_id: "+users_id);
-			log.debug("user_level: "+user_level);
-			
-			if (user_level!=null && user_level > 0 && hash != "") {
-				
-				
+			log.debug("users_id: " + users_id);
+			log.debug("user_level: " + user_level);
+
+			if (user_level != null && user_level > 0 && hash != "") {
+
 				PrintBean pBean = PrintService.getPrintItemByHash(hash);
-				
-				//Whiteboard Objects
+
+				// Whiteboard Objects
+				@SuppressWarnings("rawtypes")
 				List whiteBoardMap = pBean.getMap();
-				
+
 				// Get a DOMImplementation.
-		        DOMImplementation domImpl =
-		            GenericDOMImplementation.getDOMImplementation();
+				DOMImplementation domImpl = GenericDOMImplementation
+						.getDOMImplementation();
 
-		        // Create an instance of org.w3c.dom.Document.
-		        //String svgNS = "http://www.w3.org/2000/svg";
-		        String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
+				// Create an instance of org.w3c.dom.Document.
+				// String svgNS = "http://www.w3.org/2000/svg";
+				String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
 
-		        Document document = domImpl.createDocument(svgNS, "svg", null);
-		        
-		        // Get the root element (the 'svg' element).
-		        Element svgRoot = document.getDocumentElement();
+				Document document = domImpl.createDocument(svgNS, "svg", null);
 
-		        
-		        // Set the width and height attributes on the root 'svg' element.
-		        svgRoot.setAttributeNS(null, "width", ""+pBean.getWidth());
-		        svgRoot.setAttributeNS(null, "height", ""+pBean.getHeight());
-		        
-		        log.debug("pBean.getWidth(),pBean.getHeight()"+pBean.getWidth()+","+pBean.getHeight());
-		        
+				// Get the root element (the 'svg' element).
+				Element svgRoot = document.getDocumentElement();
 
-		        // Create an instance of the SVG Generator.
-		        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-		        
-		        svgGenerator = WhiteboardMapToSVG.getInstance().convertMapToSVG(svgGenerator, whiteBoardMap);
-		        
-		        // Finally, stream out SVG to the standard output using
-		        // UTF-8 encoding.
-		        boolean useCSS = true; // we want to use CSS style attributes
-		        //Writer out = new OutputStreamWriter(System.out, "UTF-8");
-		        
-		        
-		        String requestedFile = fileName+"_"+CalendarPatterns.getTimeForStreamId(new Date())+".svg";
-		        
-		        if (exportType.equals("svg")) {
-			        //OutputStream out = httpServletResponse.getOutputStream();
-					//httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-					//httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + requestedFile + "\"");
-			        Writer out = httpServletResponse.getWriter();
-			        
-			        svgGenerator.stream(out, useCSS);
-			        
-			        
-		        } else if (exportType.equals("png") || exportType.equals("jpg") 
-		        		|| exportType.equals("gif") || exportType.equals("tif")
-		        		|| exportType.equals("pdf")){
-		        	
-		        	String current_dir = getServletContext().getRealPath("/");
-		        	String working_dir = current_dir + "uploadtemp" + File.separatorChar;
-		        	
-		        	String requestedFileSVG = fileName+"_"+CalendarPatterns.getTimeForStreamId(new Date())+".svg";
-		        	String resultFileName = fileName+"_"+CalendarPatterns.getTimeForStreamId(new Date())+"."+exportType;
-		        	
-		        	log.debug("current_dir: "+current_dir);
-		        	log.debug("working_dir: "+working_dir);
-		        	log.debug("requestedFileSVG: "+requestedFileSVG);
-		        	log.debug("resultFileName: "+resultFileName);
-		        	
-		        	File svgFile = new File(working_dir + requestedFileSVG);
-		        	File resultFile = new File(working_dir + resultFileName);
-		        	
-		        	log.debug("svgFile: "+svgFile.getAbsolutePath());
-		        	log.debug("resultFile: "+resultFile.getAbsolutePath());
-		        	log.debug("svgFile P: "+svgFile.getPath());
-		        	log.debug("resultFile P: "+resultFile.getPath());
-		        	
-		        	FileWriter out = new FileWriter(svgFile);
-		        	svgGenerator.stream(out, useCSS);
-		        	
-		        	HashMap<String,Object> returnError = getGenerateImage().convertImageByTypeAndSize(
-		        			svgFile.getAbsolutePath(), resultFile.getAbsolutePath(), 
-		        			pBean.getWidth(), pBean.getHeight());
-		        	
-		        	//Get file and handle download
-					RandomAccessFile rf = new RandomAccessFile(resultFile.getAbsoluteFile(), "r");
+				// Set the width and height attributes on the root 'svg'
+				// element.
+				svgRoot.setAttributeNS(null, "width", "" + pBean.getWidth());
+				svgRoot.setAttributeNS(null, "height", "" + pBean.getHeight());
+
+				log.debug("pBean.getWidth(),pBean.getHeight()"
+						+ pBean.getWidth() + "," + pBean.getHeight());
+
+				// Create an instance of the SVG Generator.
+				SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+
+				svgGenerator = WhiteboardMapToSVG.getInstance()
+						.convertMapToSVG(svgGenerator, whiteBoardMap);
+
+				// Finally, stream out SVG to the standard output using
+				// UTF-8 encoding.
+				boolean useCSS = true; // we want to use CSS style attributes
+				// Writer out = new OutputStreamWriter(System.out, "UTF-8");
+
+				if (exportType.equals("svg")) {
+					// OutputStream out = httpServletResponse.getOutputStream();
+					// httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+					// httpServletResponse.setHeader("Content-Disposition","attachment; filename=\""
+					// + requestedFile + "\"");
+					Writer out = httpServletResponse.getWriter();
+
+					svgGenerator.stream(out, useCSS);
+
+				} else if (exportType.equals("png") || exportType.equals("jpg")
+						|| exportType.equals("gif") || exportType.equals("tif")
+						|| exportType.equals("pdf")) {
+
+					String current_dir = getServletContext().getRealPath("/");
+					String working_dir = current_dir + "uploadtemp"
+							+ File.separatorChar;
+
+					String requestedFileSVG = fileName + "_"
+							+ CalendarPatterns.getTimeForStreamId(new Date())
+							+ ".svg";
+					String resultFileName = fileName + "_"
+							+ CalendarPatterns.getTimeForStreamId(new Date())
+							+ "." + exportType;
+
+					log.debug("current_dir: " + current_dir);
+					log.debug("working_dir: " + working_dir);
+					log.debug("requestedFileSVG: " + requestedFileSVG);
+					log.debug("resultFileName: " + resultFileName);
+
+					File svgFile = new File(working_dir + requestedFileSVG);
+					File resultFile = new File(working_dir + resultFileName);
+
+					log.debug("svgFile: " + svgFile.getAbsolutePath());
+					log.debug("resultFile: " + resultFile.getAbsolutePath());
+					log.debug("svgFile P: " + svgFile.getPath());
+					log.debug("resultFile P: " + resultFile.getPath());
+
+					FileWriter out = new FileWriter(svgFile);
+					svgGenerator.stream(out, useCSS);
+
+					// Get file and handle download
+					RandomAccessFile rf = new RandomAccessFile(
+							resultFile.getAbsoluteFile(), "r");
 
 					httpServletResponse.reset();
 					httpServletResponse.resetBuffer();
-					OutputStream outStream = httpServletResponse.getOutputStream();
-					httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-					httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + resultFileName + "\"");
-					httpServletResponse.setHeader("Content-Length", ""+ rf.length());
+					OutputStream outStream = httpServletResponse
+							.getOutputStream();
+					httpServletResponse
+							.setContentType("APPLICATION/OCTET-STREAM");
+					httpServletResponse.setHeader("Content-Disposition",
+							"attachment; filename=\"" + resultFileName + "\"");
+					httpServletResponse.setHeader("Content-Length",
+							"" + rf.length());
 
 					byte[] buffer = new byte[1024];
 					int readed = -1;
@@ -221,12 +229,11 @@ public class ExportToImage extends HttpServlet {
 
 					out.flush();
 					out.close();
-		        	
-		        }
-				
+
+				}
+
 			}
-			
-			
+
 		} catch (Exception er) {
 			log.error("ERROR ", er);
 			System.out.println("Error exporting: " + er);

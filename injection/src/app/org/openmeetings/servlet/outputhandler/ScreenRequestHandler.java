@@ -23,8 +23,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class ScreenRequestHandler extends VelocityViewServlet {
 	private static final long serialVersionUID = 2381722235536488913L;
-	private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, ScopeApplicationAdapter.webAppRootKey);
-	
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			ScreenRequestHandler.class, ScopeApplicationAdapter.webAppRootKey);
+
 	public Sessionmanagement getSessionManagement() {
 		try {
 			if (ScopeApplicationAdapter.initComplete) {
@@ -43,7 +44,8 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (Configurationmanagement) context.getBean("cfgManagement");
+				return (Configurationmanagement) context
+						.getBean("cfgManagement");
 			}
 		} catch (Exception err) {
 			log.error("[getCfgManagement]", err);
@@ -69,19 +71,27 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (RTPStreamingHandler) context.getBean("rtpStreamingHandler");
+				return (RTPStreamingHandler) context
+						.getBean("rtpStreamingHandler");
 			}
 		} catch (Exception err) {
 			log.error("[getRtpStreamingHandler]", err);
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Context ctx) {
 
 		try {
+
+			if (getRtpStreamingHandler() == null
+					|| getRtpStreamingHandler() == null
+					|| getSessionManagement() == null) {
+				return getVelocityView().getVelocityEngine().getTemplate(
+						"booting.vm");
+			}
 
 			String sid = httpServletRequest.getParameter("sid");
 			if (sid == null) {
@@ -375,8 +385,8 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 								ScopeApplicationAdapter.webAppRootKey + "/"
 										+ room);
 
-						Configuration configuration = getCfgManagement().getConfKey(
-								3L, "default.quality.screensharing");
+						Configuration configuration = getCfgManagement()
+								.getConfKey(3L, "default.quality.screensharing");
 						String default_quality_screensharing = "1";
 						if (configuration != null) {
 							default_quality_screensharing = configuration

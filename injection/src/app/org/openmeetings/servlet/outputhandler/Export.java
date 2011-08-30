@@ -38,8 +38,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class Export extends HttpServlet {
 	private static final long serialVersionUID = 8527093674786692472L;
-	private static final Logger log = Red5LoggerFactory.getLogger(Export.class, ScopeApplicationAdapter.webAppRootKey);
-	
+	private static final Logger log = Red5LoggerFactory.getLogger(Export.class,
+			ScopeApplicationAdapter.webAppRootKey);
+
 	public Sessionmanagement getSessionManagement() {
 		try {
 			if (ScopeApplicationAdapter.initComplete) {
@@ -71,7 +72,8 @@ public class Export extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (Organisationmanagement) context.getBean("organisationmanagement");
+				return (Organisationmanagement) context
+						.getBean("organisationmanagement");
 			}
 		} catch (Exception err) {
 			log.error("[getOrganisationmanagement]", err);
@@ -97,7 +99,8 @@ public class Export extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (AuthLevelmanagement) context.getBean("authLevelManagement");
+				return (AuthLevelmanagement) context
+						.getBean("authLevelManagement");
 			}
 		} catch (Exception err) {
 			log.error("[getAuthLevelManagement]", err);
@@ -118,6 +121,12 @@ public class Export extends HttpServlet {
 			IOException {
 
 		try {
+
+			if (getUserManagement() == null || getSessionManagement() == null
+					|| getUsersDao() == null) {
+				return;
+			}
+
 			String sid = httpServletRequest.getParameter("sid");
 			if (sid == null) {
 				sid = "default";

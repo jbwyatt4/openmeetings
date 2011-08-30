@@ -86,7 +86,8 @@ public class UploadHandler extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (ScopeApplicationAdapter) context.getBean("scopeApplicationAdapter");
+				return (ScopeApplicationAdapter) context
+						.getBean("scopeApplicationAdapter");
 			}
 		} catch (Exception err) {
 			log.error("[getScopeApplicationAdapter]", err);
@@ -139,6 +140,12 @@ public class UploadHandler extends HttpServlet {
 			IOException {
 		log.debug("starting upload");
 		try {
+
+			if (getUserManagement() == null || getGeneratePDF() == null
+					|| getGenerateThumbs() == null) {
+				return;
+			}
+
 			int contentLength = httpServletRequest.getContentLength();
 			if (contentLength <= 0) {
 				log.debug("ContentLength = " + contentLength + ", aborted");
@@ -379,7 +386,8 @@ public class UploadHandler extends HttpServlet {
 
 				String outputfile = completeName + newFileExtDot;
 
-				returnError2 = getGenerateThumbs().decodePDF(inputfile, outputfile);
+				returnError2 = getGenerateThumbs().decodePDF(inputfile,
+						outputfile);
 
 				File f_old = new File(inputfile);
 				if (f_old.exists()) {
@@ -402,8 +410,9 @@ public class UploadHandler extends HttpServlet {
 				// User Profile Update
 				this.deleteUserProfileFiles(currentDir, userId);
 				// convert it to JPG
-				returnError = getGenerateImage().convertImageUserProfile(currentDir,
-						newFileName, newFileExtDot, userId, newFileName, false);
+				returnError = getGenerateImage().convertImageUserProfile(
+						currentDir, newFileName, newFileExtDot, userId,
+						newFileName, false);
 			} else {
 				// convert it to JPG
 				log.debug("##### convert it to JPG: " + userProfile);

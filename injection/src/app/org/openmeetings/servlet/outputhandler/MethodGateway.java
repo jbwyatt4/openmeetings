@@ -28,7 +28,8 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 public class MethodGateway extends HttpServlet {
 
 	private static final long serialVersionUID = -2954875038645746731L;
-	private static final Logger log = Red5LoggerFactory.getLogger(MethodGateway.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			MethodGateway.class, ScopeApplicationAdapter.webAppRootKey);
 
 	public Sessionmanagement getSessionManagement() {
 		try {
@@ -87,7 +88,8 @@ public class MethodGateway extends HttpServlet {
 			if (ScopeApplicationAdapter.initComplete) {
 				ApplicationContext context = WebApplicationContextUtils
 						.getWebApplicationContext(getServletContext());
-				return (AuthLevelmanagement) context.getBean("authLevelManagement");
+				return (AuthLevelmanagement) context
+						.getBean("authLevelManagement");
 			}
 		} catch (Exception err) {
 			log.error("[getAuthLevelManagement]", err);
@@ -108,6 +110,10 @@ public class MethodGateway extends HttpServlet {
 			IOException {
 
 		try {
+
+			if (getUserManagement() == null || getSessionManagement() == null) {
+				return;
+			}
 
 			String service = httpServletRequest.getParameter("service");
 
@@ -206,9 +212,9 @@ public class MethodGateway extends HttpServlet {
 					Long returnVal = new Long(-1);
 
 					Long users_id = getSessionManagement().checkSession(SID);
-					Long user_level = getUserManagement().getUserLevelByID(users_id);
-					if (getAuthLevelManagement().checkAdminLevel(
-							user_level)) {
+					Long user_level = getUserManagement().getUserLevelByID(
+							users_id);
+					if (getAuthLevelManagement().checkAdminLevel(user_level)) {
 
 						RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 								username, firstname, lastname,
@@ -276,10 +282,11 @@ public class MethodGateway extends HttpServlet {
 							.booleanValue();
 
 					Long users_id = getSessionManagement().checkSession(SID);
-					Long user_level = getUserManagement().getUserLevelByID(users_id);
+					Long user_level = getUserManagement().getUserLevelByID(
+							users_id);
 
-					Long returnVal = getRoommanagement().addRoom(user_level, name,
-							roomtypes_id, comment, numberOfPartizipants,
+					Long returnVal = getRoommanagement().addRoom(user_level,
+							name, roomtypes_id, comment, numberOfPartizipants,
 							ispublic, null, false, false, null, false, null,
 							true, false, false, "", "", "", null, null, null,
 							false);
