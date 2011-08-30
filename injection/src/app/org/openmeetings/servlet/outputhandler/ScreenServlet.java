@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +37,8 @@ import org.openmeetings.utils.image.ZipUtility;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.anotherbigidea.flash.movie.ImageUtil;
 import com.anotherbigidea.flash.movie.Movie;
@@ -50,22 +51,82 @@ public class ScreenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Red5LoggerFactory.getLogger(ScreenServlet.class, ScopeApplicationAdapter.webAppRootKey);
 	
-	private Sessionmanagement sessionManagement;
-	private Configurationmanagement cfgManagement;
-    private Usermanagement userManagement;
-	private UsersDaoImpl usersDao;
-	private ScopeApplicationAdapter scopeApplicationAdapter;
-	private ClientListManager clientListManager;
-	
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
-		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
-		clientListManager = (ClientListManager)config.getServletContext().getAttribute("clientListManager");
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
+	}
+
+	public Configurationmanagement getCfgManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Configurationmanagement) context.getBean("cfgManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getCfgManagement]", err);
+		}
+		return null;
+	}
+
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public UsersDaoImpl getUsersDao() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (UsersDaoImpl) context.getBean("usersDao");
+			}
+		} catch (Exception err) {
+			log.error("[getUsersDao]", err);
+		}
+		return null;
+	}
+
+	public ScopeApplicationAdapter getScopeApplicationAdapter() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (ScopeApplicationAdapter) context.getBean("scopeApplicationAdapter");
+			}
+		} catch (Exception err) {
+			log.error("[getScopeApplicationAdapter]", err);
+		}
+		return null;
+	}
+
+	public ClientListManager getClientListManager() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (ClientListManager) context.getBean("clientListManager");
+			}
+		} catch (Exception err) {
+			log.error("[getClientListManager]", err);
+		}
+		return null;
 	}
 	
 	/* (non-Javadoc)
@@ -113,11 +174,11 @@ public class ScreenServlet extends HttpServlet {
 				ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
 				
 				
-				Long users_id = sessionManagement.checkSession(sid);
-				Long user_level = userManagement.getUserLevelByID(users_id);
+				Long users_id = getSessionManagement().checkSession(sid);
+				Long user_level = getUserManagement().getUserLevelByID(users_id);
 			
 				// Switch between scharers
-				Configuration c = cfgManagement.getConfKey(user_level, "screen_viewer");
+				Configuration c = getCfgManagement().getConfKey(user_level, "screen_viewer");
 				
 				if(c == null || c.getConf_value().equals("0")){
 					doStandardSharing(sid, publicSID, room, domain, upload, record, httpServletResponse);
@@ -135,8 +196,8 @@ public class ScreenServlet extends HttpServlet {
 		
 		try {
 			System.out.println("ScreenServlet Call");
-			Long users_id = sessionManagement.checkSession(sid);
-				Long user_level = userManagement.getUserLevelByID(users_id);
+			Long users_id = getSessionManagement().checkSession(sid);
+				Long user_level = getUserManagement().getUserLevelByID(users_id);
 				
 				if (user_level > 0) {
 					
@@ -144,8 +205,8 @@ public class ScreenServlet extends HttpServlet {
 					boolean userIsInRoom = false;
 					boolean doProcess = false;
 					
-					HashMap<String, RoomClient> clientList = clientListManager.getClientList();
-					for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
+					HashMap<String, RoomClient> clientList = getClientListManager().getClientList();
+					for (Iterator<String> iter = clientList.keySet().iterator(); iter.hasNext();) {
 						RoomClient rcl = clientList.get(iter.next());
 						if (rcl.getPublicSID().equals(publicSID)) {
 							log.debug("found RoomClient");
@@ -237,14 +298,14 @@ public class ScreenServlet extends HttpServlet {
 						
 						
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-						hs.put("user", usersDao.getUser(users_id));
+						hs.put("user", getUsersDao().getUser(users_id));
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
 						
 						
 						
-						scopeApplicationAdapter.sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+						getScopeApplicationAdapter().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 					
 					}
 	
@@ -348,8 +409,8 @@ public class ScreenServlet extends HttpServlet {
 		
 		try{
 			
-			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = userManagement.getUserLevelByID(users_id);
+			Long users_id = getSessionManagement().checkSession(sid);
+			Long user_level = getUserManagement().getUserLevelByID(users_id);
 		
 			if (user_level > 0) {
 			
@@ -357,8 +418,8 @@ public class ScreenServlet extends HttpServlet {
 				boolean userIsInRoom = false;
 				boolean doProcess = false;
 			
-				HashMap<String, RoomClient> clientList = clientListManager.getClientList();
-				for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
+				HashMap<String, RoomClient> clientList = getClientListManager().getClientList();
+				for (Iterator<String> iter = clientList.keySet().iterator(); iter.hasNext();) {
 					RoomClient rcl = clientList.get(iter.next());
 					if (rcl.getPublicSID().equals(publicSID)) {
 						log.debug("found RoomClient");
@@ -483,13 +544,13 @@ public class ScreenServlet extends HttpServlet {
 					
 					if (!record.equals("yes")) {
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-						hs.put("user", usersDao.getUser(users_id));
+						hs.put("user", getUsersDao().getUser(users_id));
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
 						hs.put("swffileName", newFileSystemName+"_"+sid+".swf");
 						
-						scopeApplicationAdapter.sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+						getScopeApplicationAdapter().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 					
 						
 					}
