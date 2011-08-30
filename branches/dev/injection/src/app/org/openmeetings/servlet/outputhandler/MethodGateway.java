@@ -3,7 +3,6 @@ package org.openmeetings.servlet.outputhandler;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,8 @@ import org.openmeetings.app.remote.MainService;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -29,22 +30,71 @@ public class MethodGateway extends HttpServlet {
 	private static final long serialVersionUID = -2954875038645746731L;
 	private static final Logger log = Red5LoggerFactory.getLogger(MethodGateway.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private Sessionmanagement sessionManagement;
-	private Usermanagement userManagement;
-	private Roommanagement roommanagement;
-	private MainService mainService;
-	private AuthLevelmanagement authLevelManagement;
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		roommanagement = (Roommanagement)config.getServletContext().getAttribute("roommanagement");
-		mainService = (MainService)config.getServletContext().getAttribute("mainService");
-		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
 	}
-	
+
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public Roommanagement getRoommanagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Roommanagement) context.getBean("roommanagement");
+			}
+		} catch (Exception err) {
+			log.error("[getRoommanagement]", err);
+		}
+		return null;
+	}
+
+	public MainService getMainService() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (MainService) context.getBean("mainService");
+			}
+		} catch (Exception err) {
+			log.error("[getMainService]", err);
+		}
+		return null;
+	}
+
+	public AuthLevelmanagement getAuthLevelManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (AuthLevelmanagement) context.getBean("authLevelManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getAuthLevelManagement]", err);
+		}
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -99,7 +149,7 @@ public class MethodGateway extends HttpServlet {
 
 				if (method.equals("getSession")) {
 
-					Sessiondata sessionData = mainService.getsessiondata();
+					Sessiondata sessionData = getMainService().getsessiondata();
 
 					XStream xStream = new XStream(new XppDriver());
 					xStream.setMode(XStream.NO_REFERENCES);
@@ -119,7 +169,7 @@ public class MethodGateway extends HttpServlet {
 
 					Long returnVal = new Long(-1);
 
-					Object obj = userManagement.loginUser(SID, username,
+					Object obj = getUserManagement().loginUser(SID, username,
 							userpass, null, false);
 					if (obj == null) {
 						returnVal = new Long(-1);
@@ -155,9 +205,9 @@ public class MethodGateway extends HttpServlet {
 
 					Long returnVal = new Long(-1);
 
-					Long users_id = sessionManagement.checkSession(SID);
-					Long user_level = userManagement.getUserLevelByID(users_id);
-					if (authLevelManagement.checkAdminLevel(
+					Long users_id = getSessionManagement().checkSession(SID);
+					Long user_level = getUserManagement().getUserLevelByID(users_id);
+					if (getAuthLevelManagement().checkAdminLevel(
 							user_level)) {
 
 						RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -168,7 +218,7 @@ public class MethodGateway extends HttpServlet {
 						xStream.setMode(XStream.NO_REFERENCES);
 						String xmlString = xStream.toXML(remoteSessionObject);
 
-						sessionManagement.updateUserRemoteSession(SID,
+						getSessionManagement().updateUserRemoteSession(SID,
 								xmlString);
 
 						returnVal = new Long(1);
@@ -225,10 +275,10 @@ public class MethodGateway extends HttpServlet {
 							httpServletRequest.getParameter("ispublic"))
 							.booleanValue();
 
-					Long users_id = sessionManagement.checkSession(SID);
-					Long user_level = userManagement.getUserLevelByID(users_id);
+					Long users_id = getSessionManagement().checkSession(SID);
+					Long user_level = getUserManagement().getUserLevelByID(users_id);
 
-					Long returnVal = roommanagement.addRoom(user_level, name,
+					Long returnVal = getRoommanagement().addRoom(user_level, name,
 							roomtypes_id, comment, numberOfPartizipants,
 							ispublic, null, false, false, null, false, null,
 							true, false, false, "", "", "", null, null, null,
