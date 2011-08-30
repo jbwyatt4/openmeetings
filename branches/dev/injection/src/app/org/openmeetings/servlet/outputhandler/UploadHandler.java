@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +28,8 @@ import org.openmeetings.utils.StoredFile;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.itextpdf.text.pdf.PdfReader;
 
@@ -41,31 +42,95 @@ public class UploadHandler extends HttpServlet {
 
 	private String filesString[] = null;
 
-	private Sessionmanagement sessionManagement;
-	private Usermanagement userManagement;
-	private UsersDaoImpl usersDao;
-	private ScopeApplicationAdapter scopeApplicationAdapter;
-	private GenerateImage generateImage;
-	private GenerateThumbs generateThumbs;
-	private GeneratePDF generatePDF;
+	public Sessionmanagement getSessionManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Sessionmanagement) context.getBean("sessionManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getSessionManagement]", err);
+		}
+		return null;
+	}
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		sessionManagement = (Sessionmanagement) config.getServletContext()
-				.getAttribute("sessionManagement");
-		userManagement = (Usermanagement) config.getServletContext()
-				.getAttribute("userManagement");
-		usersDao = (UsersDaoImpl) config.getServletContext().getAttribute(
-				"usersDao");
-		scopeApplicationAdapter = (ScopeApplicationAdapter) config
-				.getServletContext().getAttribute("scopeApplicationAdapter");
-		generateImage = (GenerateImage) config.getServletContext()
-				.getAttribute("generateImage");
-		generateThumbs = (GenerateThumbs) config.getServletContext()
-				.getAttribute("generateThumbs");
-		generatePDF = (GeneratePDF) config.getServletContext().getAttribute(
-				"generatePDF");
+	public Usermanagement getUserManagement() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (Usermanagement) context.getBean("userManagement");
+			}
+		} catch (Exception err) {
+			log.error("[getUserManagement]", err);
+		}
+		return null;
+	}
+
+	public UsersDaoImpl getUsersDao() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (UsersDaoImpl) context.getBean("usersDao");
+			}
+		} catch (Exception err) {
+			log.error("[getUsersDao]", err);
+		}
+		return null;
+	}
+
+	public ScopeApplicationAdapter getScopeApplicationAdapter() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (ScopeApplicationAdapter) context.getBean("scopeApplicationAdapter");
+			}
+		} catch (Exception err) {
+			log.error("[getScopeApplicationAdapter]", err);
+		}
+		return null;
+	}
+
+	public GenerateImage getGenerateImage() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (GenerateImage) context.getBean("generateImage");
+			}
+		} catch (Exception err) {
+			log.error("[getGenerateImage]", err);
+		}
+		return null;
+	}
+
+	public GenerateThumbs getGenerateThumbs() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (GenerateThumbs) context.getBean("generateThumbs");
+			}
+		} catch (Exception err) {
+			log.error("[getGenerateThumbs]", err);
+		}
+		return null;
+	}
+
+	public GeneratePDF getGeneratePDF() {
+		try {
+			if (ScopeApplicationAdapter.initComplete) {
+				ApplicationContext context = WebApplicationContextUtils
+						.getWebApplicationContext(getServletContext());
+				return (GeneratePDF) context.getBean("generatePDF");
+			}
+		} catch (Exception err) {
+			log.error("[getGeneratePDF]", err);
+		}
+		return null;
 	}
 
 	@Override
@@ -87,8 +152,8 @@ public class UploadHandler extends HttpServlet {
 			}
 			log.debug("sid: " + sid);
 
-			Long userId = sessionManagement.checkSession(sid);
-			Long userLevel = userManagement.getUserLevelByID(userId);
+			Long userId = getSessionManagement().checkSession(sid);
+			Long userLevel = getUserManagement().getUserLevelByID(userId);
 			log.debug("userId = " + userId + ", userLevel = " + userLevel);
 
 			if (userLevel <= 0) {
@@ -103,10 +168,10 @@ public class UploadHandler extends HttpServlet {
 			}
 
 			LinkedHashMap<String, Object> hs = new LinkedHashMap<String, Object>();
-			hs.put("user", usersDao.getUser(userId));
+			hs.put("user", getUsersDao().getUser(userId));
 
 			fileService(httpServletRequest, sid, userId, hs);
-			scopeApplicationAdapter.sendMessageWithClientByPublicSID(hs,
+			getScopeApplicationAdapter().sendMessageWithClientByPublicSID(hs,
 					publicSID);
 		} catch (Exception e) {
 			System.out.println("Exception during upload: " + e);
@@ -274,7 +339,7 @@ public class UploadHandler extends HttpServlet {
 		log.debug("canBeConverted: " + canBeConverted);
 		if (canBeConverted) {
 			// convert to pdf, thumbs, swf and xml-description
-			returnError = generatePDF.convertPDF(currentDir, newFileName,
+			returnError = getGeneratePDF().convertPDF(currentDir, newFileName,
 					newFileExtDot, roomName, true, completeName);
 		} else if (isPdf) {
 			boolean isEncrypted = false;
@@ -314,7 +379,7 @@ public class UploadHandler extends HttpServlet {
 
 				String outputfile = completeName + newFileExtDot;
 
-				returnError2 = generateThumbs.decodePDF(inputfile, outputfile);
+				returnError2 = getGenerateThumbs().decodePDF(inputfile, outputfile);
 
 				File f_old = new File(inputfile);
 				if (f_old.exists()) {
@@ -324,7 +389,7 @@ public class UploadHandler extends HttpServlet {
 			}
 
 			// convert to thumbs, swf and xml-description
-			returnError = generatePDF.convertPDF(currentDir, newFileName,
+			returnError = getGeneratePDF().convertPDF(currentDir, newFileName,
 					newFileExtDot, roomName, false, completeName);
 
 			// returnError.put("decodePDF", returnError2);
@@ -337,12 +402,12 @@ public class UploadHandler extends HttpServlet {
 				// User Profile Update
 				this.deleteUserProfileFiles(currentDir, userId);
 				// convert it to JPG
-				returnError = generateImage.convertImageUserProfile(currentDir,
+				returnError = getGenerateImage().convertImageUserProfile(currentDir,
 						newFileName, newFileExtDot, userId, newFileName, false);
 			} else {
 				// convert it to JPG
 				log.debug("##### convert it to JPG: " + userProfile);
-				returnError = generateImage.convertImage(currentDir,
+				returnError = getGenerateImage().convertImage(currentDir,
 						newFileName, newFileExtDot, roomName, newFileName,
 						false);
 			}
@@ -351,12 +416,12 @@ public class UploadHandler extends HttpServlet {
 				// User Profile Update
 				this.deleteUserProfileFiles(currentDir, userId);
 				// is UserProfile Picture
-				HashMap<String, Object> processThumb1 = generateThumbs
+				HashMap<String, Object> processThumb1 = getGenerateThumbs()
 						.generateThumb("_chat_", currentDir, completeName, 40);
-				HashMap<String, Object> processThumb2 = generateThumbs
+				HashMap<String, Object> processThumb2 = getGenerateThumbs()
 						.generateThumb("_profile_", currentDir, completeName,
 								126);
-				HashMap<String, Object> processThumb3 = generateThumbs
+				HashMap<String, Object> processThumb3 = getGenerateThumbs()
 						.generateThumb("_big_", currentDir, completeName, 240);
 				returnError.put("processThumb1", processThumb1);
 				returnError.put("processThumb2", processThumb2);
@@ -364,15 +429,15 @@ public class UploadHandler extends HttpServlet {
 
 				File fileNameToStore = new File(completeName + ".jpg");
 				String pictureuri = fileNameToStore.getName();
-				Users us = usersDao.getUser(userId);
+				Users us = getUsersDao().getUser(userId);
 				us.setUpdatetime(new java.util.Date());
 				us.setPictureuri(pictureuri);
-				usersDao.updateUser(us);
+				getUsersDao().updateUser(us);
 
-				scopeApplicationAdapter.updateUserSessionObject(userId,
+				getScopeApplicationAdapter().updateUserSessionObject(userId,
 						pictureuri);
 			} else {
-				HashMap<String, Object> processThumb = generateThumbs
+				HashMap<String, Object> processThumb = getGenerateThumbs()
 						.generateThumb("_thumb_", currentDir, completeName, 50);
 				returnError.put("processThumb", processThumb);
 			}
