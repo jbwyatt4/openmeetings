@@ -51,7 +51,7 @@ public class TestErrorManagement extends AbstractOpenmeetingsSpringTest {
 		assertNotNull("Errorvalues Id should persists", errorValuesId);
 
 		ErrorValues ev = errorManagement.getErrorValuesById(errorValuesId);
-		assertNotNull("Error type should not be null", ev.getErrorType());
+		assertNotNull("Error type id should not be null", ev.getErrortype_id());
 		assertEquals("Error type should persists", errorTypeId,
 				ev.getErrortype_id());
 		assertNotNull("Fieldvalues should not be null", ev.getFieldvalues_id());

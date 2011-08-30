@@ -5,10 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,11 +16,8 @@ public class ErrorValues implements Serializable {
 	@Id
 	@Column(name = "errorvalues_id")
 	private Long errorvalues_id;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "errortype_id", updatable = true, insertable = true)
-	private ErrorType errorType;
-
+	@Column(name = "errortype_id")
+	private Long errortype_id;
 	@Column(name = "fieldvalues_id")
 	private Long fieldvalues_id;
 	@Column(name = "starttime")
@@ -64,15 +58,7 @@ public class ErrorValues implements Serializable {
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
-
-	public ErrorType getErrorType() {
-		return errorType;
-	}
-
-	public void setErrorType(ErrorType errorType) {
-		this.errorType = errorType;
-	}
-
+	
 	public Long getFieldvalues_id() {
 		return fieldvalues_id;
 	}
@@ -82,10 +68,11 @@ public class ErrorValues implements Serializable {
 	}
 
 	public Long getErrortype_id() {
-		return errorType.getErrortype_id();
+		//return errorType.getErrortype_id();
+		return errortype_id;
 	}
 
 	public void setErrortype_id(Long errortype_id) {
-		errorType.setErrortype_id(errortype_id);
+		this.errortype_id = errortype_id;
 	}
 }
