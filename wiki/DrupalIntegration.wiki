@@ -4,7 +4,7 @@
 
 == Possible Features ==
 
-  * Emebd Links to conference rooms into Drupal articles
+  * Emebed Links to conference rooms into Drupal articles
   * Single Sing on using your Drupal login
   * List recordings in Drupal <depending on requirements>
   * Embed recording links in articles <depending on requirements>
