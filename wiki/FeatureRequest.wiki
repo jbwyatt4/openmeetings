@@ -1,5 +1,8 @@
 #summary You can post / comment here feature's you would like to see
 
+<wiki:gadget url="http://www.google.com/moderator/static/moderator-embed-gadget.xml" 
+height="400" width="900" up_url="http://www.google.com/moderator/#15/e=b76c0&t=b76c0.40" up_sort="HOT" up_hl="en" />
+
 You can also post your request to the mailing lists to discuss your requests:
 
 Developer-List: http://groups.google.com/group/openmeetings-dev
