@@ -1,6 +1,6 @@
 #summary You can post / comment here feature's you would like to see
 
-Mod
+= Post your Feature Request *
 
 <wiki:gadget url="http://www.google.com/moderator/static/moderator-embed-gadget.xml" height="400" width="900" up_url="http://www.google.com/moderator/#15/e=b76c0&t=b76c0.40" up_sort="HOT" up_hl="en" />
 
