@@ -24,12 +24,8 @@
 == Where to get the Joomla Module ==
 
 Contact: mailto:service@openmeetings.de<br/>
-Sebastian Wagner
-Kaiserstraße 66
-76133 Karlsruhe
-
-Telefon: ++49 (0) 721 467 27327
-Telefax: ++49 (0) 721 467 27327
+Sebastian Wagner<br/>
+Telefon: ++49 (0) 721 467 27327<br/>
 Website: www.openmeetings.de
 <br/>
 If you need a Demo on our system contact us and we will give you an account in our sandbox.
