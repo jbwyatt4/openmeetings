@@ -14,14 +14,16 @@ If you would like to request a new feature please use the [http://groups.google.
 
 == Community == 
 
-  <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%20com.googlegroups.openmeetings-dev%20com.googlegroups.openmeetings-en-espanol&r=90" height="260" width="500" border="0" /> 
-
   * FeatureRequest
   * RoadMap
   * NewsArchive
 Mailing-Lists:
   * User: http://groups.google.com/group/openmeetings-user
   * Developers: http://groups.google.com/group/openmeetings-dev
+
+  <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%20com.googlegroups.openmeetings-dev%20com.googlegroups.openmeetings-en-espanol&r=90" height="260" width="500" border="0" /> 
+
+<wiki:gadget url="http://www.ohloh.net/p/openmeetings/widgets/project_basic_stats.xml" height="220" border="1" />
 
 == Hosting, Customization and Services ==
   
