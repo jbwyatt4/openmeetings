@@ -35,14 +35,9 @@ There is also a list of past and present transactions and the possibility to dow
 == Where to get the Paypal Module ==
 
 
-Contact:<br/>
+Contact: mailto:service@openmeetings.de<br/>
 Sebastian Wagner<br/>
-Haid-und-Neu-Straße 7<br/>
-76131 Karlsruhe<br/>
-++49 (0) 721 255 1990<br/>
-Mail: seba dot wagner at gmail dot com<br/>
-Jabber: seba dot wagner at gmail dot com<br/>
-Web: http://www.webbase-design.de<br/>
-Skype: s.wagner1<br/>
+Telefon: ++49 (0) 721 467 27327<br/>
+Website: www.openmeetings.de
 <br/>
-If you need a Demo on our system contact us and I will give you an account in our sandbox.
+If you need a Demo on our system contact us and we will give you an account in our sandbox.
