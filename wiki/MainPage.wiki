@@ -23,7 +23,11 @@ Mailing-Lists:
 
   <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%20com.googlegroups.openmeetings-dev%20com.googlegroups.openmeetings-en-espanol&r=90" height="260" width="500" border="0" /> 
 
+|| 
 <wiki:gadget url="http://www.ohloh.net/p/openmeetings/widgets/project_basic_stats.xml" height="220" border="1" />
+||
+<wiki:gadget url="http://www.ohloh.net/p/openmeetings/widgets/project_languages.xml" width="340" height="200" border="1" />
+||
 
 == Hosting, Customization and Services ==
   
