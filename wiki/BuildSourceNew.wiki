@@ -44,7 +44,8 @@ If you just need to change 3 lines of code then your probably better switch to [
 
 To develop !OpenMeetings you need at least:
   * Eclipse in a up to date copy and Java6
-  * Subclipse Plugin (to download the Code from the Repository into Eclipse)
+  * Subclipse or Subversive Plugin for Eclipse (to download the Code from the SVN Repository into Eclipse) (installable via Help > Eclipse Marketplace)
+  * Spring IDE for Eclipse (installable via Help > Eclipse Marketplace)
   * MySQL (or Postgres, or other Databases supported by Hibernate)
   * Tomcat 6 installed on your system to test and debug the code
 
