@@ -1,7 +1,7 @@
 #summary Release Notes
 #labels Featured
 
-== Major changes in Version 1.8 (release on Wednesday 14.09.2011) ==
+== Major changes in Version 1.8 (released Wednesday 14.09.2011) ==
 
   * Updated Red5 to Red5 1.0 RC1
   * Completed refactoring and replacment of persistance layer from Hibernate with openJPA, *the hibernate.cfg.xml does not exist anymore, it is now located in WEB-INF/classes/META-INF/persistance.xml*
@@ -10,12 +10,12 @@
   * New feature *Math-Symbols*: You have now a lot more icons/graphs that you can use. There are around 2000 graphic smybols that can be used. Together with the possibility to rotate, drag and resize them you should be able to bring your formular more easily to the whiteboard
   * Lots of small improvements in the UI and user-experience, see for example: http://code.google.com/p/openmeetings/issues/list?can=1&q=status%3AFixed+MileStone%3DopenJPA
 
-== Major changes in Moodle Mod 1.2 (released on Sunday 19.06.2011) ==
+== Major changes in Moodle Mod 1.2 (released Sunday 19.06.2011) ==
 
   * Fix languages 
   * Update the record in Moodle does update the record in !OpenMeetings
 
-== Major changes in Version 1.7 (released on Wednesday 15.06.2011) ==
+== Major changes in Version 1.7 (released Wednesday 15.06.2011) ==
 
   * Multi-Whiteboard, you can add new whiteboard instances, each whiteboard can have the full range of tools and documents inside.
   * Advanced File-Explorer, Drag and Drop Interface for managing files, including possibility to create a document tree with folders.
@@ -25,7 +25,7 @@
   * *!MyRooms* section. Each user has now by default 2 personal rooms that are always accessible exclusive for that user. There are buttons to enter those rooms from the dashboard
   * VoIP-Integration. Together with our Finish partner and the Open Source Department of Kvarken region we have done a VoIP integration by using an applet for the audio part. For further information see VoIPAndSIP
 
-== Major changes in Version 1.6.2 (released on Monday 07.03.2011) ==
+== Major changes in Version 1.6.2 (released Monday 07.03.2011) ==
 
   * Fix for Mysql 5.5
   * Update of persistance Library to Hibernate 3.6.1
@@ -42,7 +42,7 @@
 
   * Compliant to Moodle 2.0
 
-== Major changes in Version 1.6 RC1 (released on Thursday 11.11.2010) == 
+== Major changes in Version 1.6 RC1 (released Thursday 11.11.2010) == 
 
   * Watch the small demo about new features: http://www.youtube.com/user/sebastwagner#p/u/0/EriKb0zY0lM
   * You can login using your Facebook account now
@@ -57,14 +57,14 @@
   * Some new timezones and fixes for the release 1.5 regarding wrong time zones in some mail notifications
   * New SOAP calls to login to the dashboard and to show a popup to choose a custom nickname when you go directly to a conference room
 
-== Major changes in Version 1.5 RC1 (released on Sunday 26.09.2010) ==
+== Major changes in Version 1.5 RC1 (released Sunday 26.09.2010) ==
 
   * Timezone support in User Profile, Calendar and Invitations. Users can now organize Events with people from different timezones and the system will keep track on handling the event time correctly, see also TimeZoneHandling
   * Re-Styling and fixing some layout aspects
   * Quick-link button next to each user-name in dashboard user list and in every chat box to quickly guide people to a conference room
   * small Bug fixes
 
-== Major changes in Version 1.4 RC1 (released on Wednesday 25.08.2010) ==
+== Major changes in Version 1.4 RC1 (released Wednesday 25.08.2010) ==
 
 New Features:
   * Remote Desktop Control (RDC) in Screen Sharing and separated right for RDC in user list, Moderators are able by default to do RDC other users can apply for it using the right-buttons
@@ -79,7 +79,7 @@ New Features:
 
   * Fix utf8 problem with names in SOAP Gateway
 
-== Major changes in Version 1.3 RC1 (release on Wednesday 23.06.2010) ==
+== Major changes in Version 1.3 RC1 (release Wednesday 23.06.2010) ==
 
 New Features:
   * Drawings stay on slide when you turn the page of a document on the whiteboard
@@ -97,14 +97,14 @@ Major Bug fixes:
   * Reminder Email not beeing send before scheduled Meetings (now send 15 minutes upfront no matter if ICAL or simple Mail)
   * lots of small things
 
-== Major changes in Version 1.2 RC1 (release on Wednesday 03.03.2010) ==
+== Major changes in Version 1.2 RC1 (release Wednesday 03.03.2010) ==
 
   * Performance Fixes
   * New Integration Code and SOAP Methods
   * Moodle Plugin Update with performance fix
   * New Sugar CRM Plugin see [SugarCRMModule] in Version 1.0
 
-== Major changes in Version 1.1 RC1 (release on Monday 08.02.2010) ==
+== Major changes in Version 1.1 RC1 (release Monday 08.02.2010) ==
 
 New !ScreenSharing:
   * Uses RTMP as protocol
