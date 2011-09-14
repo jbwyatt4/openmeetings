@@ -5,14 +5,10 @@
 
   * Updated Red5 to Red5 1.0 RC1
   * Completed refactoring and replacment of persistance layer from Hibernate with openJPA
-  * Tighter integration with Spring, fixing DB-Session Issues, also having better control about 
-configuration"
-  * New feature ""Activity-List"": Instead of having annoying pop-ups about requests from your students 
-you have now a list with the chronolgical order of the requests. And you can also directly answer those 
-requests in that list."
-  * New feature ""Math-Symbols"": You have now a lot more icons/graphs that you can use. There are around 
-2000 graphic smybols that can be used. Together with the possibility to rotate, drag and resize them 
-you should be able to bring your formular more easily to the whiteboard"
+  * Tighter integration with Spring, fixing DB-Session Issues, also having better control about configuration
+  * New feature ""Activity-List"": Instead of having annoying pop-ups about requests from your students you have now a list with the chronolgical order of the requests. And you can also directly answer those requests in that list.
+  * New feature "Math-Symbols": You have now a lot more icons/graphs that you can use. There are around 
+2000 graphic smybols that can be used. Together with the possibility to rotate, drag and resize them you should be able to bring your formular more easily to the whiteboard
   * Lots of small improvements in the UI and user-experience, see for example: http://code.google.com/p/openmeetings/issues/list?can=1&q=status%3AFixed+MileStone%3DopenJPA
 
 == Major changes in Moodle Mod 1.2 (released on Sunday 19.06.2011) ==
