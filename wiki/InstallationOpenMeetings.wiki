@@ -36,7 +36,7 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
   # Download [http://openmeetings.googlecode.com/files/openmeetings_1_8_0_r4229.zip OpenMeetings (including already Red5)]
   # Unpack it (Please make sure that you use an up-to-date unzip-software) (and copy it somewhere in you system, do not start it from your Windows Desktop)
   # you have now a folder openmeetings_version_no_xx
-  # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/persistance.xml 
+  # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml 
     * MySQL-Database-Users: Alter following config values in `persistance.xml` $DB_HOST $USER_NAME $USER_PASS with your values
      {{{
 <property name="openjpa.ConnectionProperties" value="DriverClassName=com.mysql.jdbc.Driver, Url=jdbc:mysql://$DB_HOST:3306/openmeetings?autoReconnect=true&amp;useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;connectionCollation=utf8_general_ci&amp;cachePrepStmts=true&amp;cacheCallableStatements=true&amp;cacheServerConfiguration=true&amp;useLocalSessionState=true&amp;elideSetAutoCommits=true&amp;alwaysSendSetIsolation=false&amp;enableQueryTimeouts=false&amp;prepStmtCacheSize=3000&amp;prepStmtCacheSqlLimit=1000, MaxActive=100, MaxWait=10000, TestOnBorrow=true,  poolPreparedStatements=true,  Username=$USER_NAME, Password=$USER_PASS"/>
