@@ -4,7 +4,7 @@
 == Major changes in Version 1.8 (release on Wednesday 14.09.2011) ==
 
   * Updated Red5 to Red5 1.0 RC1
-  * Completed refactoring and replacment of persistance layer from Hibernate with openJPA
+  * Completed refactoring and replacment of persistance layer from Hibernate with openJPA, the hibernate.cfg.xml does not exist anymore, it is now located in WEB-INF/classes/META-INF/persistance.xml
   * Tighter integration with Spring, fixing DB-Session Issues, also having better control about configuration
   * New feature ""Activity-List"": Instead of having annoying pop-ups about requests from your students you have now a list with the chronolgical order of the requests. And you can also directly answer those requests in that list.
   * New feature "Math-Symbols": You have now a lot more icons/graphs that you can use. There are around 2000 graphic smybols that can be used. Together with the possibility to rotate, drag and resize them you should be able to bring your formular more easily to the whiteboard
