@@ -33,42 +33,19 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
 
 == Install !OpenMeetings ==
 
-  # Download [http://openmeetings.googlecode.com/files/openmeetings_1_7_0_r3822.zip OpenMeetings including Red5]
+  # Download [http://openmeetings.googlecode.com/files/openmeetings_1_8_0_r4229.zip OpenMeetings (including already Red5)]
   # Unpack it (Please make sure that you use an up-to-date unzip-software) (and copy it somewhere in you system, do not start it from your Windows Desktop)
   # you have now a folder openmeetings_version_no_xx
-  # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/conf/hibernate.cfg.xml 
-    * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
+  # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/persistance.xml 
+    * MySQL-Database-Users: Alter following config values in `persistance.xml` $DB_HOST $USER_NAME $USER_PASS with your values
      {{{
-		<property name="connection.username">root</property>
-		<property name="connection.password"></property>
-
-		<property name="connection.url">jdbc:mysql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
+<property name="openjpa.ConnectionProperties" value="DriverClassName=com.mysql.jdbc.Driver, Url=jdbc:mysql://$DB_HOST:3306/openmeetings?autoReconnect=true&amp;useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;connectionCollation=utf8_general_ci&amp;cachePrepStmts=true&amp;cacheCallableStatements=true&amp;cacheServerConfiguration=true&amp;useLocalSessionState=true&amp;elideSetAutoCommits=true&amp;alwaysSendSetIsolation=false&amp;enableQueryTimeouts=false&amp;prepStmtCacheSize=3000&amp;prepStmtCacheSqlLimit=1000, MaxActive=100, MaxWait=10000, TestOnBorrow=true,  poolPreparedStatements=true,  Username=$USER_NAME, Password=$USER_PASS"/>
+	
      }}}
     If you have problems in connecting your database, a common error is that the Database does not listen to TCP/IP Connection, or you properly need to replace the jdbc-driver with the one for your database-version.
-    Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:`jdbc:mysql://localhost/openmeetings`
-    * Postgres-Database-Users: Rename `postgres_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`postgres_`)`hibernate.cfg.xml`
-    {{{
-		<!-- User  / Password -->
-		<property name="connection.username">postgres</property>
-		<property name="connection.password"></property>
-		
-		<property name="connection.url">jdbc:postgresql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
-    }}}
-    Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:`jdbc:postgresql://localhost/openmeetings`
-    * Any-Database-Users: Rename `any_hibernate.cfg.xml` to hibernate.cfg.xml. 
-    Alter the following config values to fit your needs:
-    {{{
-		<!-- User  / Password -->
-		<property name="connection.username">user</property>
-		<property name="connection.password">*****</property>
-		
-		<!-- Database Settings -->
-		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="connection.url">jdbc:postgresql://localhost/openmeetings</property>	
-		
-    }}}
-    You can see a list of available _dialect_'s here [http://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html#configuration-optional-dialects hibernate-SQL-dialects]. You must download the driver for your database and copy it to _$OPENMEETINGS-HOME/WEB-INF/lib_
+    
+    * Postgres-Database-Users: Rename `postgres_persistance.xml` to `persistance.xml` and alter the db/user/pass values
+    * Any-Database-Users Oracle, DB2, MSSQL: Fix the JDBC JAR by placing the JAR in WEB-INF/lib, change the values in the persistance.xml for usage with the DB, and restart    
   # (Re)start Red5 (The table's will be automatically created by hibernate if there is something wrong with your database values you will see errors in Red5 logfile 
   # go to the Installer by accessing it via browser: http://localhost:5080/openmeetings/install and follow the instructions 
 
