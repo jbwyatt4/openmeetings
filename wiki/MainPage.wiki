@@ -20,6 +20,8 @@ If you would like to request a new feature please use the [http://groups.google.
 Mailing-Lists:
   * User: http://groups.google.com/group/openmeetings-user
   * Developers: http://groups.google.com/group/openmeetings-dev
+  * Spanish User Group: http://groups.google.com/group/openmeetings-en-espanol
+  * Japanese Wiki: http://www.openmeetings.jp
 
   <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%20com.googlegroups.openmeetings-dev%20com.googlegroups.openmeetings-en-espanol&r=90" height="260" width="500" border="0" /> 
 
@@ -31,8 +33,8 @@ Mailing-Lists:
 
 == Hosting, Customization and Services ==
   
+  * http://www.openmeetings.de Hosting and Services
   * [http://code.google.com/p/openmeetings/wiki/Jobs Job Offers and Seekers]
-  * http://www.webbase-design.de/cms/service.html
   * http://net8.co.jp  ( also English  )
   * http://www.teleskele.com/
 
