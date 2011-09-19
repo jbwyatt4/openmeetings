@@ -27,15 +27,6 @@ public class LanguageImport {
 	public LanguageImport() {
 	}
 
-	private static LanguageImport instance = null;
-
-	public static synchronized LanguageImport getInstance() {
-		if (instance == null) {
-			instance = new LanguageImport();
-		}
-		return instance;
-	}
-
 	public Long addLanguageByDocument(Long language_id, InputStream is)
 			throws Exception {
 
