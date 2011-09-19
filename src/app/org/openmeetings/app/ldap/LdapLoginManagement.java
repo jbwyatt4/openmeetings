@@ -35,7 +35,6 @@ public class LdapLoginManagement {
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			LdapLoginManagement.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private static LdapLoginManagement instance = null;
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
@@ -106,14 +105,6 @@ public class LdapLoginManagement {
 
 	private LdapLoginManagement() {
 		// do not use -> singleton
-	}
-
-	/** Getting instance */
-	public static synchronized LdapLoginManagement getInstance() {
-		if (instance == null) {
-			instance = new LdapLoginManagement();
-		}
-		return instance;
 	}
 
 	/**
