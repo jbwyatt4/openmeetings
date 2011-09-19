@@ -1150,6 +1150,7 @@ public class Usermanagement {
 			users = em.merge(users);
 
 			em.flush();
+			em.refresh(users);
 
 			Long user_id = users.getUser_id();
 
@@ -1262,6 +1263,7 @@ public class Usermanagement {
 
 			em.merge(users);
 			em.flush();
+			em.refresh(users);
 			long user_id = users.getUser_id();
 
 			return user_id;
@@ -1275,6 +1277,7 @@ public class Usermanagement {
 	public Long addUser(Users usr) {
 		try {
 			usr = em.merge(usr);
+			em.refresh(usr);
 			Long user_id = usr.getUser_id();
 			return user_id;
 		} catch (Exception ex2) {
@@ -1299,6 +1302,7 @@ public class Usermanagement {
 			}
 
 			usr = em.merge(usr);
+			em.refresh(usr);
 			Long user_id = usr.getUser_id();
 
 			return user_id;
