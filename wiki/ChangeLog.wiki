@@ -1,6 +1,10 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in Version 1.8.1 (released Monday 19.09.2011) ==
+
+  * Fix Spring/openJPA migration issues in Language-Editor import and in LDAP / ADS integration module
+
 == Major changes in Version 1.8 (released Wednesday 14.09.2011) ==
 
   * Updated Red5 to Red5 1.0 RC1
