@@ -454,7 +454,7 @@ public class Usermanagement {
 	public Long updateUser(long user_level, Long user_id, Long level_id,
 			String login, String password, String lastname, String firstname,
 			Date age, String street, String additionalname, String zip,
-			long states_id, String town, int availible, String telefon,
+			long states_id, String town, Long language_id, int availible, String telefon,
 			String fax, String mobil, String email, String comment, int status,
 			List<?> organisations, int title_id, String phone, String sip_user,
 			String sip_pass, String sip_auth, Boolean generateSipUserData,
@@ -511,6 +511,7 @@ public class Usermanagement {
 					us.setTitle_id(title_id);
 					us.setOmTimeZone(omTimeZoneDaoImpl
 							.getOmTimeZone(jNameTimeZone));
+					us.setLanguage_id(language_id);
 					us.setForceTimeZoneCheck(forceTimeZoneCheck);
 
 					us.setUserOffers(userOffers);
@@ -1277,7 +1278,6 @@ public class Usermanagement {
 	public Long addUser(Users usr) {
 		try {
 			usr = em.merge(usr);
-			em.refresh(usr);
 			Long user_id = usr.getUser_id();
 			return user_id;
 		} catch (Exception ex2) {
@@ -1302,7 +1302,6 @@ public class Usermanagement {
 			}
 
 			usr = em.merge(usr);
-			em.refresh(usr);
 			Long user_id = usr.getUser_id();
 
 			return user_id;
@@ -1353,6 +1352,7 @@ public class Usermanagement {
 					savedUser.setTitle_id(Integer.parseInt(values.get(
 							"title_id").toString()));
 
+					savedUser.setLanguage_id(Long.parseLong(values.get("languages_id").toString()));
 					savedUser.setOmTimeZone(omTimeZoneDaoImpl
 							.getOmTimeZone((values.get("jnameTimeZone")
 									.toString())));

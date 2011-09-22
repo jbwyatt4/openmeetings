@@ -103,10 +103,6 @@ public class LdapLoginManagement {
 	public static final String CONFIGKEY_LDAP_KEY_TOWN = "ldap_user_attr_town";
 	public static final String CONFIGKEY_LDAP_KEY_PHONE = "ldap_user_attr_phone";
 
-	private LdapLoginManagement() {
-		// do not use -> singleton
-	}
-
 	/**
 	 * Determine if is a supported Auth Type
 	 * 

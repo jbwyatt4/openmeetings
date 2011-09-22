@@ -241,6 +241,7 @@
   			this.sendObject["level_id"] = Number(this.parent.level.getValue());
 			this.sendObject["title_id"] = Number(this.parent.salutation.getValue());
 			this.sendObject["jNameTimeZone"] = parent._timeZone.getValue();
+            this.sendObject["language_id"] = parent.languages.getValue();
 			this.sendObject["forceTimeZoneCheck"] = parent.forceTimeZoneCheck.getValue();
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
   			
@@ -272,7 +273,7 @@
     	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
-				//Debug.write("saveOrUpdateUser: ",val);
+				if ($debug) Debug.write("saveOrUpdateUser ondata: ",val);
 				if (val>0){
 					var obj = new Array();
 					obj["user_id"] = val;
