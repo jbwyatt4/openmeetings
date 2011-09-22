@@ -24,9 +24,6 @@ public class LanguageImport {
 	@Autowired
 	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
 
-	public LanguageImport() {
-	}
-
 	public Long addLanguageByDocument(Long language_id, InputStream is)
 			throws Exception {
 
