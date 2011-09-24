@@ -1,6 +1,12 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in Version 1.8.2 (released Monday 24.09.2011) ==
+
+  * Fixes language problems: The default language is bound now to the user-profile, not to the server settings!
+  * Fix some issue in creating conferences via the integrated calendar
+  * Fixes issues when drag and droping a video from the file-explorer to the whiteboard
+
 == Changes in Version 1.8.1 (released Monday 19.09.2011) ==
 
   * Fix Spring/openJPA migration issues in Language-Editor import and in LDAP / ADS integration module
