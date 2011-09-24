@@ -33,7 +33,7 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
 
 == Install !OpenMeetings ==
 
-  # Download [http://openmeetings.googlecode.com/files/openmeetings_1_8_2_r4277.zip OpenMeetings (Red5 is already included in that package)]
+  # Download [http://openmeetings.googlecode.com/files/openmeetings_1_8_2_r4283.zip OpenMeetings (Red5 is already included in that package)]
   # Unpack it (Please make sure that you use an up-to-date unzip-software) (and copy it somewhere in you system, do not start it from your Windows Desktop)
   # you have now a folder openmeetings_version_no_xx
   # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml 
