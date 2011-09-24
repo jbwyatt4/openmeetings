@@ -6,6 +6,7 @@
   * Fixes language problems: The default language is bound now to the user-profile, not to the server settings!
   * Fix some issue in creating conferences via the integrated calendar
   * Fixes issues when drag and droping a video from the file-explorer to the whiteboard
+  * Update Chinese Simplified
 
 == Changes in Version 1.8.1 (released Monday 19.09.2011) ==
 
