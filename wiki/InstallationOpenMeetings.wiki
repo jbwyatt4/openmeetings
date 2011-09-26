@@ -54,7 +54,6 @@ After Running the Installer all basics are installed. Now login and go to the Me
 == Debian, Links, Changelog, VoIP  ==
 
   * for VoIP and SIP Integration see also [VoIPAndSIP]
-  * [ChangeLog ChangeLog]
   * [MeetingsLive Ubuntu Live DVD] MeetingsLive http://meetingslive.sourceforge.net/
   * [InstallationCentOS5 Installation on CentOS 5]
   * [InstallationRHELS Installation on RHELS 5.6]
@@ -66,10 +65,11 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
   * InstallationDebian
   * [qosTips]
+  * French version of Installation Instructions: http://flash.54n.free.fr/?/Root/Debian/OpenMeetings-Installation
 
 == Hidden and experimental features ==
 
-  * rtmps (using of SSL) => you find in the config.xml some value to enable the client to first try to connect to rtmps (useSSL param) .. NOTE: Flash Player only on Windows have the rtmps feature and you will need to clear your browser cache to force a reload of the updated config.xml
+  * SSL encryption, search the mailing list for "native SSL".
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
   * there are some hidden emoticons (for example (activate)), you might want to add your own ones [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/public/emoticons/emotes.xml Full List]
 
@@ -85,16 +85,14 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
 == Ports, NAT Settings, Customize ==
 
-  * Default Ports: 1935 (RTMP), 8088 (RTMP-Over HTTP), 5080 (HTTP), 4445 ([ODSP Desktop Sharing]), 8443 (RTMP over SSL)  for alternate Port settings have a look at red5/conf/red5.properties. Don't forget that you have also some port settings in the Client, see the red5/webapps/openmeetings/config.xml
+  * Default Ports: 1935 (RTMP), 8088 (RTMP-Over HTTP), 5080 (HTTP), for alternate Port settings have a look at red5/conf/red5.properties. Have a look also on the other ports red5 does require (but not in use by !OpenMeetings. Don't forget that you have also some port settings in the Client, see the red5/webapps/openmeetings/config.xml
+  * To run openmeetings behind a Apache Web-Server you can try with mod_proxy and for example multiple sub-domains.
   * Custom Colors, Default Language, see red5/webapps/openmeetings/config.xml
   * You may be able to run different red5 instances if you bind it to specific ports. 
   * Single Sing On, Integration => Use the Remote Gateway with the SoapMethods
 
 == Tips and Tricks ==
 
-  * To run openmeetings behind a Apache Web-Server you can try with apache mod_jk and mod_proxy
-  * Watch the ScreenCast of 0.5.2/SVN-Version Basic Installation http://blip.tv/file/836696?filename=Kunthar-OpenmeetingsBasicInstallation696.flv 
-  * French version of Installation Instructions: http://flash.54n.free.fr/?/Root/Debian/OpenMeetings-Installation
   * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/openmeetings/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/openmeetings/maindebug.lzx.lzr=swf8.swf
   * If you have Problems with conversion-jobs check your Red5-Log output. There will be error Messages which help you. You must install !OpenOffice, !ImageMagick, !GhostScript and SWFTools to run all conversion-Jobs correctly.
   * if you have problems in converting Files check the Batch-Scripts in $OPENMEETINGS_HOME/jod
