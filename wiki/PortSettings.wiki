@@ -29,3 +29,7 @@ A short description about the connection mechanism:
 The application first tries connecting to rtmp 3 times, because rtmp is the protocol that is less performance hungry. If that fails the application will fallback to rtmpT.
 
 Most firewalls do allow traffic on port 443 and they normally do not analyse the packets, because 443 is normally SSL encrypted, so the firewall should not be able to read the packets at all.
+
+== !OpenMeetings over SSL ==
+
+You can run !OpenMeetings completely over SSL. A guide on how to do it will follow.
