@@ -1,5 +1,5 @@
   * [MainPage Wiki Index]
-  * Installation, Upgrade, Source
+  * Installation and Upgrade
     * *[InstallationOpenMeetings OpenMeetings Installation]*
     * [UpdateOpenMeetings OpenMeetings Update]
     * [BuildSourceNew Get Source, build yourself, Nightly Builds]
