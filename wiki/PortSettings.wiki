@@ -1,0 +1,19 @@
+#summary OpenMeetings Port settings
+
+== Default Configuration ==
+
+  * Port 5080: HTTP
+  * Port 1935: RTMP (Flash Stream and Remoting)
+  * Port 8088: RTMP over HTTP-Tunneling (rtmpT)
+
+Additionally red5 uses some ports internally. However those ports are not in use by !OpenMeetings by deault.
+
+== Configure alternative ports ==
+
+You need to change two files:
+
+  * Server-Side configuration: $RED5_HOME/conf/red5.properties, you need to restart the red5-service so that changes are online.
+  * Client-Side configuration: $RED5_HOME/webapps/openmeetings/config.xml 
+    Every server side configuration has a client side representive
+
+|| Config-Name || red5.properties || config.xml ||
