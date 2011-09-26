@@ -13,7 +13,7 @@ Additionally red5 uses some ports internally. However those ports are not in use
 You need to change two files:
 
   * Server-Side configuration: $RED5_HOME/conf/red5.properties, you need to restart the red5-service so that changes are online.
-  * Client-Side configuration: $RED5_HOME/webapps/openmeetings/config.xml 
+  * Client-Side configuration: $RED5_HOME/webapps/openmeetings/config.xml, you need to clear your browser cache after changing the file. 
     Every server side configuration has a client side representive
 
 || Config-Name || Default-value || Name in red5.properties || Name in config.xml ||
