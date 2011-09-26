@@ -22,4 +22,4 @@ You have to exclude the "-XX:+UseConcMarkSweepGC" param from the default red5-hi
 However if you are a performance expert you might also play with the values to find perfect matches for your use-case.
 
 For a complete overview about possible arguments and their meaning see:
-http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html
+http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html#PerformanceTuning
