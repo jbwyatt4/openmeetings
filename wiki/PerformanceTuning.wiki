@@ -20,3 +20,6 @@ exec $RED5_HOME/red5.sh >> $RED5_HOME/log/jvm.stdout 2>&1 &
 
 You have to exclude the "-XX:+UseConcMarkSweepGC" param from the default red5-highperf.sh to make it functional!
 However if you are a performance expert you might also play with the values to find perfect matches for your use-case.
+
+For a complete overview about possible arguments and their meaning see:
+http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html
