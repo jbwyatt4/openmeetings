@@ -1,4 +1,5 @@
 #summary How to tweak the performance settings
+#labels Configuration
 
 == Introduction ==
 
