@@ -1,0 +1,4 @@
+#summary Howto rename webapp
+#labels Configuration
+
+Feature available since r4303 (Issue 1403)
