@@ -1,4 +1,5 @@
 #summary Using a custom encrypt Class / Method
+#labels Configuration
 
 = Configuration of Custom Crypt-Style =
 
