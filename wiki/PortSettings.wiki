@@ -1,4 +1,5 @@
 #summary OpenMeetings Port settings
+#labels Configuration
 
 == Default Configuration ==
 
