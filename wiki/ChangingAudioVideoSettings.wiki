@@ -1,4 +1,5 @@
 #summary changing the audio and video settings
+#labels Configuration
 
 = Description = 
 
