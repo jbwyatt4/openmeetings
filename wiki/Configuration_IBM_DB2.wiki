@@ -10,8 +10,10 @@ Get the IBM Data Server Driver for JDBC and SQLJ from IBM website: https://www14
 
 Copy JDBC driver db2jcc4.jar to webapps/openmeetings/WEB-INF/lib/
 
-Create database for !OpenMeetings using a pagesize bigger or equal 8K, sample query_
+Create database for !OpenMeetings using a pagesize bigger or equal 8K, sample query:
+{{{
 CREATE DATABASE openmeet AUTOMATIC STORAGE YES ON 'C:' DBPATH ON 'C:' USING CODESET UTF-8 TERRITORY DE COLLATE USING System PAGESIZE 16 K
+}}}
 
 == DB2 Sample Configuration ==
 
