@@ -8,6 +8,9 @@
     * [http://www.openmeetings.jp Japanese Wiki]
     * [Internationalisation]
     * TimeZoneHandling
+  * Configuration 
+    * DB Sample Configurations
+      * [Configuration_IBM_DB2 IBM DB2]
   * Integration
     * Modules and Plugins
       * [MoodlePlugins Moodle Module]
