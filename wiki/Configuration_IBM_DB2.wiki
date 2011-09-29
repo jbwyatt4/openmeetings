@@ -13,4 +13,6 @@ Copy JDBC driver xyz.JAR to WEB-INF/lib/
 Create database for !OpenMeetings:
 http://publib.boulder.ibm.com/infocenter/db2luw/v9/index.jsp?topic=%2Fcom.ibm.db2.udb.admin.doc%2Fdoc%2Fr0000929.htm
 
+Todo: Check param: AppendExtendedExceptionText
+
 == DB Sample Configuration ==
