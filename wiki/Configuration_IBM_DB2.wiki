@@ -21,7 +21,7 @@ File for reference in the SVN:
 http://code.google.com/p/openmeetings/source/browse/trunk/singlewebapp/src/META-INF/db2_persistence.xml
 
 Replace user/db/pass/port with your values of course!
-Some DB Mappings of tables might change from !OpenMeetings version to version!
+Some class mappings of tables might change from !OpenMeetings version to version!
 
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
