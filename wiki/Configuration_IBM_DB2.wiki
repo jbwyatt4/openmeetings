@@ -1,0 +1,10 @@
+#summary Documentation about IBM DB2
+#labels Configuration
+
+
+== Database Setup ==
+
+Tested IBM DB2 Express-C 9.7.xx:
+
+
+== DB Sample Configuration ==
