@@ -6,5 +6,11 @@
 
 Tested IBM DB2 Express-C 9.7.xx:
 
+Get the JDBC Driver from IBM website: https://www14.software.ibm.com/webapp/iwm/web/preLogin.do?source=swg-idsdjs
+
+Copy "" JAR to WEB-INF/lib/
+
+Create database for !OpenMeetings:
+
 
 == DB Sample Configuration ==
