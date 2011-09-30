@@ -13,7 +13,7 @@ $settings->add(new admin_setting_configtext('openmeetings_openmeetingsAdminUser'
                        get_string('openmeetingsAdminUser', 'openmeetings'), "admin", PARAM_TEXT));
                        
 $settings->add(new admin_setting_configtext('openmeetings_openmeetingsAdminUserPass', get_string('openmeetingsAdminUserPass', 'openmeetings'),
-                       get_string('openmeetingsAdminUserPass', 'openmeetings'), "password", PARAM_TEXT));                       
+                       get_string('openmeetingsAdminUserPass', 'openmeetings'), "password", PARAM_PASSWORD));                       
                    
 $settings->add(new admin_setting_configtext('openmeetings_openmeetingsModuleKey', get_string('openmeetingsModuleKey', 'openmeetings'),
                        get_string('openmeetingsModuleKey', 'openmeetings'), "moodle", PARAM_TEXT));
