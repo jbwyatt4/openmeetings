@@ -128,6 +128,14 @@
 		$openmeetings_gateway = new openmeetings_gateway();
 		if ($openmeetings_gateway->openmeetings_loginuser()) {
 			
+			$allowRecording = 1;
+			if ($openmeetings->allow_recording == 2) {
+				$allowRecording = 0;
+			}
+			if ($openmeetings->is_moderated_room == 3) {
+				$becomemoderator = 1;
+			}
+			
 			//set User-Object to Session ... is deprecated
 			//$returnVal = $openmeetings_gateway->openmeetings_setUserObject($USER->username,$USER->firstname,
 			//				$USER->lastname,$USER->picture,$USER->email);
@@ -135,8 +143,8 @@
 			// Simulate the User automatically
 			//echo "openmeetings_setUserObjectWithExternalUser<br/>";
 			if ($openmeetings->type != 0){
-				$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRoomHashByURL($USER->username,$USER->firstname,
-								$USER->lastname,$USER->picture,$USER->email,$USER->id,$CFG->openmeetings_openmeetingsModuleKey,$openmeetings->room_id,$becomemoderator);
+				$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRoomHashByURLAndRecFlag($USER->username,$USER->firstname,
+								$USER->lastname,$USER->picture,$USER->email,$USER->id,$CFG->openmeetings_openmeetingsModuleKey,$openmeetings->room_id,$becomemoderator,$allowRecording);
 			} else {
 				$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRecordingHashByURL($USER->username,$USER->firstname,
 								$USER->lastname,$USER->id,$CFG->openmeetings_openmeetingsModuleKey,$openmeetings->room_recording_id);
