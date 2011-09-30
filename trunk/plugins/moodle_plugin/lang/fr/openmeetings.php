@@ -21,7 +21,7 @@ $string['Room_Language'] = 'Langue R&eacute;union';
 $string['Max_User'] = 'Nb max utilisateurs';
 $string['Wait_for_teacher'] = 'Attendre enseignant';
 
-$string['recordings_label'] = 'The Recording Field is only used if Room Type is Recording';
+$string['recordings_label'] = 'The Recording Field is only used if Room Type is Recording. Instead of the conference room a recording will be shown.';
 $string['recordings_show'] = 'Available Recordings to Shows';
 $string['Comment'] = 'Comment';
 
@@ -30,6 +30,7 @@ $string['Audience'] = 'Conf&eacute;rence (max 32 participants)';
 $string['Restricted'] = 'Acc&egrave;s restreint (max 150 participants)';
 $string['Recording'] = 'Show Recording (select recording from drop down to be shown instead of meeting)';
 
+$string['Moderation_Description'] = '(Moodle Administratoren, teachers and course creators are automatically a moderator)';
 $string['Moderation_TYPE_1'] = 'Les participants doivent attendre un enseignant pour pouvoir commencer';
 $string['Moderation_TYPE_2'] = 'La r&eacute;union peut d&eacute;marrer imm&eacute;diatement (le premier connect&eacute; devient le mod&eacute;rateur)';
 $string['Moderation_TYPE_3'] = 'Every participant is automatically moderator when he/she enters the room';

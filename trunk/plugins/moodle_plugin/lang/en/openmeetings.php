@@ -21,7 +21,7 @@ $string['Room_Language'] = 'Room Language';
 $string['Max_User'] = 'Max users';
 $string['Wait_for_teacher'] = 'Moderation modus';
 
-$string['recordings_label'] = 'The Recording Field is only used if Room Type is Recording';
+$string['recordings_label'] = 'The Recording Field is only used if Room Type is Recording. Instead of the conference room a recording will be shown.';
 $string['recordings_show'] = 'Available Recordings to Shows';
 $string['Comment'] = 'Comment';
 
@@ -30,6 +30,7 @@ $string['Audience'] = 'Audience (max 32 participants)';
 $string['Restricted'] = 'Webinar (max 150 participants)';
 $string['Recording'] = 'Show Recording (select recording from drop down to be shown instead of meeting)';
 
+$string['Moderation_Description'] = '(Moodle Administratoren, teachers and course creators are automatically a moderator)';
 $string['Moderation_TYPE_1'] = 'Participants need to wait till the teacher enters the room';
 $string['Moderation_TYPE_2'] = 'Participants can already start (first User in room becomes moderator)';
 $string['Moderation_TYPE_3'] = 'Every participant is automatically moderator when he/she enters the room';
