@@ -63,7 +63,7 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 		/// Adding the "Is Moderated Room" field
 		$mform->addElement('select', 'is_moderated_room', get_string('Wait_for_teacher', 'openmeetings'), array('1'=> get_string('Moderation_TYPE_1', 'openmeetings'),'2' => get_string('Moderation_TYPE_2', 'openmeetings'),'3' => get_string('Moderation_TYPE_3', 'openmeetings')));
 
-		$mform->addElement('select', 'allow_recording', get_string('Allow_Recording', 'openmeetings'), array('1'=> get_string('Recording_TYPE_2', 'openmeetings'),'2' => get_string('Recording_TYPE_2', 'openmeetings')));
+		$mform->addElement('select', 'allow_recording', get_string('Allow_Recording', 'openmeetings'), array('1'=> get_string('Recording_TYPE_1', 'openmeetings'),'2' => get_string('Recording_TYPE_2', 'openmeetings')));
 			
 			
 		/// Adding the "Room Language" field
@@ -111,7 +111,7 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 		//$mform->addElement('format', 'introformat', get_string('format', 'openmeetings'));
 		//$this->add_intro_editor(true, get_string('description', 'mplayer'));
 
-		$this->add_intro_editor(true);
+		//$this->add_intro_editor(true);
 
 		//-------------------------------------------------------------------------------
 		// add standard elements, common to all modules
