@@ -10,7 +10,7 @@ Place ojdbc6.jar into webapps/openmeetings/WEB-INF/lib/
 
 == DB2 Sample Configuration ==
 
-Copy webapps/openmeetings/WEB-INF/classes/oracle_persistance.xml
+Copy webapps/openmeetings/WEB-INF/classes/oracle_persistance.xml<br/>
 to webapps/openmeetings/WEB-INF/classes/persistance.xml
 
 File for reference in the SVN:
