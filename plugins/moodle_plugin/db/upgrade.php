@@ -38,6 +38,10 @@ function xmldb_openmeetings_upgrade($oldversion) {
     	upgrade_mod_savepoint(true, 20111002, 'openmeetings');
     }
     
+    if ($oldversion == 20111002) {
+    	$result = false;
+    }
+    
     return $result;
 }
 

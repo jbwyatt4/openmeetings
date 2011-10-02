@@ -41,6 +41,6 @@ $string['Recording_TYPE_1'] = 'Die Funktion zum Aufzeichnen der Konferenz ist ve
 $string['Recording_TYPE_2'] = 'Die Funktion zum Aufzeichnen der Konferenz ist nicht verf&uuml;gbar.';
 
 $string['openmeetingsWebappnameLabel'] = 'OpenMeetings webapp name';
-$string['openmeetingsWebappnameDescription'] = 'Erweiterte Einstellung: Wenn sie die OpenMeetings applikation umbenannt haben kšnnen Sie hier einen alternativen Namen eingeben.';
+$string['openmeetingsWebappnameDescription'] = 'Erweiterte Einstellung: Wenn sie die OpenMeetings applikation umbenannt haben k&ouml;nnen Sie hier einen alternativen Namen eingeben.';
 
 ?>
