@@ -2,7 +2,7 @@
 
 == Installation ==
 
-Current Version !OpenMeetings 0.7 RC1 to 1.8.2 : InstallationOpenMeetings, UpdateOpenMeetings, changes: [ChangeLog  ChangeLog]
+Current Version !OpenMeetings 0.7 RC1 to 1.8.3 : InstallationOpenMeetings, UpdateOpenMeetings, changes: [ChangeLog  ChangeLog]
 
 Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
