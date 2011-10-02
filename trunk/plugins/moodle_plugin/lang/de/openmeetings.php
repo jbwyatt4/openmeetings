@@ -13,7 +13,8 @@ $string['red5host'] = 'OpenMeetings Server Host oder IP';
 $string['red5port'] = 'OpenMeetings Server Port';
 $string['openmeetingsAdminUser'] = 'OpenMeetings Admin Benutzer';
 $string['openmeetingsAdminUserPass'] = 'OpenMeetings Admin Benutzer Passwort';
-$string['openmeetingsModuleKey'] = 'OpenMeetings Modul-Schl&uuml;ssel (falls Sie mehrer Moodle Instanzen betreiben sollte der Schl&uuml;ssel bei jeder Instanz anders sein)';
+$string['openmeetingsModuleKeyLabel'] = 'Module Key';
+$string['openmeetingsModuleKey'] = 'Erweiterte Einstellung: OpenMeetings Modul-Schl&uuml;ssel (falls Sie mehrer Moodle Instanzen betreiben sollte der Schl&uuml;ssel bei jeder Instanz anders sein)';
 
 $string['Room_Name'] = 'Raum name';
 $string['Room_Type'] = 'Raumtyp';
@@ -38,5 +39,8 @@ $string['Moderation_TYPE_3'] = 'Jeder Teilnehmer ist automatisch Moderator im Ko
 $string['Allow_Recording'] = 'Funktion zum Aufzeichnen verf&uuml;gbar';
 $string['Recording_TYPE_1'] = 'Die Funktion zum Aufzeichnen der Konferenz ist verf&uuml;gbar und kann gestartet werden.';
 $string['Recording_TYPE_2'] = 'Die Funktion zum Aufzeichnen der Konferenz ist nicht verf&uuml;gbar.';
+
+$string['openmeetingsWebappnameLabel'] = 'OpenMeetings webapp name';
+$string['openmeetingsWebappnameDescription'] = 'Erweiterte Einstellung: Wenn sie die OpenMeetings applikation umbenannt haben kšnnen Sie hier einen alternativen Namen eingeben.';
 
 ?>

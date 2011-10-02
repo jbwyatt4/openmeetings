@@ -13,7 +13,8 @@ $string['red5host'] = 'OpenMeetings Server Host or IP';
 $string['red5port'] = 'OpenMeetings Server Port';
 $string['openmeetingsAdminUser'] = 'OpenMeetings Admin User';
 $string['openmeetingsAdminUserPass'] = 'OpenMeetings Admin User Password';
-$string['openmeetingsModuleKey'] = 'OpenMeetings Module key (vary for multiple instances using same OpenMeetings Server)';
+$string['openmeetingsModuleKeyLabel'] = 'Module Key';
+$string['openmeetingsModuleKey'] = 'Advanced setting: OpenMeetings Module key (vary for multiple instances using same OpenMeetings Server)';
 
 $string['Room_Name'] = 'Room name';
 $string['Room_Type'] = 'Room type';
@@ -38,5 +39,8 @@ $string['Moderation_TYPE_3'] = 'Every participant is automatically moderator whe
 $string['Allow_Recording'] = 'Recording allowed';
 $string['Recording_TYPE_1'] = 'Recording functionality is available.';
 $string['Recording_TYPE_2'] = 'Recording functionality is not available.';
+
+$string['openmeetingsWebappnameLabel'] = 'OpenMeetings webapp name';
+$string['openmeetingsWebappnameDescription'] = 'Advanced setting: If you have renamed the OpenMeetings webapp you can enter your alternative name here.';
 
 ?>
