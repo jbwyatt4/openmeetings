@@ -7,8 +7,8 @@
 
   * http://moodle.openmeetings.de (_updated at 02.10.2011 to r4343_)
   _you don't need to register to get into this Course_ 
-<br/>
-Demo (no Audio in this Video)<br/>
+
+== Video Showing the integration (no Audio in this Video) ==
 <wiki:video url="http://www.youtube.com/watch?v=qA2e4rajvL0"/>
 
 == URLs ==
