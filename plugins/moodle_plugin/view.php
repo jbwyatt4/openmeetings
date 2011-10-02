@@ -170,10 +170,10 @@
 				}
 				
 				$iframe_d = "http://".$CFG->openmeetings_red5host . ":" . $CFG->openmeetings_red5port .
-							 	"/" . "openmeetings/?" .
+							 	"/".$CFG->openmeetings_webappname."/?" .
 								"secureHash=" . $returnVal . 
 								"&scopeRoomId=" . $scope_room_id .
-								"&swf=maindebug.swf8.swf" .
+								//"&swf=maindebug.swf8.swf" .
 								"&language=" . $openmeetings->language . 
 								"&picture=" . $USER->picture . 
 								"&user_id=". $USER->id . 
