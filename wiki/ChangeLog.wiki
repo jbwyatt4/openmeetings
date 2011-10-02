@@ -1,6 +1,10 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in Version 1.8.3 (released Sunday 02.10.2011) ==
+
+  * Fix Issue with recording flag and SOAP API
+
 == Changes in Version 1.8.2 (released Monday 24.09.2011) ==
 
   * Improves language handling: The default language is bound now to the user-profile, not to the server settings!
