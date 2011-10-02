@@ -15,6 +15,6 @@ New Issues have to be verified by someone of the team and assigned then to a per
 If you wish certain items to be priorities or need help to solve your installation or customization project then please consider hiring someone from the [http://code.google.com/p/openmeetings/wiki/Jobs list of developers].
 
 If your Issue has the status *review* then its up to you to give a short comment in the issue that you are satisfied with the result. 
-Normally each review status has a comment from the developer saying in which revision number (#r) the issue is solved. You may try one of the nightly builds (http://i4demo.com/openmeetings/builds/), each build has a #r number in its name.
+Normally each review status has a comment from the developer saying in which revision number (#r) the issue is solved. You may try one of the nightly builds (http://nightly.openmeetings.de/openmeetings/builds/), each build has a #r number in its name.
 
  
