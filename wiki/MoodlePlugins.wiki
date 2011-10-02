@@ -5,17 +5,17 @@
 
 == Demo ==
 
-  * http://www.openmeetings.de:8090/moodle/ (_updated at 07.02.2010 to r3087_)
+  * http://moodle.openmeetings.de (_updated at 02.10.2011 to r4343_)
   _you don't need to register to get into this Course_ 
 <br/>
 Demo (no Audio in this Video)<br/>
-<wiki:video url="http://www.youtube.com/watch?v=pPgv7zkPXAk"/>
+<wiki:video url="http://www.youtube.com/watch?v=qA2e4rajvL0"/>
 
 == URLs ==
 
   * Download see http://code.google.com/p/openmeetings/downloads/list
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Technical-Review Technical-Review]
-  * Demo: http://www.openmeetings.de:8090/moodle/course/view.php?id=2 (You can login as Guest)
+  * Demo: http://moodle.openmeetings.de (You can login as Guest)
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Source-Locations Source-Locations]
 
 == Help And Support ==
