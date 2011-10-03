@@ -82,9 +82,10 @@ function openmeetings_update_instance($openmeetings) {
 function openmeetings_delete_instance($id) {
 	global $DB;
 	
-    if (! $openmeetings = $DB->get_record("openmeetings", "id", "$id")) {
+    if (! $openmeetings = $DB->get_record("openmeetings", array("id"=>"$id"))) {
         return false;
     }
+    
 
     $result = true;
     
@@ -100,15 +101,15 @@ function openmeetings_delete_instance($id) {
 		echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
 		exit();
 	}
-    
-
+	
     # Delete any dependent records here #
 
-    if (! $DB->delete_records("openmeetings", "id", "$openmeetings->id")) {
+    if (! $DB->delete_records("openmeetings", array("id"=>"$openmeetings->id"))) {
         $result = false;
     }
 
     return $result;
+    
 }
 
 
