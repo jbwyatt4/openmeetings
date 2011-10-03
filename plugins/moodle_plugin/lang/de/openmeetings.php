@@ -22,7 +22,7 @@ $string['Room_Language'] = 'Raum-Sprache';
 $string['Max_User'] = 'Maximale Teilnehmerzahl';
 $string['Wait_for_teacher'] = 'Moderations-Modus';
 
-$string['recordings_label'] = 'Das Feld mit den aufgezeichneten Meetings wird nur verwendet wenn der Raumtyp "Aufzeichnung anzeigen" gew&auml;hlt wurde. Es wird dann die Aufzeichnung anstatt dem Konferenzraum angezeigt.';
+$string['recordings_label'] = 'Das Feld zur Auswahl aufgezeichneter Meetings wird nur verwendet, wenn der Raumtyp "Aufzeichnung anzeigen" gew&auml;hlt wurde. Es wird dann die Aufzeichnung anstatt des Konferenzraums angezeigt.';
 $string['recordings_show'] = 'Aufgezeichnete Meetings';
 $string['Comment'] = 'Kommentar';
 
@@ -33,7 +33,7 @@ $string['Recording'] = 'Aufzeichnung anzeigen (Aufzeichnung ausw&auml;hlen die s
 
 $string['Moderation_Description'] = '(Moodle Administratoren, Lehrer und Kurs Moderatoren sind automatisch Moderator)';
 $string['Moderation_TYPE_1'] = 'Teilnehmer m&uuml;ssen warten bis ein Moderator im Raum erscheint';
-$string['Moderation_TYPE_2'] = 'Teilnehmer k&ouml;nnen selbstst&auml;ndig anfangen (der erste besucher wird Moderator im Raum)';
+$string['Moderation_TYPE_2'] = 'Teilnehmer k&ouml;nnen selbstst&auml;ndig anfangen (der erste Besucher wird Moderator im Raum)';
 $string['Moderation_TYPE_3'] = 'Jeder Teilnehmer ist automatisch Moderator im Konferenz-Raum';
 
 $string['Allow_Recording'] = 'Funktion zum Aufzeichnen verf&uuml;gbar';
@@ -41,6 +41,6 @@ $string['Recording_TYPE_1'] = 'Die Funktion zum Aufzeichnen der Konferenz ist ve
 $string['Recording_TYPE_2'] = 'Die Funktion zum Aufzeichnen der Konferenz ist nicht verf&uuml;gbar.';
 
 $string['openmeetingsWebappnameLabel'] = 'OpenMeetings webapp name';
-$string['openmeetingsWebappnameDescription'] = 'Erweiterte Einstellung: Wenn sie die OpenMeetings applikation umbenannt haben k&ouml;nnen Sie hier einen alternativen Namen eingeben.';
+$string['openmeetingsWebappnameDescription'] = 'Erweiterte Einstellung: Wenn sie die OpenMeetings Applikation umbenannt haben k&ouml;nnen Sie hier einen alternativen Namen eingeben.';
 
 ?>
