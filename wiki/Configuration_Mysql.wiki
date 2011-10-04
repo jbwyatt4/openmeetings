@@ -1,0 +1,4 @@
+#summary MySQL configuration
+#labels Configuration
+
+There is a MySQL sample config: mysql_persistance.xml that ships with every release of !OpenMeetings.
