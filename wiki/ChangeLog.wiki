@@ -5,9 +5,9 @@
 
   * Secure "SOAP-Only" user access level 
   * 3 Moderation Types for Conference Rooms (Moodle admins, teachers and course creators are automatically a moderator):
-Moderation Type A) Participants need to wait till the teacher enters the room
-Moderation Type B) Participants can already start (first User in room becomes moderator)
-Moderation Type C) Every participant is automatically moderator when he/she enters the room
+    * Moderation Type A) Participants need to wait till the teacher enters the room
+    * Moderation Type B) Participants can already start (first User in room becomes moderator)
+    * Moderation Type C) Every participant is automatically moderator when he/she enters the room
   * New Flag "Allow Recording": You can set in the room configuration now a flag that controls if the recording button is available or not
   * Fix Icon in Moodle Course overview and edit page
   * Fix Issue when deleting a conference room from a course (all conference rooms where deleted from all courses)
