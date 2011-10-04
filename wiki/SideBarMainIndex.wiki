@@ -16,6 +16,10 @@
       * LanguageEditor
       * TimeZoneHandling
       * EditTemplates
+    * NAT Port Settings
+      * [PortSettings Port settings]
+    * Performance 
+      * [PerformanceTuning JVM performance tuning]
   * Integration
     * Modules and Plugins
       * [MoodlePlugins Moodle Module]
