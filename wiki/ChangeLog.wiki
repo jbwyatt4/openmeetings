@@ -1,6 +1,23 @@
 #summary Release Notes
 #labels Featured
 
+== Major changes in !OpenMeetings Moodle Mod 1.2 (released on Tuesday  04.10.2011) ==
+
+  * Secure "SOAP-Only" user access level 
+  * 3 Moderation Types for Conference Rooms (Moodle admins, teachers and course creators are automatically a moderator):
+Moderation Type A) Participants need to wait till the teacher enters the room
+Moderation Type B) Participants can already start (first User in room becomes moderator)
+Moderation Type C) Every participant is automatically moderator when he/she enters the room
+  * New Flag "Allow Recording": You can set in the room configuration now a flag that controls if the recording button is available or not
+  * Fix Icon in Moodle Course overview and edit page
+  * Fix Issue when deleting a conference room from a course (all conference rooms where deleted from all courses)
+  * Add/Fix Moodle Mod languages: German, French, Spanish (OpenMeetings itself has around 30 languages)
+  * Clear and restructure conference creation form for Moodle moderators
+
+You can try and test the Moodle integration at:
+
+http://moodle.openmeetings.de
+
 == Changes in Version 1.8.3 (released Sunday 02.10.2011) ==
 
   * Fix Issue with recording flag and SOAP API
