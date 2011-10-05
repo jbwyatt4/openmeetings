@@ -8,7 +8,7 @@
   * http://moodle.openmeetings.de (_updated at 02.10.2011 to r4343_)
   _you don't need to register to get into this Course_ 
 
-== Video Showing the integration (no Audio in this Video) ==
+== Video Showing the installation and integration (no Audio in this Video) or OpenMeetings Moodle Mod ==
 <wiki:video url="http://www.youtube.com/watch?v=qA2e4rajvL0"/>
 
 == URLs ==
@@ -25,8 +25,8 @@
 
 === Installation ===
 
-  * For Moodle Mod 0.5 you need at least OpenMeetings 0.8.4.
-  * The Moodle Plugin is build against Moodle 1.9.5
+  * For Moodle Mod 1.2 you need at least OpenMeetings 1.8.3
+  * The Moodle Plugin 0.9 is the last module that is build against Moodle 1.9.xx, later versions require Moodle 2.x.x. However Moodle Mod 0.9 is still compatible with latest !OpenMeetings Version.
   * Download see http://code.google.com/p/openmeetings/downloads/list
   * Unpack the content into $MOODLE_ROOT/mod/
   * goto http://$YOUR_MOODLE_HOST/$MOODLE_WWW_ROOT/admin => watch the Table populated
