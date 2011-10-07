@@ -2,7 +2,7 @@
 #labels Configuration
 
 
-== Database Setup ==
+== Before you start ==
 
 _Tested with IBM DB2 Express-C 9.7.x_
 
@@ -14,6 +14,14 @@ Create database for !OpenMeetings using a pagesize bigger or equal 8K, sample qu
 {{{
 CREATE DATABASE openmeet AUTOMATIC STORAGE YES ON 'C:' DBPATH ON 'C:' USING CODESET UTF-8 TERRITORY DE COLLATE USING System PAGESIZE 16 K
 }}}
+
+  * If you encounter issues, you can drop the db again and delete the file $red5/webapps/openmeetings/conf/install.xml and then run the web based installer again
+
+=== Steps todo ==
+  # Rename<br/>$red5/webapps/openmeetings/WEB-INF/classes/META-INF/db2_persistance.xml<br/>to<br/>$red5/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml
+  # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml 
+    MySQL-Database-Users: Alter following config values in `persistance.xml` $DB_HOST $USER_NAME $USER_PASS with your values
+  # Run red5-service and goto the web-based installer: http://localhost:5080/openmeetings/install
 
 == DB2 Sample Configuration ==
 
