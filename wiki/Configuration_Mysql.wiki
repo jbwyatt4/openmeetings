@@ -6,7 +6,7 @@ There is a MySQL sample config: mysql_persistance.xml that ships with every rele
 TODO:
   # Rename 
   $red5/webapps/openmeetings/WEB-INF/classes/META-INF/mysql_persistance.xml 
-  to 
+  to <br/>
   $red5/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml
 
   # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml 
