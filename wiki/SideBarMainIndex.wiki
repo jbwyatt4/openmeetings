@@ -8,6 +8,7 @@
     * [http://www.openmeetings.jp Japanese Wiki]
   * Configuration 
     * DB Sample Configurations
+      * [ApacheDerbyDB Apache Derby]
       * [Configuration_IBM_DB2 IBM DB2]
       * [Configuration_Mysql MySQL]
       * [Configuration_Postgres Postgres]
