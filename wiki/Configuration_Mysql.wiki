@@ -3,7 +3,7 @@
 
 There is a MySQL sample config: mysql_persistance.xml that ships with every release of !OpenMeetings.
 
-== Before you start ==
+=== Before you start ===
 
   * Make sure that you have set utf8 as default/server-character-set in your MySQL configuration (my.cnf) before you start the installation process of !OpenMeetings!
   * make sure MySQL is listening on TCP/Ip connections!
