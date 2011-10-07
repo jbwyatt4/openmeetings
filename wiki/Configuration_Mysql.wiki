@@ -4,10 +4,7 @@
 There is a MySQL sample config: mysql_persistance.xml that ships with every release of !OpenMeetings.
 
 TODO:
-  # Rename 
-$red5/webapps/openmeetings/WEB-INF/classes/META-INF/mysql_persistance.xml
-to
-$red5/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml
+  # Rename $red5/webapps/openmeetings/WEB-INF/classes/META-INF/mysql_persistance.xml to $red5/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml
 
   # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml 
     * MySQL-Database-Users: Alter following config values in `persistance.xml` $DB_HOST $USER_NAME $USER_PASS with your values
