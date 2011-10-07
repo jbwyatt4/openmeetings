@@ -15,7 +15,6 @@ To verify if MySQL connection is working: OpenMeetings will automatically create
 === Steps todo ==
   # Rename 
   $red5/webapps/openmeetings/WEB-INF/classes/META-INF/mysql_persistance.xml<br/>to<br/>$red5/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml
-
   # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml 
     MySQL-Database-Users: Alter following config values in `persistance.xml` $DB_HOST $USER_NAME $USER_PASS with your values
      {{{
