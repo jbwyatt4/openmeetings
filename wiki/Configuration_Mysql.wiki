@@ -3,4 +3,20 @@
 
 There is a MySQL sample config: mysql_persistance.xml that ships with every release of !OpenMeetings.
 
-Make sure that you have set utf8 as default/server-character-set in your MySQL configuration (my.cnf) before you start the installation process of !OpenMeetings!
+TODO:
+  # Rename 
+$red5/webapps/openmeetings/WEB-INF/classes/META-INF/mysql_persistance.xml
+to
+$red5/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml
+
+  # Prepare Database Settings - go to openmeetings_version_no_xx/webapps/openmeetings/WEB-INF/classes/META-INF/persistance.xml 
+    * MySQL-Database-Users: Alter following config values in `persistance.xml` $DB_HOST $USER_NAME $USER_PASS with your values
+     {{{
+<property name="openjpa.ConnectionProperties" value="DriverClassName=com.mysql.jdbc.Driver, Url=jdbc:mysql://$DB_HOST:3306/openmeetings?autoReconnect=true&amp;useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8&amp;connectionCollation=utf8_general_ci&amp;cachePrepStmts=true&amp;cacheCallableStatements=true&amp;cacheServerConfiguration=true&amp;useLocalSessionState=true&amp;elideSetAutoCommits=true&amp;alwaysSendSetIsolation=false&amp;enableQueryTimeouts=false&amp;prepStmtCacheSize=3000&amp;prepStmtCacheSqlLimit=1000, MaxActive=100, MaxWait=10000, TestOnBorrow=true,  poolPreparedStatements=true,  Username=$USER_NAME, Password=$USER_PASS"/>
+	
+     }}}
+
+  * Make sure that you have set utf8 as default/server-character-set in your MySQL configuration (my.cnf) before you start the installation process of !OpenMeetings!
+  * make sure MySQL is listening on TCP/Ip connections!
+
+To verify if MySQL connection is working: OpenMeetings will automatically create all tables in the database and all tables should have utf8 as encoding/collation!
