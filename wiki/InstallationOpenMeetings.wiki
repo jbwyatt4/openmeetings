@@ -9,10 +9,10 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
     By default !OpenMeetings uses the integrated Apache Derby database. For production environment you should consider using [Configuration_Mysql MySQL], [Configuration_Postgres Postgres] or for example [Configuration_IBM_DB2 IBM DB2]
   # ====Enabling Image Upload and Import to Whiteboard====
     * Installed *!ImageMagick* on the server, you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
-  # Enabling import of PDFs into the Whiteboard
+  # ====Enabling import of PDFs into the Whiteboard====
     * Installed *!GhostScript* on the server, you can get more information on http://pages.cs.wisc.edu/~ghost/ regarding installation. The instructions for installation can be found there, however on most linux systems you can get it via your favorite package managers (apt-get it).
     * Installed *SWFTools* on the server, you can get more information on http://www.swftools.org/ regarding installation. Some of the Linux distributions already have it in there package manager see http://packages.debian.org/unstable/utils/swftools), the recommended version of *SWFTools* is 0.9 as prior version have a bug that does lead to wrong object dimensions in the Whiteboard  (_server-side_)"
-  # Enabling import of .doc, .docx, .ppt, .pptx, ... all Office Documents
+  # ====Enabling import of .doc, .docx, .ppt, .pptx, ... all Office Documents====
     * *!OpenOffice-Service* started and listening on port 8100, see OpenOfficeConverter for details
   # Enabling Recording and import of .avi, .flv, .mov and .mp4 into whiteboard
     * Install *FFMpeg*. You should get FFMPEG in an up to date copy! For Windows you can download a Build for example from http://ffmpeg.arrozcru.org/builds/ Linux or OSx Users should be able to use one of the various Installation Instructions on the Web. You need to enable libmp3lame!
