@@ -5,8 +5,7 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
 
 [http://openmeetings.googlecode.com/files/openmeetings_1_8_4_r4387.zip http://openmeetings.googlecode.com/svn/docs/installation_instructions.png]
 
-  # Recommendation for production environment<br/>By default OpenMeetings uses the integrated Apache Derby database. For production environment you should consider using 
-[Configuration_Mysql MySQL], [Configuration_Postgres Postgres] or for example [Configuration_IBM_DB2 IBM DB2]"
+  # Recommendation for production environment<br/>By default OpenMeetings uses the integrated Apache Derby database. For production environment you should consider using [Configuration_Mysql MySQL], [Configuration_Postgres Postgres] or for example [Configuration_IBM_DB2 IBM DB2]
   # Enabling Image Upload and Import to Whiteboard
     * Installed *!ImageMagick* on the server, you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
   # Enabling import of PDFs into the Whiteboard
