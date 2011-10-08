@@ -7,7 +7,7 @@
   * Port 1935: RTMP (Flash Stream and Remoting/RPC)
   * Port 8088: RTMP over HTTP-Tunneling (rtmpT)
 
-Additionally red5 uses some ports internally. However those ports are not in use by !OpenMeetings by deault.
+Additionally red5 uses some ports internally. However those ports are not in use by !OpenMeetings by default.
 
 == Configure alternative ports ==
 
