@@ -7,7 +7,7 @@ There is a MySQL sample config: postgres_persistance.xml that ships with every r
   * Make sure that you have set utf8 as default/server-character-set
   * make sure Postgres is listening on TCP/IP connections!
 
-To verify if Postgres connection is working: OpenMeetings will automatically create all tables in the database.
+To verify if Postgres connection is working: !OpenMeetings will automatically create all tables in the database.
 
   * If you encounter issues, you can drop the db again and delete the file $red5/webapps/openmeetings/conf/install.xml and then run the web based installer again
 
