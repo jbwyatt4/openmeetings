@@ -34,6 +34,7 @@
       * [ELGG ELGG Plugin]
       * [IliasPlugin ILIAS Plugin]
       * [DrupalIntegration Drupal Integration]
+      * [ATutorIntegration ATutor Integration]
     * Integration API
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
