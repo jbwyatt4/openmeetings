@@ -2,7 +2,6 @@
   * [InstallationOpenMeetings Installation Index]
     * [InstallationOpenMeetings#VMWare VMWare]
     * [InstallationOpenMeetings#Hardware_Requirements Hardware Requirements]
-    * [InstallationOpenMeetings#Software_Requirements_/_Dependencies Software Requirements / Dependencies]
     * [InstallationOpenMeetings#Debian,_Links,_Changelog,_VoIP Debian, CentOS, Links, Changelog, VoIP-Integration]
     * [InstallationOpenMeetings#Hidden_and_experimental_features Hidden and experimental features]
     * [InstallationOpenMeetings#Integration,_Single_Sign_On_and_LDAP Integration, Single Sign On and LDAP]
