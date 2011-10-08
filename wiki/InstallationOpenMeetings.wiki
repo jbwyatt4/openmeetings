@@ -14,7 +14,7 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
     * Installed *SWFTools* on the server, you can get more information on http://www.swftools.org/ regarding installation. Some of the Linux distributions already have it in there package manager see http://packages.debian.org/unstable/utils/swftools), the recommended version of *SWFTools* is 0.9 as prior version have a bug that does lead to wrong object dimensions in the Whiteboard  (_server-side_)"
   # ====Enabling import of .doc, .docx, .ppt, .pptx, ... all Office Documents====
     * *!OpenOffice-Service* started and listening on port 8100, see OpenOfficeConverter for details
-  # Enabling Recording and import of .avi, .flv, .mov and .mp4 into whiteboard
+  # ====Enabling Recording and import of .avi, .flv, .mov and .mp4 into whiteboard====
     * Install *FFMpeg*. You should get FFMPEG in an up to date copy! For Windows you can download a Build for example from http://ffmpeg.arrozcru.org/builds/ Linux or OSx Users should be able to use one of the various Installation Instructions on the Web. You need to enable libmp3lame!
     * Install *SoX*. You should install SoX in a up to date copy! SoX 12.xx will NOT work! "
 
