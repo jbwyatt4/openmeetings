@@ -18,6 +18,9 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
     * Install *FFMpeg*. You should get FFMPEG in an up to date copy! For Windows you can download a Build for example from http://ffmpeg.arrozcru.org/builds/ Linux or OSx Users should be able to use one of the various Installation Instructions on the Web. You need to enable libmp3lame!
     * Install *SoX*. You should install SoX in a up to date copy! SoX 12.xx will NOT work!
 
+== Ports, NAT Settings, Customize ==
+
+  * see PortSettings
 
 == VMWare ==
 
@@ -63,17 +66,9 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
   * Regarding LDAP-Configuration see the Installer Script and sample Configuration 
   * [ActiveDirectoryLDAP  Configure LDAP Authentication with Active Directory]
 
-= using 3th Party Publishing Software, RTP-Streams or IP-Cams =
+== using 3th Party Publishing Software, RTP-Streams or IP-Cams ==
 
   * If you want to integrate 3th Party Software for publishing Live-Video you may have a look at [http://www.xuggle.com Xuggler]. There is no out of the Box solution but there are already people successfully publish their usual [http://www.red5wiki.com/wiki/SteamStream RTP-LiveStream] by using Xuggler
-
-== Ports, NAT Settings, Customize ==
-
-  * Default Ports: 1935 (RTMP), 8088 (RTMP-Over HTTP), 5080 (HTTP), for alternate Port settings have a look at red5/conf/red5.properties. Have a look also on the other ports red5 does require (but not in use by !OpenMeetings. Don't forget that you have also some port settings in the Client, see the red5/webapps/openmeetings/config.xml
-  * To run openmeetings behind a Apache Web-Server you can try with mod_proxy and for example multiple sub-domains.
-  * Custom Colors, Default Language, see red5/webapps/openmeetings/config.xml
-  * You may be able to run different red5 instances if you bind it to specific ports. 
-  * Single Sing On, Integration => Use the Remote Gateway with the SoapMethods
 
 == Tips and Tricks ==
 
