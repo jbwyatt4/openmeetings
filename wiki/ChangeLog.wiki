@@ -1,6 +1,11 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in !OpenMeetings 1.8.4 ==
+
+  * Zero conf installation, 3 steps to install, see InstallationOpenMeetings
+  * add configuration and documentation for IBM DB2, see [Configuration_IBM_DB2]
+
 == Major changes in !OpenMeetings Moodle Mod 1.2 (released on Tuesday  04.10.2011) ==
 
   * Secure "SOAP-Only" user access level 
