@@ -1,7 +1,7 @@
 #labels Featured
 #sidebar InstallationSidebar
 
-To update to future versions or migrate see UpdateOpenMeetings, for payed services see [http://www.openmeetings.de/hosting-and-service/ Service and Hosting]
+To update from past versions or migrate see UpdateOpenMeetings, for payed services see [http://www.openmeetings.de/hosting-and-service/ Service and Hosting]
 
 [http://openmeetings.googlecode.com/files/openmeetings_1_8_4_r4387.zip http://openmeetings.googlecode.com/svn/docs/installation_instructions.png]
 
