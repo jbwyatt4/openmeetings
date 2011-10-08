@@ -7,7 +7,7 @@ $string['modulenameplural'] = 'OpenMeetings';
 
 $string['whiteboardfieldset'] = 'Custom example fieldset';
 $string['whiteboardintro'] = 'OpenMeetings Intro';
-$string['whiteboardname'] = 'Nom de la réunion';
+$string['whiteboardname'] = 'Nom de la r&eacute;union';
 
 $string['red5host'] = 'OpenMeetings Server Host or IP';
 $string['red5port'] = 'OpenMeetings Server Port';
