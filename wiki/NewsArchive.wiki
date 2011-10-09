@@ -1,5 +1,30 @@
 #summary former news
 
+  * !OpenMeetings 1.8 released see ChangeLog, at 14.09.2011
+  * Demo Server updated to r4227, at 13.09.2011
+  * Demo Server updated to r4162, at 03.09.2011
+  * Docs about [RestMethods REST API], at 03.07.2011
+  * Demo Server updated to r3929, at 02.07.2011
+  * Join our [http://www.linkedin.com/groups?home=&gid=2229974&trk=anet_ug_hm group at LinkedIn], at 22.06.2011
+  * Moodle Mod 1.1 released, see ChangeLog, at 19.06.2011
+  * New website at [http://www.openmeetings.de] and new [http://openmeetings.googlecode.com/files/openmeetings_1_7_0_r3822.zip Version 1.7], at 16.06.2011
+  * New URL of demo Server: [http://demo.openmeetings.de http://demo.openmeetings.de], at 15.06.2011
+  * Demo Server updated to r3800, at 11.06.2011
+  * Successfully presentation of !OpenMeetings at Moodlemoot in Germany and in Finland at !OpenKvarken Seminar [http://www.openkvarken.fi] at 26/27.April
+  * [http://meetingslive.sourceforge.net/ Ubuntu Live DVD] see also MeetingsLive , at 09.04.2011
+  * !OpenMeetings 1.6.2 released see ChangeLog, at 07.03.2011
+  * !OpenMeetings 1.6.1 released see ChangeLog, at 27.02.2011
+  * Visit us at the !MoodleMoot Germany in Elmshorn in April 19./20. 2011, see the program at http://moodlemoot.moodle.de/
+  * New Moodle Mod for Moodle 2.0, at 09.01.2010, see also [http://moodle.org/mod/data/view.php?d=13&rid=1543&filter=1 Moodle Plugin Dir]
+  * New Release !OpenMeetings 1.6, ChangeLog, [http://www.youtube.com/user/sebastwagner#p/u/0/EriKb0zY0lM Demo video of new features], at 11.11.2010
+  * Demo Server updated to r3548, at 10.11.2010
+  * Demo Server updated to r3514, at 24.10.2010
+  * !OpenMeetings and StudIP Integration, see [StudIPIntegration], at 06.10.2010
+  * !OpenMeetings 1.5 released, ChangeLog, at 26.09.2010 
+  * Demo Server updated to r3377, at 24.09.2010
+  * Demo Server updated to r3373, at 22.09.2010
+  * The Demo Server will be down Wednesday, 22.09.2010, between 14:00 and 16:00 o'clock because of technical maintenance, at 15.09.2010
+  * [https://www.xing.com/net/priab0224x/opensourcewebconferencing Join our Group @ Xing], at 07.09.2010
   * Demo Server updated to r3334, at 28.08.2010
   * !OpenMeetings 1.4 RC1 released, [ChangeLog], at 25.08.2010
   * You can find some more Demo Videos at [http://www.youtube.com/user/sebastwagner#p/u Sebastian's Youtube Channel], at 19.08.2010
