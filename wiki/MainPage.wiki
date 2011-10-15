@@ -10,7 +10,7 @@ If you would like to request a new feature please use the [http://groups.google.
 
 == !OpenMeetings Demo Videos ==
 
-  * Watch some [http://www.youtube.com/user/sebastwagner Demo Videos on Youtube] 
+  * Watch some (btw: All those videos are created using recording functionality of !OpenMeetings! ) [http://www.youtube.com/user/sebastwagner Demo Videos on Youtube] 
 
 == Community == 
 
