@@ -39,7 +39,9 @@ function xmldb_openmeetings_upgrade($oldversion) {
     }
     
     if ($oldversion == 20111002) {
-    	$result = false;
+    	//$result = false;
+    	//nothing to upgrade here
+    	
     }
     
     return $result;
