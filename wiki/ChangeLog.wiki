@@ -1,6 +1,13 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in !OpenMeetings Moodle Mod 1.3 (released on Wednesday  19.10.2011) ==
+ 
+  * Fix UTF8 problem
+  * Add Russian language to Moodle Plugin RoomConfiguration Form
+
+Sebastian
+
 == Changes in !OpenMeetings 1.8.4 ==
 
   * Zero conf installation, 3 steps to install, see InstallationOpenMeetings
