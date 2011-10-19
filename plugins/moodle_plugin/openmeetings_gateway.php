@@ -170,7 +170,8 @@ class openmeetings_gateway {
 		//echo $client_userService."<br/>";
 	    
 	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/RoomService?wsdl", true);
-		
+	 	$client_roomService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_roomService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -224,7 +225,8 @@ class openmeetings_gateway {
 		//echo $client_userService."<br/>";
 	    
 	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/RoomService?wsdl", true);
-		
+	 	$client_roomService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_roomService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -279,7 +281,8 @@ class openmeetings_gateway {
 		//echo $client_userService."<br/>";
 	    
 	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/RoomService?wsdl", true);
-		
+	 	$client_roomService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_roomService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -338,7 +341,8 @@ class openmeetings_gateway {
 		//echo $client_userService."<br/>";
 	    
 	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/RoomService?wsdl", true);
-		
+	 	$client_roomService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_roomService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -375,6 +379,7 @@ class openmeetings_gateway {
 		global $USER, $CFG;
 		
 		$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/RoomService?wsdl", true);
+		$client_roomService->soap_defencoding = 'utf-8';
 		
 		$err = $client_roomService->getError();
 		if ($err) {
@@ -413,7 +418,8 @@ class openmeetings_gateway {
 			$profilePictureUrl, $email) {
 	    global $USER, $CFG;
 	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/UserService?wsdl", true);
-		
+	 	$client_userService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_userService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -458,7 +464,8 @@ class openmeetings_gateway {
 			$profilePictureUrl, $email, $userId, $systemType) {
 	    global $USER, $CFG;
 	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/UserService?wsdl", true);
-		
+	 	$client_userService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_userService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -514,7 +521,8 @@ class openmeetings_gateway {
 			$profilePictureUrl, $email, $userId, $systemType, $room_id, $becomeModerator) {
 	    global $USER, $CFG;
 	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/UserService?wsdl", true);
-		
+	 	$client_userService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_userService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -554,7 +562,8 @@ class openmeetings_gateway {
 			$profilePictureUrl, $email, $userId, $systemType, $room_id, $becomeModerator, $allowRecording) {
 		global $USER, $CFG;
 		$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/UserService?wsdl", true);
-	
+		$client_userService->soap_defencoding = 'utf-8';
+		
 		$err = $client_userService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -599,7 +608,8 @@ class openmeetings_gateway {
 						$userId, $systemType, $recording_id) {
 	    global $USER, $CFG;
 	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/".$CFG->openmeetings_webappname."/services/UserService?wsdl", true);
-		
+	 	$client_userService->soap_defencoding = 'utf-8';
+	 	
 		$err = $client_userService->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
