@@ -16,7 +16,7 @@ To update from past versions or migrate see UpdateOpenMeetings, for payed servic
     * *!OpenOffice-Service* started and listening on port 8100, see OpenOfficeConverter for details
   # ====Enabling Recording and import of .avi, .flv, .mov and .mp4 into whiteboard====
     * Install *FFMpeg*. You should get FFMPEG in an up to date copy! For Windows you can download a Build for example from http://ffmpeg.arrozcru.org/builds/ Linux or OSx Users should be able to use one of the various Installation Instructions on the Web. You need to enable libmp3lame!
-    * Install *SoX*. You should install SoX in a up to date copy! SoX 12.xx will NOT work!
+    * Install *SoX* http://sox.sourceforge.net/. You should install SoX in a up to date copy! SoX 12.xx will NOT work!
 
 == Ports, NAT Settings, Customize ==
 
