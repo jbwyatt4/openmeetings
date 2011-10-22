@@ -4,7 +4,7 @@
 == Changes in !OpenMeetings 1.8.5 ==
 
   * Update of installer and new option to exclude the default rooms in the installation (this can be handy if you import a backup directly after installation)
-  * Fix backup import tool issue with wrong organization_id after import (Users did get assign to a previous existing organization)
+  * Fix backup import tool issue with wrong organization_id after import (Users could get assigned to a previous existing organization if there are multiple)
 
 == Changes in !OpenMeetings Moodle Mod 1.3 (released on Wednesday  19.10.2011) ==
  
