@@ -29,7 +29,7 @@ $f("a.rtmp", "http://releases.flowplayer.org/swf/flowplayer-3.2.7.swf", {
                         /*
                                 netConnectionUrl defines where the streams are found
                         */
-                        netConnectionUrl: 'rtmp://www.openmeetings.de/openmeetings/hibernate'
+                        netConnectionUrl: 'rtmp://$RTMP_HOST:$RTMP_PORT/openmeetings/hibernate'
           }
         }
 });
