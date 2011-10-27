@@ -8,7 +8,7 @@ If you would like to use Flowplayer to access a recording made you can use the f
 </a>
 }}}
 
-and as JavaScript:
+and as !JavaScript:
 
 {{{
 // install both players with this one call
