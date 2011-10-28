@@ -13,10 +13,8 @@ There are 3 ways the client communicates with the server:
 == Configuring RTMPS for the Flash Client == 
 
   # 1. Create a new keystore and key, use the same password for both: 
-
-  {{{
-    
   (copied from http://trac.red5.org/wiki/Documentation/Tutorials/Red5DeveloperTips/SSLTLS):
+  {{{ 
 keytool -keysize 2048 -genkey -alias red5 -keyalg RSA -keystore red5/conf/keystore
 Enter keystore password:
 Re-enter new password:
