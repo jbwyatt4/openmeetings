@@ -1,0 +1,38 @@
+#summary Using OpenMeetings with RTMPS and HTTPS
+
+There are 3 ways the client communicates with the server:
+  * The flash-client uses RTMP protocol to transfer Audio/Video and to send and receive the user data (login et cetera) to the server and back
+  * The browser uses HTTP protocol to load the SWF and to upload and download the files (documents, pdfs, images) to the server and back.
+  * The screensharing client uses RTMP protocol to transfer screen data and remote control to the server and back
+
+== Prerequisites ==
+
+  # Install OpenMeetings according to the install instructions and check that it runs without problems
+  # Rename the existing keystore file red5/conf/keystore to keystore.bak
+  
+== Configuring RTMPS for the Flash Client == 
+
+  # 1. Create a new keystore and key, use the same password for both: 
+
+  {{{
+    
+  (copied from http://trac.red5.org/wiki/Documentation/Tutorials/Red5DeveloperTips/SSLTLS):
+keytool -keysize 2048 -genkey -alias red5 -keyalg RSA -keystore red5/conf/keystore
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+[Unknown]:  <your hostname, e.g demo.openmeetings.de>
+What is the name of your organizational unit?
+[Unknown]:  Dev
+What is the name of your organization?
+[Unknown]:  OpenMeetings
+What is the name of your City or Locality?
+[Unknown]:  Henderson
+What is the name of your State or Province?
+[Unknown]:  Nevada
+What is the two-letter country code for this unit?
+[Unknown]:  US
+
+  }}}
+
+== Configuring HTTPS for the Browser ==
