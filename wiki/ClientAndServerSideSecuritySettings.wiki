@@ -33,4 +33,4 @@ Sample file:
 http://code.google.com/p/openmeetings/source/browse/trunk/singlewebapp/red5-1.0.0-RC1/red5/webapps/root/crossdomain.xml
 
 If you accessing your application behind an Apache Webservre (using mod_proxy or mod_jk2) be careful to make the crossdomain.xml accessible.
-Flash will always search for this file in the www-root directory of every URL you connect to. You might use [https://addons.mozilla.org/de/firefox/addon/firebug/ !FireBug] for example too lookup this request.
+Flash will always search for this file in the www-root directory of every URL you connect to. You might use [https://addons.mozilla.org/de/firefox/addon/firebug/ FireBug] for example too lookup this request.
