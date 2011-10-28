@@ -82,3 +82,7 @@ If you want to use SSL for the web interface in addition to RTMPS, you need to m
   # Edit red5/webapps/openmeetings/config.xml and set {{{<protocol>https</protocol>}}}
   # Edit red5/conf/red5.properties and set “https.port=443”
   # Restart red5 and try to connect to https://your.server – you should be redirected to the OpenMeetings app and all access should be via HTTPS or RTMPS (close port 5080 to be sure).
+
+=== Credits === 
+
+Credits goto: Nexus and Holger Rabbach for their help and contribution and configuration documention!
