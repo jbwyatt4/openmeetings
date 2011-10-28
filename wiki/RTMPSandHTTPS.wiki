@@ -12,7 +12,7 @@ There are 3 ways the client communicates with the server:
   
 == Configuring RTMPS for the Flash Client == 
 
-  # 1. Create a new keystore and key, use the same password for both: 
+  # Create a new keystore and key, use the same password for both: 
   (copied from http://trac.red5.org/wiki/Documentation/Tutorials/Red5DeveloperTips/SSLTLS):
   {{{ 
 keytool -keysize 2048 -genkey -alias red5 -keyalg RSA -keystore red5/conf/keystore
@@ -30,7 +30,43 @@ What is the name of your State or Province?
 [Unknown]:  Nevada
 What is the two-letter country code for this unit?
 [Unknown]:  US
-
+Is CN=demo.openmeetings.de, OU=Dev, O=OpenMeetings, L=Henderson, ST=Nevada, C=US correct?
+[no]:  yes
+Enter key password for <red5>
   }}}
 
-== Configuring HTTPS for the Browser ==
+  # Generate a CSR: keytool -certreq -keyalg RSA -alias red5 -file red5.csr -keystore red5/conf/keystore
+  # Submit CSR to your CA of choice and receive a signed certificate
+  # Import your chosen CA’s root certificate into the keystore (may need to download it from their site – make sure to get the *root* CA and not the intermediate one): keytool -import -alias root -keystore red5/conf/keystore -trustcacerts -file root.crt (note: you may receive a warning that the certificate already exists in the system wide keystore – import anyway)
+  # Import the intermediate certificate(s) you normally receive with the certificate: keytool -import -alias intermed –keystore red5/conf/ keystore -trustcacerts -file intermediate.crt
+  # Import the certificate you received: keytool -import -alias red5 -keystore red5/conf/keystore -trustcacerts -file demo.openmeetings.de.crt
+
+== Set up RTMPS ==
+
+  # Add the following XML code to red5/conf/red5-core.xml before the final </beans> line:
+ 
+  {{{
+  <bean id="rtmpsMinaIoHandler"
+    class="org.red5.server.net.rtmps.RTMPSMinaIoHandler">
+    <property name="handler" ref="rtmpHandler" />
+    <property name="codecFactory" ref="rtmpCodecFactory" />
+    <property name="rtmpConnManager" ref="rtmpMinaConnManager" />
+<property name="keyStorePassword" value="${rtmps.keystorepass}" />
+    <property name="keystoreFile" value="conf/keystore" />
+</bean>
+
+<bean id="rtmpsTransport" class="org.red5.server.net.rtmp.RTMPMinaTransport" init-method="start" destroy-method="stop">
+    <property name="ioHandler" ref="rtmpsMinaIoHandler" />
+    <property name="connectors">
+        <list>
+            <bean class="java.net.InetSocketAddress">
+                <constructor-arg index="0" type="java.lang.String" value="${rtmps.host}" />
+                <constructor-arg index="1" type="int" value="${rtmps.port}" />
+            </bean>
+        </list>
+    </property>
+    <property name="receiveBufferSize" value="${rtmp.receive_buffer_size}" />
+    <property name="sendBufferSize" value="${rtmp.send_buffer_size}" />
+    <property name="tcpNoDelay" value="${rtmp.tcp_nodelay}" />
+</bean>
+   }}}
