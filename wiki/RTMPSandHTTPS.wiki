@@ -7,7 +7,8 @@ There are 3 ways the client communicates with the server:
 
 == Prerequisites ==
 
-  # Install OpenMeetings according to the install instructions and check that it runs without problems
+  # You need !OpenMeetings 1.x.x for this, !OpenMeetings 1.8.x does not have those options.
+  # Install !OpenMeetings according to the install instructions and check that it runs without problems
   # Rename the existing keystore file red5/conf/keystore to keystore.bak
   
 == Configuring RTMPS for the Flash Client == 
