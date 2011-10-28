@@ -22,6 +22,8 @@
       * [PortSettings Port settings]
     * Performance 
       * [PerformanceTuning JVM performance tuning]
+    * Security
+      * [ClientAndServerSideSecuritySettings Restricted Access]
   * Integration
     * Modules and Plugins
       * [MoodlePlugins Moodle Module]
