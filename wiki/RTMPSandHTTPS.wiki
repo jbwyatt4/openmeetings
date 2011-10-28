@@ -43,7 +43,7 @@ Enter key password for <red5>
 
 == Set up RTMPS ==
 
-  # Add the following XML code to red5/conf/red5-core.xml before the final </beans> line:
+  # Add the following XML code to red5/conf/red5-core.xml before the final `*`</beans>`*` line:
  
   {{{
   <bean id="rtmpsMinaIoHandler"
