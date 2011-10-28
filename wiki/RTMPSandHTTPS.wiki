@@ -70,3 +70,7 @@ Enter key password for <red5>
     <property name="tcpNoDelay" value="${rtmp.tcp_nodelay}" />
 </bean>
    }}}
+
+  # Edit red5/conf/red5.properties and set “rtmps.port=5443” and “rtmps.keystorepass=password” (password = password you set on your new keystore)
+  # Edit red5/webapps/openmeetings/config.xml and set “<rtmpsslport>5443</rtmpsslport>”, “<useSSL>yes</useSSL>” and “<proxyType>best</proxyType>”
+  # Restart red5 and try to connect – your connection should now be made via RTMPS (close port 1935 to be sure)
