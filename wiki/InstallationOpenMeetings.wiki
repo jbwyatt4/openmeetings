@@ -1,5 +1,4 @@
 #summary Installation OpenMeetings
-#labels Featured
 
 To update from past versions or migrate see UpdateOpenMeetings, for payed services see [http://www.openmeetings.de/hosting-and-service/ Service and Hosting]
 
