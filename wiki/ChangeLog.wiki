@@ -4,7 +4,7 @@
 == Changes in !OpenMeetings 1.8.6 ==
 
   * Refactor scheduler that sends emails to participants of calendar events
-  * add option poly2bitmap to workaround issue of SWFTools *only supports 65536 shapes at once* error message
+  * add option poly2bitmap to workaround issue of SWFTools "only supports 65536 shapes at once" error message
 
 == Changes in !OpenMeetings 1.8.5 ==
 
