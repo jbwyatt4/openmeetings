@@ -1,6 +1,11 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in !OpenMeetings 1.8.6 ==
+
+  * Refactor scheduler that sends emails to participants of calendar events
+  * add option poly2bitmap to workaround issue of SWFTools *only supports 65536 shapes at once* error message
+
 == Changes in !OpenMeetings 1.8.5 ==
 
   * Update of installer and new option to exclude the default rooms in the installation (this can be handy if you import a backup directly after installation)
