@@ -3,7 +3,7 @@
 
 To update from past versions or migrate see UpdateOpenMeetings, for payed services see [http://www.openmeetings.de/hosting-and-service/ Service and Hosting]
 
-[http://openmeetings.googlecode.com/files/openmeetings_1_8_5_r4452.zip http://openmeetings.googlecode.com/svn/docs/installation_instructions.png]
+[http://openmeetings.googlecode.com/files/openmeetings_1_8_6_r4488.zip http://openmeetings.googlecode.com/svn/docs/installation_instructions.png]
 
   # ====Recommendation for production environment====
     By default !OpenMeetings uses the integrated Apache Derby database. For production environment you should consider using [Configuration_Mysql MySQL], [Configuration_Postgres Postgres] or for example [Configuration_IBM_DB2 IBM DB2]
