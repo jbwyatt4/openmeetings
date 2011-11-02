@@ -1,0 +1,32 @@
+#summary Running Openmeetings [http://junit.org JUnit] tests
+
+= Introduction =
+
+Automatic tests are the significant part of development process. Below is the instruction of how to run Openmeetings [http://junit.org JUnit] tests.
+
+
+= Details =
+
+  # running tests using command line:
+    * all tests:
+{{{
+ant test
+}}}
+    * subset of tests by mask:
+{{{
+ant -Dtestcases=TestError* test
+}}}
+  # running tests from Eclipse IDE:
+    * Start Eclipse
+    * Load workspace with Openmeetings project
+    * Select "Debug Configurations..."
+http://openmeetings.googlecode.com/svn/docs/junit/DebugConfigurations.png
+    * Create New Junit configuration, give it a name and select test class
+http://openmeetings.googlecode.com/svn/docs/junit/NewConfiguration.png
+    * Select Arguments tab
+    * Add the following code to the VM section
+{{{
+-javaagent:${workspace_loc:ROOT}/lib/openjpa2/openjpa-2.1.0.jar
+}}}
+http://openmeetings.googlecode.com/svn/docs/junit/Arguments.png
+    * Select Debug
