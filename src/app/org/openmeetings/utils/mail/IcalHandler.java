@@ -19,7 +19,6 @@ import net.fortuna.ical4j.model.parameter.Role;
 import net.fortuna.ical4j.model.property.Attendee;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Description;
-import net.fortuna.ical4j.model.property.Method;
 import net.fortuna.ical4j.model.property.Organizer;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Sequence;
@@ -80,13 +79,14 @@ public class IcalHandler {
 		icsCalendar.getProperties().add(Version.VERSION_2_0);
 
 		// Switch Method Type
+		/*
 		if (methodType.equals(ICAL_METHOD_REFRESH))
 			icsCalendar.getProperties().add(Method.REFRESH);
 		else if (methodType.equals(ICAL_METHOD_CANCEL))
 			icsCalendar.getProperties().add(Method.CANCEL);
 		else
 			icsCalendar.getProperties().add(Method.REQUEST);
-
+		*/
 	}
 
 	/**
