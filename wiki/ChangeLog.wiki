@@ -1,6 +1,10 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in !OpenMeetings 1.8.7 (released on Sunday 06.11.2011) ==
+
+  * Fixes ENTER-Key/Event in Remote Desktop Control
+
 == Changes in !OpenMeetings 1.8.6 (released on Sunday 30.10.2011) ==
 
   * Refactor scheduler that sends emails to participants of calendar events
