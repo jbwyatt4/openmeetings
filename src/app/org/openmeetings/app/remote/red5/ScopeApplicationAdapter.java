@@ -1260,19 +1260,24 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			// String streamid = current.getClient().getId();
 
-			RoomClient currentClient = this.clientListManager
-					.getClientByPublicSID(publicSID);
+            List<RoomClient> clients = this.clientListManager
+					.getClientsByPublicSID(publicSID);
 
-			if (currentClient == null) {
+			if (clients == null) {
 				return -1L;
 			}
 
-			currentClient.setIsBroadcasting(value);
-			currentClient.setInterviewPodId(interviewPodId);
+			for (RoomClient rcl : clients) {
+                rcl.setIsBroadcasting(value);
+			    rcl.setInterviewPodId(interviewPodId);
 
-			// Put the mod-flag to true for this client
-			this.clientListManager.updateClientByStreamId(
-					currentClient.getStreamid(), currentClient);
+                // Put the mod-flag to true for this client
+			    this.clientListManager.updateClientByStreamId(
+					rcl.getStreamid(), rcl);
+            }
+
+            // workaround for as3 interview room
+            RoomClient currentClient = clients.get(0);
 
 			// Notify all clients of the same scope (room)
 			Collection<Set<IConnection>> conCollection = current.getScope()
