@@ -433,6 +433,8 @@
 	   This is a variable to make it backwards compatible to the old room layout
 	 -->
 	<attribute name="userNewVideoContainer" value="false" type="boolean"/>
+
+    <attribute name="showsVideoInSeparateComponent" value="true" type="boolean" />
 	
 	<handler name="oninit">
 		//set modus

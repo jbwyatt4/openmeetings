@@ -80,12 +80,30 @@ public class ClientListManager {
 		return null;
 	}
 
+    public synchronized List<RoomClient> getClientsByPublicSID(String publicSID) {
+		try {
+            log.debug(" :: getClientByPublicSID :: " + publicSID);
+			Query q = em.createQuery("select rc from RoomClient rc where rc.publicSID = :publicSID");
+			q.setParameter("publicSID", publicSID);
+            List<RoomClient> clients = q.getResultList();
+            if (!clients.isEmpty()) {
+                return clients;
+            }
+		} catch (Exception err) {
+			log.error("[getClientByPublicSID]", err);
+		}
+		return null;
+	}
+
 	public RoomClient getClientByPublicSID(String publicSID) {
 		try {
 			log.debug(" :: getClientByPublicSID :: " + publicSID);
 			Query q = em.createQuery("select rc from RoomClient rc where rc.publicSID = :publicSID");
 			q.setParameter("publicSID", publicSID);
-			return (RoomClient)q.getSingleResult();
+            List<RoomClient> clients = q.getResultList();
+            if (!clients.isEmpty()) {
+                return clients.get(0);
+            }
 		} catch (NoResultException nre) {
 			//expected
 		} catch (Exception err) {

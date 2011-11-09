@@ -6,8 +6,22 @@
 <!-- 
 ##########################################################
 these properties will be overwritten by config.xml -->  
-    
-<!--- URL/IP to use for the Server 192.168.178.28 
+
+<attribute name="vid_lc_name" value="" type="String"/>
+
+<attribute name="lc"/>
+
+<attribute name="rtmp_lc_name" value="" type="String"/>
+
+<attribute name="rtmp_lc"/>
+
+<attribute name="stream_lc_name" value="" type="String"/>
+
+<attribute name="stream_lc_callback_name" value="" type="String"/>
+
+<attribute name="stream_lc"/>
+
+<!--- URL/IP to use for the Server 192.168.178.28
 	inno02.fh-pforzheim.de macbook 192.168.2.103
 	192.168.2.102 bxlug.homelinux.org 213.219.160.72
 	    if this value is empty it will try to connect to the 

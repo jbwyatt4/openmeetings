@@ -10,6 +10,8 @@
 	
 	<!--- colors for each user -->
 	<attribute name="colorArray" value="null" />
+
+    <attribute name="showsVideoInSeparateComponent" value="false" type="boolean" />
 	
 	<handler name="oninit">
 		//set modus
@@ -34,6 +36,8 @@
             //The user is already in the correct Scope
             this.reconnectSuccess();
         }
+
+        _videoviewcontent.initVideoContainer(40, 281, 281);
 	</handler>
                   
     <method name="reconnectSuccess">
@@ -157,9 +161,15 @@
 		} else if (rcl.avsettings=="a"){
 			obj.setVideouserProfilePic(rcl);
             obj.setAttribute("visibility","visible");
+            if(rcl.publicSID != canvas.publicSID) {
+                this.startStream(rcl.publicSID, rcl.broadCastID, rcl.firstname, rcl.lastname, rcl.interviewPodId);
+            }
 		} else {
 			obj.deleteVideoConfProfilePic();
             obj.setAttribute("visibility","visible");
+            if(rcl.publicSID != canvas.publicSID) {
+                this.startStream(rcl.publicSID, rcl.broadCastID, rcl.firstname, rcl.lastname, rcl.interviewPodId);
+            }
 		}
 		obj.clientVars = rcl;
     	obj.updateAVSettingsSymbol(rcl);
@@ -174,31 +184,16 @@
     		//if ($debug) Debug.write("getVideoObjectByPublicSid SEARCH: ",publicSID);
     		
     		var videoContainer = canvas._drawarea._videoviewcontent;
-            
-    		//for (var i=0;i<this._videoviewcontent.subviews.length;i++){
-    		//	if ($debug) Debug.write("getVideoObjectByBroadCastId6 broadcastId: ",this._videoviewcontent.subviews[i].broadcastId);
-    		//	if ($debug) Debug.write("getVideoObjectByBroadCastId7 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
-    		//}
-    		
-            //if ($debug) Debug.write("getVideoObjectByBroadCastId2 VIEW: ",canvas.publicSID);
-            
+
     		for (var i=0;i<videoContainer.subviews.length;i++){
-    			//if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",videoContainer.subviews[i].broadcastId);
-    			//if ($debug) Debug.write("getVideoObjectByBroadCastId3: ",videoContainer.subviews[i]._videoPlay.publicSID);
-    			//if ($debug) Debug.write("getVideoObjectByBroadCastId4: ",videoContainer.subviews[i]._videoBroadCast.publicSID);
-    			//if ($debug) Debug.write("getVideoObjectByBroadCastId5 streamid,user_id: ",videoContainer.subviews[i].clientVars.streamid,videoContainer.subviews[i].clientVars.user_id);
+                //if ($debug) Debug.write("getVideoObjectByPublicSID: videoContainer.subviews[i]._videoPlay",videoContainer.subviews[i]._videoPlay);
     			if (videoContainer.subviews[i]._videoPlay.publicSID == publicSID){
-    				videoContainer.subviews[i]._videoPlay.setAttribute("visibility","visible");
     				return videoContainer.subviews[i]._videoPlay;
     			}
-    			if (videoContainer.subviews[i]._videoBroadCast.publicSID == publicSID){
-    				videoContainer.subviews[i]._videoPlay.setAttribute("visibility","visible");
-                    return videoContainer.subviews[i]._videoPlay;
-                }
     		}
-    		
+
     		if ($debug) Debug.warn(" - getVideoObjectByPublicSID - DID NOT FIND THE USER BY ",publicSID);
-            
+
             return null;
     		
     	]]>
@@ -387,20 +382,13 @@
 	-->
 	<method name="setSpeakingByPos" args="publicSID,bool">
 		<![CDATA[
+		    if ($debug) Debug.write("setSpeakingByPos :: ",publicSID,bool,obj);
+
 			var obj = this.getVideoObjectByPublicSID(publicSID);
-			//if ($debug) Debug.write("setSpeakingByPos :: ",publicSID,bool,obj);
 			if (bool){
-				if (canvas.publicSID != publicSID) {
-					obj._loudness.loudness.setAttribute('opacity',1);
-				} else if (obj.parent._videoBroadCast.visibility == "visible") {
-					obj.parent._videoBroadCast._loudness.loudness.setAttribute('opacity',1);
-				}
+				obj._loudness.loudness.setAttribute('opacity',1);
 			} else {
-				if (canvas.publicSID != publicSID) {
-					obj._loudness.loudness.setAttribute('opacity',0.2);
-				} else if (obj.parent._videoBroadCast.visibility == "visible") {
-					obj.parent._videoBroadCast._loudness.loudness.setAttribute('opacity',0.2);
-				}
+				obj._loudness.loudness.setAttribute('opacity',0.2);
 			}
 		]]>
 	</method>	
@@ -440,7 +428,7 @@
 			//if ($debug) Debug.write("disconnectclient obj: ",obj);
 			
 			if (obj != null){
-				if ($debug) Debug.write("disconnectclient objList: ",objList);
+				if ($debug) Debug.write("disconnectclient obj: ",obj);
 				obj.resetValues();
 				//We will only hide this here cause we will need it again!
 				obj.setAttribute("visibility","hidden");
@@ -463,7 +451,7 @@
     
     <interviewListInner name="_participents" />
     
-	<commonVideoViewContent name="_videoviewcontent"/>
+	<commonVideoComponentAdapter name="_videoviewcontent"/>
 	
 </class>
 

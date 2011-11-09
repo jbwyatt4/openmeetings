@@ -42,6 +42,30 @@
     <view width="$once{ parent.width-2 }" height="${ parent.height-2 }" 
         x="1" y="1" bgcolor="white" />
 
+    <handler name="oninit">
+        <![CDATA[
+            var items = this._table.innerList.subnodes;
+            canvas.stream_lc.lc_setSoundMuted = function(publicSID,isMuted) {
+                if ($debug) Debug.write("lc_setSoundMuted: publicSID, isMuted",publicSID, isMuted);
+
+                for (var i=1; i<items.length; i++) {
+                    var listItem = items[i];
+                    if (listItem.refObj.publicSID == publicSID) {
+                        var muteView = listItem._miniIcons._mute;
+                        if (isMuted) {
+                            muteView.setAttribute('frame', 2);
+                            muteView._tip.setAttribute('labelid', 1075);
+                        } else {
+                            muteView.setAttribute('frame', 1);
+                            muteView._tip.setAttribute('labelid', 1074);
+                        }
+                        break;
+                    }
+                }
+            };
+        ]]>
+    </handler>
+
     <method name="addItem" args="object">
         <![CDATA[
             if ($debug) Debug.write("participentList addItem: ",object,object.publicSID);
@@ -114,35 +138,21 @@
         this._table.destroy();
         new lz.participentsTable(this,{name:'_table'});
     </method>
-    
-    <!--- get a Objects List Item
-        @param string publicSID publicSID
-     -->
-    <method name="getVideoObjectByPublicSID" args="publicSID">
+
+    <method name="disconnectclient" args="publicSID">
         <![CDATA[
-            //if ($debug) Debug.write("getVideoObjectByPublicSid SEARCH: ",publicSID);
-            
-            //for (var i=0;i<this._videoviewcontent.subviews.length;i++){
-            //  if ($debug) Debug.write("getVideoObjectByBroadCastId6 broadcastId: ",this._videoviewcontent.subviews[i].broadcastId);
-            //  if ($debug) Debug.write("getVideoObjectByBroadCastId7 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
-            //}
-            
             for (var i=0;i<this._table.innerList.subviews.length;i++){
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",this._videoviewcontent.subviews[i].broadcastId);
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId3 broadcastId SEARCH: ",broadcastId);
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId4 obj: ",this._videoviewcontent.subviews[i]);
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId5 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
                 if (this._table.innerList.subviews[i].refObj.publicSID==publicSID){
-                    return this._table.innerList.subviews[i];
+                    var item = this._table.innerList.subviews[i];
+                    item.resetValues();
+                    item.destroy();
+                    break;
                 }
             }
-            
-            return null;
-            
         ]]>
     </method>
     
-    <participentsTable name="_table" y="20" /> 
+    <participentsTable name="_table" y="20" />
 
     <view name="_miniIcons" x="132" y="0" height="18">
         

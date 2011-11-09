@@ -54,14 +54,25 @@
 <class name="interviewVideoBox" extends="view" width="322" height="281" bgcolor="0x000000">
 
     <attribute name="interviewPodId" value="0" type="number" />
+
+    <!--<handler name="onx" args="x">-->
+        <!--if ($debug) Debug.write("# x", this.getAttributeRelative('x', canvas));-->
+        <!--canvas.lc.send(canvas.vid_lc_name, "videoOnMove", this.interviewPodId, this.getAttributeRelative('x', canvas), this.getAttributeRelative('y', canvas));-->
+    <!--</handler>-->
     
     <method name="startInterView">
     	if ($debug) Debug.write("startInterView :: ");
-    	new lz.editRecordStream(this,{isInterview:true,
-                	   myvideocontainer:this._videoBroadCast,
-                	   doDefaultAnimation:false,
-                	   align:'center',valign:'middle'
-                	});
+        //canvas._videocontainer._videoviewcontent.createVideoObject(canvas.publicSID, true, this.interviewPodId);
+        var t = this;
+        canvas.stream_lc.onStartBroadcast = function(broadCastID, settings) {
+            //TODO: settings
+            if ($debug) Debug.write("onStartBroadcast :: ", broadCastID, settings);
+            t._videoPlay.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
+            t._videoPlay._chatvideoinner._videostream.playStream(broadCastID, -1);
+            t._videoPlay.setAttribute("visibility","visible");
+            t._videoPlay.setAttribute("publicSID", canvas.publicSID);
+        };
+    	new lz.editRecordStream(this,{isInterview:true});
     </method>
 
     <method name="sendConfirmation" args="publicSID">
@@ -115,10 +126,6 @@
     	
     <videoObjectPlayBroadcast name="_videoPlay" isInterview="true" visibility="hidden" 
     						  width="$once{ parent.width }" height="$once{ parent.height }" />
-    
-    
-    <videoObjectBroadcast name="_videoBroadCast" isInterview="true" visibility="hidden" 
-                              width="$once{ parent.width }" height="$once{ parent.height }" />
 	
 	
 </class>

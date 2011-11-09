@@ -108,17 +108,9 @@
     <method name="getVideoObjectByPublicSID" args="publicSID">
         <![CDATA[
             //if ($debug) Debug.write("getVideoObjectByPublicSid SEARCH: ",publicSID);
-            
-            //for (var i=0;i<this._videoviewcontent.subviews.length;i++){
-            //  if ($debug) Debug.write("getVideoObjectByBroadCastId6 broadcastId: ",this._videoviewcontent.subviews[i].broadcastId);
-            //  if ($debug) Debug.write("getVideoObjectByBroadCastId7 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
-            //}
-            
+
             for (var i=0;i<this._table.innerList.subviews.length;i++){
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",this._videoviewcontent.subviews[i].broadcastId);
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId3 broadcastId SEARCH: ",broadcastId);
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId4 obj: ",this._videoviewcontent.subviews[i]);
-                //if ($debug) Debug.write("getVideoObjectByBroadCastId5 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
+                //if ($debug) Debug.write("getVideoObjectByPublicSID : this._table.innerList.subviews[i]",this._table.innerList.subviews[i]);
                 if (this._table.innerList.subviews[i].refObj.publicSID==publicSID){
                     return this._table.innerList.subviews[i];
                 }

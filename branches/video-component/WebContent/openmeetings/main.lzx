@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" title="OpenMeetings">
-    
+    <debug fontsize="11" oninit="Debug.showInternalProperties = true" />
 <!-- 
     If you use maindebug.lzx, main.lzx with debug=true is loaded. 
     h.kuze 2008.3.26
@@ -40,6 +40,7 @@
     canvas.setDefaultContextMenu(cmenu);
     cmenu.hideBuiltInItems();
     if($debug) Debug.write("main.lzx/oninit:",this);
+    canvas.lc = new LocalConnection();
 </handler>
 
 
@@ -59,6 +60,7 @@
         <view name="inner" />
         <method name="clearAll">
             <![CDATA[
+                canvas.lc.send(canvas.vid_lc_name, "clearAll");
                 if($debug) Debug.write("main.lzx/main_content._content.inner.clearAll(): ",this.inner,this.inner.subviews.length);
                 var baseContent = this.inner.subviews[0].close();
                 for (var eg in this.inner.subviews) {

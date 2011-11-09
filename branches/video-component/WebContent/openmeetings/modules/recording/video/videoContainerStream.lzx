@@ -5,7 +5,7 @@
 		This class is using for video and audio panel of conference recording viewer.
 	 -->
 	 
-	<class name="videoContainerStream" extends="view" width="288" height="$once{ parent.height-22 }" >	
+	<class name="videoContainerStream" extends="view" width="288" height="$once{ parent.height-22 }" >
 		<handler name="oninit">
 			canvas._videocontainer=this;
 		</handler>

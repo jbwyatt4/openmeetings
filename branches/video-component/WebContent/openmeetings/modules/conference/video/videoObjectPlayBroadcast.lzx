@@ -24,6 +24,16 @@
      ]]>
    </handler>
 
+    <handler name="onpublicSID" args="value">
+        if (canvas.publicSID == value) {
+            this._toolbar._mute.setAttribute('visibility','hidden');
+            this.setSoundVolume(0);
+        } else {
+            this._toolbar._mute.setAttribute('visibility','visible');
+            this.setSoundVolume(100);
+        }
+    </handler>
+
 	<view name="_chatvideoinner" x="1" y="20"  
           width="${parent.width-2}" height="${parent.height-21}" >
         
@@ -43,6 +53,12 @@
               width="${parent.width}" height="${parent.height}" />
         
 	</view>
+
+    <method name="setSoundVolume" args="volume">
+        if (this._chatvideoinner._videostream != null){
+            this._chatvideoinner._videostream.setVolume(volume);
+        }
+    </method>
 
 </class>
 

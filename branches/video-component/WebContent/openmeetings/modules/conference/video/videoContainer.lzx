@@ -14,6 +14,8 @@
 	
 	<!--- colors for each user -->
 	<attribute name="colorArray" value="null" />
+
+    <attribute name="showsVideoInSeparateComponent" value="true" type="boolean" />
 	
 	<handler name="oninit">
 		//set modus
@@ -175,10 +177,13 @@
 				this.broadCastViewRef = obj;
 			} else {
 				//Get a Free VideoView Slot
-				var freePos = this._videoviewcontent.getVideoObjectFreePos(36, 100, 100);
+				var neededWidth = 100;
+				var neededHeight = 100;
+				var neededOffsetLength = 36;
+				var freePos = this._videoviewcontent.getVideoObjectFreePos(neededOffsetLength, neededWidth, neededHeight);
 
 				this.broadCastViewRef = new lz.videoObjectBroadcast(this._videoviewcontent,{
-	                    publicSID:publicSID,
+	                    publicSID:publicSID, width:neededWidth,height:neededHeight,
 	                    x:freePos[0],y:freePos[1]
                     });
 				canvas.currentusercolor = this.colorArray[this.subviews.length];
@@ -202,10 +207,13 @@
 				return obj;
 			}
             //Get a Free VideoView Slot
-            var freePos = this._videoviewcontent.getVideoObjectFreePos(36, 100, 100);
+            var neededWidth = 100;
+            var neededHeight = 100;
+            var neededOffsetLength = 36;
+            var freePos = this._videoviewcontent.getVideoObjectFreePos(neededOffsetLength, neededWidth, neededHeight);
 
 			return new lz.videoObjectPlayBroadcast(this._videoviewcontent,{
-                    publicSID:publicSID,
+                    publicSID:publicSID, width:neededWidth,height:neededHeight,
                     x:freePos[0],y:freePos[1]
                 });
 		]]>
