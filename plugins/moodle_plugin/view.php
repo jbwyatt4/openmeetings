@@ -165,7 +165,7 @@
 
 				$scope_room_id = $openmeetings->room_id;
 
-				if ($scope_room_id == 0) {
+				if ($scope_room_id == 0 || $openmeetings->type == 0) {
 					$scope_room_id = "hibernate";
 				}
 				
