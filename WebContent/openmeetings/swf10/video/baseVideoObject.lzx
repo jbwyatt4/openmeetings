@@ -89,9 +89,9 @@
             
             var prop1 = [this, "width"];
             var prop2 = [this, "height"];
-            this.applyConstraintMethod("setItemContraints", prop1);
-            this.applyConstraintMethod("setItemContraints", prop2);
-            this.setShadow();   
+            this.applyConstraintMethod("setItemContraintsWidth", prop1);
+            this.applyConstraintMethod("setItemContraintsHeight", prop2);
+            this.setShadow();
             
             if (this.publicSID == canvas.publicSID) {
             	this._toolbar._resync._tip.setAttribute("labelid",610);
@@ -164,25 +164,33 @@
     </method>   
         
     <!-- respect ratio and keep minimum width / height -->
-    <method name="setItemContraints" args="w">
+    <method name="setItemContraintsWidth" args="unused">
         <![CDATA[
             if (!this.respectRatio) {
                 return;
             }
-
-            //if ($debug) Debug.write("setItemContraints ",w);
-
-            //if ($debug) Debug.write("setItemContraints",w)
-            var w=this.height * this.initW/this.initH;
-            w=((w < this.initW ) ? initW : w);
             var h=this.width * this.initH/this.initW;
             h=((h < this.initH ) ? initH : h);
-    
-            this.setAttribute("width",w);
+
+            if ($debug) Debug.write("setItemContraintsWidth",this.respectRatio,'orig',this.height,this.width,'new h',h);
+
             this.setAttribute("height",h);
         ]]>
     </method>
-        
+
+    <method name="setItemContraintsHeight" args="unused">
+        <![CDATA[
+            if (!this.respectRatio) {
+                return;
+            }
+            var w=this.height * this.initW/this.initH;
+            w=((w < this.initW ) ? initW : w);
+
+            if ($debug) Debug.write("setItemContraintsHeight",this.respectRatio,'orig',this.height,this.width,'new w',w);
+
+            this.setAttribute("width",w);
+        ]]>
+    </method>
 	
 	<method name="updateAVSettingsSymbol" args="rcl">
 		//FIXME: Set a Symbol wether this Client is Audio(only)/Video(only), both or Profile Picture 
