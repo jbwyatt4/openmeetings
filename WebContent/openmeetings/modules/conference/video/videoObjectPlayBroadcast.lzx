@@ -26,10 +26,10 @@
 
     <handler name="onpublicSID" args="value">
         if (canvas.publicSID == value) {
-            this._toolbar._mute.setAttribute('visibility','hidden');
+            //this._toolbar._mute.setAttribute('visibility','hidden');
             this.setSoundVolume(0);
         } else {
-            this._toolbar._mute.setAttribute('visibility','visible');
+            //this._toolbar._mute.setAttribute('visibility','visible');
             this.setSoundVolume(100);
         }
     </handler>

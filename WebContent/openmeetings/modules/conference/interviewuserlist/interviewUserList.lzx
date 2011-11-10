@@ -306,10 +306,10 @@
 
     <method name="updateMuteStatusVideoView" args="roomClient">
         <![CDATA[
+            this._videoviewcontent.updateMuteStatusVideoView(roomClient);
             var videoContainer = canvas._drawarea._videoviewcontent;
             for (var i=0;i<videoContainer.subviews.length;i++){
             	videoContainer.subviews[i]._videoPlay.muteMicrophone(roomClient);
-            	videoContainer.subviews[i]._videoBroadCast.muteMicrophone(roomClient);
             }
         ]]>
     </method>
