@@ -548,7 +548,7 @@
                                                refObj:this,showCheckBox:false});
                 return;
         	} else {
-        	    canvas.stream_lc.send(canvas.stream_lc_name, 'lc_switchMicMuted', this.publicSID, false);
+        	    canvas.videoComp_lc.send(canvas.videoComp_lc_name, 'lc_switchMicMuted', this.publicSID, false);
         	}
         } else {
         	//disable this action for now
@@ -575,7 +575,7 @@
                                                    refObj:this,showCheckBox:false});
                     return;
                 } else {
-                    canvas.stream_lc.send(canvas.stream_lc_name, 'lc_switchMicMuted', this.publicSID, false);
+                    canvas.videoComp_lc.send(canvas.videoComp_lc_name, 'lc_switchMicMuted', this.publicSID, false);
                 }
         	} else {
             	if (mute) {
@@ -596,7 +596,7 @@
     <method name="confirmGloballyOff" args="bool,t" >
     	if ($debug) Debug.write("confirmGloballyOff :: ",bool);
     	if (bool) {
-            canvas.stream_lc.send(canvas.stream_lc_name, 'lc_switchMicMuted', this.publicSID, true);
+            canvas.videoComp_lc.send(canvas.videoComp_lc_name, 'lc_switchMicMuted', this.publicSID, true);
     	}
     </method>
 

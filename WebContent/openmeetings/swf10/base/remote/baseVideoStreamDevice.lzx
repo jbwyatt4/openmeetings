@@ -138,7 +138,7 @@
   		this.objMessage[0] = 'audioActivity';
   		this.objMessage[1] = this.isgreater;
   		this.objMessage[2] = parent.parent.publicSID;
-	  	canvas.stream_lc.send(canvas.stream_lc_name, "sendNotification", this.objMessage);
+	  	canvas.videoComp_lc.send(canvas.videoComp_lc_name, "sendNotification", this.objMessage);
 	</method>
 
 </class>

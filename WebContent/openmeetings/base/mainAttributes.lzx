@@ -15,11 +15,11 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="rtmp_lc"/>
 
-<attribute name="stream_lc_name" value="" type="String"/>
+<attribute name="videoComp_lc_name" value="" type="String"/>
 
-<attribute name="stream_lc_callback_name" value="" type="String"/>
+<attribute name="videoComp_lc_callback_name" value="" type="String"/>
 
-<attribute name="stream_lc"/>
+<attribute name="videoComp_lc"/>
 
 <!--- URL/IP to use for the Server 192.168.178.28
 	inno02.fh-pforzheim.de macbook 192.168.2.103

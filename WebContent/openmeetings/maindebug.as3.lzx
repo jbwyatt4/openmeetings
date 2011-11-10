@@ -24,11 +24,11 @@
 
     <attribute name="rtmp_lc"/>
 
-    <attribute name="stream_lc_name" />
+    <attribute name="videoComp_lc_name" />
 
-    <attribute name="stream_lc_callback_name" />
+    <attribute name="videoComp_lc_callback_name" />
 
-    <attribute name="stream_lc" />
+    <attribute name="videoComp_lc" />
 
     <include href="swf10/base/" />
 
@@ -56,12 +56,12 @@
         this.setAttribute('lc_SID', this.getLCSID());
         this.setAttribute('vid_lc_name', lc_SID + '__videoLC');
         this.setAttribute('rtmp_lc_name', lc_SID + '__rtmpLC');
-        this.setAttribute('stream_lc_name', lc_SID + '__streamLC');
-        this.setAttribute('stream_lc_callback_name', lc_SID + '__streamLC_cback');
+        this.setAttribute('videoComp_lc_name', lc_SID + '__streamLC');
+        this.setAttribute('videoComp_lc_callback_name', lc_SID + '__streamLC_cback');
 
-        var stream_lc_cback:LocalConnection = new LocalConnection();
-        stream_lc_cback.connect(this.stream_lc_callback_name);
-        this.setAttribute('stream_lc',stream_lc_cback);
+        var videoComp_lc_cback:LocalConnection = new LocalConnection();
+        videoComp_lc_cback.connect(this.videoComp_lc_callback_name);
+        this.setAttribute('videoComp_lc',videoComp_lc_cback);
 
         var request:URLRequest = new URLRequest("maindebug.swf8.swf?lzproxied=solo&lcSID="+canvas.lc_SID);
         var loader:Loader = new Loader();

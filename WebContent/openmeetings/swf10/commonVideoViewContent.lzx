@@ -40,7 +40,8 @@
             client.removeVideoByUser = this.removeVideoByUser;
             client.muteSound = this.muteSound;
             client.videoOnMove = this.videoOnMove;
-            client.updateMuteStatusVideoView = this.updateMuteStatusVideoView
+            client.updateMuteStatusVideoView = this.updateMuteStatusVideoView;
+            client.ismoderatorChanged = this.ismoderatorChanged;
 
             var lc:LocalConnection = new LocalConnection();
             lc.connect(canvas.vid_lc_name);
@@ -272,6 +273,10 @@
                 this.subviews[i].muteMicrophone(roomClient);
     		}
         ]]>
+    </method>
+
+    <method name="ismoderatorChanged" args="m">
+        canvas.setAttribute("ismoderator", m);
     </method>
 
 

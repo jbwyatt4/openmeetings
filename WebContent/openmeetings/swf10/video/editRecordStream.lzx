@@ -46,7 +46,7 @@
 			if ($debug) Debug.write("this.myvideocontainer ",this.myvideocontainer);
 			if ($debug) Debug.write("editrecordstream ###################### ");
 
-			canvas.stream_lc.client = {clb_getBroadCastId: this.clb_getBroadCastId, clb_setUserAVSettings: this.clb_setUserAVSettings};
+			canvas.videoComp_lc.client = {clb_getBroadCastId: this.clb_getBroadCastId, clb_setUserAVSettings: this.clb_setUserAVSettings};
 
 	        var t:SharedObject = SharedObject.getLocal('userdata');
 	        var g = t.data;
@@ -68,7 +68,7 @@
                     this.remoteMessage[0] = 'avsettings';
                     this.remoteMessage[2] = this.chosenSetting;
                     //this.getBroadCastId.doCall();
-                    canvas.stream_lc.send(canvas.stream_lc_name, 'lc_getBroadCastId', this.chosenSetting, this.remoteMessage);
+                    canvas.videoComp_lc.send(canvas.videoComp_lc_name, 'lc_getBroadCastId', this.chosenSetting, this.remoteMessage);
                 } else {
                     if (this.doDefaultAnimation) {
                         this._chooseDeviceAnimation.doStart();
@@ -170,7 +170,7 @@
                 case "vs":
                     videoview.broadcast(this.currentClient.broadCastID,_camera,null);
                     if(isInterview) {
-                        canvas.stream_lc.send(canvas.stream_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
+                        canvas.videoComp_lc.send(canvas.videoComp_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
                     } else {
                         this.myvideocontainer.setAttribute("visibility","visible");
                     }
@@ -178,7 +178,7 @@
 	    		case "av":
 	    			videoview.broadcast(this.currentClient.broadCastID,_camera,_micro);
                     if(isInterview) {
-                        canvas.stream_lc.send(canvas.stream_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
+                        canvas.videoComp_lc.send(canvas.videoComp_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
                     } else {
                         this.myvideocontainer.setAttribute("visibility","visible");
                     }
@@ -187,7 +187,7 @@
 	    		case "a":
 	    			videoview.broadcast(this.currentClient.broadCastID,null,_micro);
                     if(isInterview) {
-                        canvas.stream_lc.send(canvas.stream_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
+                        canvas.videoComp_lc.send(canvas.videoComp_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
                     } else {
                         if (this.myvideocontainer.hidebyAudioOnly) {
                             this.myvideocontainer.setAttribute("visibility","hidden");
@@ -202,7 +202,7 @@
 	    		case "v":
 	    			videoview.broadcast(this.currentClient.broadCastID,_camera,null);
 	    			if(isInterview) {
-                        canvas.stream_lc.send(canvas.stream_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
+                        canvas.videoComp_lc.send(canvas.videoComp_lc_name, "onStartBroadcast", this.currentClient.broadCastID, settings);
                     } else {
                         this.myvideocontainer.setAttribute("visibility","visible");
                     }
@@ -411,7 +411,7 @@
             this.parent.remoteMessage[1] = "0";
             this.parent.remoteMessage[2] = this.parent.chosenSetting;
             //this.parent.getBroadCastId.doCall();
-            canvas.stream_lc.send(canvas.stream_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
+            canvas.videoComp_lc.send(canvas.videoComp_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
         </handler>
     </simpleLabelButton>
 
@@ -434,8 +434,8 @@
 			this.parent.remoteMessage[1] = "0";
 			this.parent.remoteMessage[2] = this.parent.chosenSetting;
             //this.parent.getBroadCastId.doCall();
-            if ($debug) Debug.write(canvas.stream_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
-            canvas.stream_lc.send(canvas.stream_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
+            if ($debug) Debug.write(canvas.videoComp_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
+            canvas.videoComp_lc.send(canvas.videoComp_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
         </handler>
     </simpleLabelButton>
 

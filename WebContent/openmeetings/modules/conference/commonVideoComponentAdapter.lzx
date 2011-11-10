@@ -4,10 +4,14 @@
 <class name="commonVideoComponentAdapter" extends="view">
 
     <handler name="oninit">
-        canvas.stream_lc.lc_switchMicMuted = function(publicSID, tMute) {
+        canvas.videoComp_lc.lc_switchMicMuted = function(publicSID, tMute) {
             if ($debug) Debug.write("lc_switchMicMuted", publicSID, tMute);
             canvas.thishib.switchMicMuted.setMute(publicSID, tMute);
         };
+    </handler>
+
+    <handler name="onismoderator" reference="canvas" args="m">
+        canvas.lc.send(canvas.vid_lc_name, "ismoderatorChanged", m);
     </handler>
 
     <!--
