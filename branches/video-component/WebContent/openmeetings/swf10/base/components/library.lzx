@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-    <include href="confirmationSingle.lzx" />
     <include href="iconView.lzx" />
     <include href="resetCombobox.lzx" />
     <include href="updatecheckbox.lzx" />
@@ -15,6 +14,7 @@
     <include href="clickbox/" />   
     <include href="explorer/" />    
     <include href="panel/" />  
+    <include href="popups" />
     <include href="list/" />
     <include href="turnoverlist/" />
     <include href="turnoverlistpaged/" />

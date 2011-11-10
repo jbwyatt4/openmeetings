@@ -109,20 +109,6 @@
     <handler name="onerror" >
         this.connect();
     </handler>
-
-    <netRemoteCallHib name="switchMicMuted" funcname="switchMicMuted">
-        <attribute name="publicSID" value="" type="string" />
-        <attribute name="mute" value="false" type="boolean" />
-        <method name="setMute" args="tPublicSID,tMute">
-            this.publicSID = tPublicSID;
-            this.mute = tMute;
-            if ($debug) Debug.write("???????? 2");
-            this.doCall();
-            if ($debug) Debug.write("???????? 3");
-        </method>
-        <netparam><method name="getValue">return parent.publicSID;</method></netparam>
-        <netparam><method name="getValue">return parent.mute;</method></netparam>
-    </netRemoteCallHib>
     
 </class>
 

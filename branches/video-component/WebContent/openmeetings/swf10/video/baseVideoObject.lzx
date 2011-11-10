@@ -14,6 +14,7 @@
 	  <when property="$as3">
 		<passthrough>
 		  import flash.filters.DropShadowFilter;
+          import flash.media.*
 		</passthrough>
 	  </when>
 	</switch>
@@ -512,10 +513,10 @@
             	if ($debug) Debug.write("Set Mute for Client :: ",roomClientObj.username);
                 if (roomClientObj.micMuted) {
                 	if ($debug) Debug.write("############ SET GAIN 0");
-                    this._chatvideoinner._videostream.micro.setGain(0);
+                    this._chatvideoinner._videostream.micro.gain = 0;
                 } else {
                 	if ($debug) Debug.write("############ SET GAIN 50");
-                    this._chatvideoinner._videostream.micro.setGain(50);
+                	this._chatvideoinner._videostream.micro.gain = 50;
                 }
             }
             this.isMutedByModerator = roomClientObj.micMuted;
@@ -525,7 +526,7 @@
         	if (!roomClientObj.micMuted) {
         		//Make sure sound is on, in case a user has set it locally to 0
         		//in other words: overwrite any local settings
-        	    this._chatvideoinner._videostream.setVolume(100);
+        		this._chatvideoinner._videostream.setSoundVolume(100);
         	}
         }
         ]]>
@@ -538,93 +539,64 @@
     <method name="silenceMicrophone" args="mute">
         <![CDATA[
 
-        if ($debug) Debug.write("!!!!!!!!!!!!! 1");
         if (this.publicSID == canvas.publicSID) {
-            if ($debug) Debug.write("!!!!!!!!!!!!! 2");
         	//self sound turned off
         	if (mute) {
-        	    if ($debug) Debug.write("!!!!!!!!!!!!! 3");
             	new lz.confirmationSingle(canvas,{
                                                labelid:1388,labeliderror:1389,
                                                refReturnMethod:'confirmGloballyOff',
                                                refObj:this,showCheckBox:false});
                 return;
         	} else {
-        	    if ($debug) Debug.write("!!!!!!!!!!!!! 4");
-        		canvas.thishib.switchMicMuted.setMute(this.publicSID,false);
-        		if ($debug) Debug.write("!!!!!!!!!!!!! 5");
+        	    canvas.stream_lc.send(canvas.stream_lc_name, 'lc_switchMicMuted', this.publicSID, false);
         	}
-        	if ($debug) Debug.write("!!!!!!!!!!!!! 6");
         } else {
-            if ($debug) Debug.write("!!!!!!!!!!!!! 7");
         	//disable this action for now
         	if (!canvas.ismoderator) {
-        	    if ($debug) Debug.write("!!!!!!!!!!!!! 8");
         		new lz.labelerrorPopup(canvas,{errorlabelid:1409});
-        		if ($debug) Debug.write("!!!!!!!!!!!!! 9");
         		return;
         	}
-            if ($debug) Debug.write("!!!!!!!!!!!!! 10");
         	//you can not unmute it locally by putting sound to 100 cause the gain is set to zero globally in the micro of the sender!
         	//so setting the sound/volume on the other remote clients has zero effect
         	if (this.isMutedByModerator && !canvas.ismoderator) {
-        	if ($debug) Debug.write("!!!!!!!!!!!!! 11");
                 //FIXME: That is not true, you could restart audio/video ...
                 var errorlabelid = 1402;
                 if (this.publicSID == canvas.publicSID) {
-                    if ($debug) Debug.write("!!!!!!!!!!!!! 12");
                     errorlabelid = 1387;
                 }
-                if ($debug) Debug.write("!!!!!!!!!!!!! 13");
                 new lz.labelerrorPopup(canvas,{errorlabelid:errorlabelid});
-                if ($debug) Debug.write("!!!!!!!!!!!!! 14");
                 return;
             }
-            if ($debug) Debug.write("!!!!!!!!!!!!! 15");
         	if (canvas.ismoderator) {
-        	    if ($debug) Debug.write("!!!!!!!!!!!!! 16");
         		if (mute) {
-        		    if ($debug) Debug.write("!!!!!!!!!!!!! 17");
                     new lz.confirmationSingle(canvas,{
                                                    labelid:1392,labeliderror:1393,
                                                    refReturnMethod:'confirmGloballyOff',
                                                    refObj:this,showCheckBox:false});
-                    if ($debug) Debug.write("!!!!!!!!!!!!! 18");
                     return;
                 } else {
-                    if ($debug) Debug.write("!!!!!!!!!!!!! 19");
-                    canvas.thishib.switchMicMuted.setMute(this.publicSID,false);
-                    if ($debug) Debug.write("!!!!!!!!!!!!! 20");
+                    canvas.stream_lc.send(canvas.stream_lc_name, 'lc_switchMicMuted', this.publicSID, false);
                 }
         	} else {
-        	    if ($debug) Debug.write("!!!!!!!!!!!!! 21");
             	if (mute) {
-            	    if ($debug) Debug.write("!!!!!!!!!!!!! 22");
             		new lz.confirmationSingle(canvas,{
                                                    labelid:1390,labeliderror:1391,
                                                    refReturnMethod:'confirmLocallyOff',
                                                    refObj:this,showCheckBox:false});
-                    if ($debug) Debug.write("!!!!!!!!!!!!! 23");
                     return;
                 } else {
-                    if ($debug) Debug.write("!!!!!!!!!!!!! 24");
-                    this._chatvideoinner._videostream.setVolume(100);
-                    if ($debug) Debug.write("!!!!!!!!!!!!! 25");
+                    this._chatvideoinner._videostream.setSoundVolume(100);
                 }
         	}
         }
-        if ($debug) Debug.write("!!!!!!!!!!!!! 26");
         this.setMicMuted(mute);
-        if ($debug) Debug.write("!!!!!!!!!!!!! 27");
         ]]>
     </method>
 
     <method name="confirmGloballyOff" args="bool,t" >
     	if ($debug) Debug.write("confirmGloballyOff :: ",bool);
     	if (bool) {
-            if ($debug) Debug.write("???????? 1");
-            canvas.thishib.switchMicMuted.setMute(this.publicSID,true);
-            if ($debug) Debug.write("???????? 4");
+            canvas.stream_lc.send(canvas.stream_lc_name, 'lc_switchMicMuted', this.publicSID, true);
     	}
     </method>
 
@@ -632,7 +604,7 @@
         if ($debug) Debug.write("confirmLocallyOff :: ",bool);
         if (bool) {
         	this.setMicMuted(true);
-            this._chatvideoinner._videostream.setVolume(0);
+            this._chatvideoinner._videostream.setSoundVolume(0);
         }
     </method>
 
