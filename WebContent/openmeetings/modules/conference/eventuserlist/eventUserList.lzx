@@ -218,12 +218,7 @@
 	</method>
 	
 	<method name="updateMuteStatusVideoView" args="roomClient">
-        <![CDATA[
-            var videoContainer = parent.parent._videoviewcontent;
-            for (var i=0;i<videoContainer.subviews.length;i++){
-                videoContainer.subviews[i].muteMicrophone(roomClient);
-            }
-        ]]>
+        this._videoviewcontent.updateMuteStatusVideoView(roomClient);
     </method>
 	
 	<!---

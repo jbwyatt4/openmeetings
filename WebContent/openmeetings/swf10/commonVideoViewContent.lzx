@@ -40,6 +40,7 @@
             client.removeVideoByUser = this.removeVideoByUser;
             client.muteSound = this.muteSound;
             client.videoOnMove = this.videoOnMove;
+            client.updateMuteStatusVideoView = this.updateMuteStatusVideoView
 
             var lc:LocalConnection = new LocalConnection();
             lc.connect(canvas.vid_lc_name);
@@ -264,6 +265,14 @@
         var obj = this.closeStreamclient(publicSID);
         obj.destroy();
     ]]></method>
+
+    <method name="updateMuteStatusVideoView" args="roomClient">
+        <![CDATA[
+            for (var i=0;i<this.subviews.length;i++){
+                this.subviews[i].muteMicrophone(roomClient);
+    		}
+        ]]>
+    </method>
 
 
     <method name="setSpeakingByPos" args="publicSID,bool">
