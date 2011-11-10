@@ -32,13 +32,13 @@
         //this.getBroadCastId.doCall();
         var t = this;
         canvas.lc.send(canvas.vid_lc_name, "createEditRecordStream", this.syncUpdate, this.isInterview);
-        canvas.stream_lc.lc_getBroadCastId = function(chosenSetting,remoteMessage) {
+        canvas.videoComp_lc.lc_getBroadCastId = function(chosenSetting,remoteMessage) {
             if ($debug) Debug.write("lc_getBroadCastId",chosenSetting,remoteMessage);
             t.chosenSetting = chosenSetting;
             t.remoteMessage = remoteMessage;
             t.getBroadCastId.doCall();
         };
-        canvas.stream_lc.sendNotification = function(objMessage) {
+        canvas.videoComp_lc.sendNotification = function(objMessage) {
             //if ($debug) Debug.write("Level sendNotification ",this.isgreater);
             t.objMessage = objMessage;
             t.sendMessage.doCall();
@@ -53,7 +53,7 @@
         	<![CDATA[
         		if ($debug) Debug.write("getBroadCastId",value,canvas.publicSID);
 
-        		canvas.stream_lc.send(canvas.stream_lc_callback_name, 'clb_getBroadCastId', value)
+        		canvas.videoComp_lc.send(canvas.videoComp_lc_callback_name, 'clb_getBroadCastId', value)
 
         		canvas.setAttribute("currentMicName", Microphone.names[parent.chosenMic]);
         		canvas.setAttribute("currentCamName", Camera.names[parent.chosenCam]);
@@ -75,7 +75,7 @@
         		if ($debug) Debug.write("setUserAVSettings",value);
         		parent.currentClient = value;
             	//parent.doninitalize();
-            	canvas.stream_lc.send(canvas.stream_lc_callback_name, 'clb_setUserAVSettings', value);
+            	canvas.videoComp_lc.send(canvas.videoComp_lc_callback_name, 'clb_setUserAVSettings', value);
             ]]>
         </handler>   
     </netRemoteCallHib>    

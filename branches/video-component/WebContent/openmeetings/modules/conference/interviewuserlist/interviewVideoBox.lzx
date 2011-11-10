@@ -64,7 +64,7 @@
     	if ($debug) Debug.write("startInterView :: ");
         //canvas._videocontainer._videoviewcontent.createVideoObject(canvas.publicSID, true, this.interviewPodId);
         var t = this;
-        canvas.stream_lc.onStartBroadcast = function(broadCastID, settings) {
+        canvas.videoComp_lc.onStartBroadcast = function(broadCastID, settings) {
             //TODO: settings
             if ($debug) Debug.write("onStartBroadcast :: ", broadCastID, settings);
             t._videoPlay.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);

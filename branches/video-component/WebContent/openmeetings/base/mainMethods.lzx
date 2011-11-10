@@ -174,12 +174,12 @@
         this.setAttribute('lc_SID', pMap['lcSID']);
         this.setAttribute('vid_lc_name', this.lc_SID + "__videoLC");
         this.setAttribute('rtmp_lc_name', this.lc_SID + "__rtmpLC");
-        this.setAttribute('stream_lc_name', this.lc_SID + "__streamLC");
-        this.setAttribute('stream_lc_callback_name', this.lc_SID + "__streamLC_cback");
+        this.setAttribute('videoComp_lc_name', this.lc_SID + "__streamLC");
+        this.setAttribute('videoComp_lc_callback_name', this.lc_SID + "__streamLC_cback");
 
-        var stream_lc = new LocalConnection();
-        stream_lc.connect(this.stream_lc_name);
-        this.setAttribute('stream_lc', stream_lc);
+        var videoComp_lc = new LocalConnection();
+        videoComp_lc.connect(this.videoComp_lc_name);
+        this.setAttribute('videoComp_lc', videoComp_lc);
         
         
         mainBaseText.setAttribute('text',canvas.currentappname);

@@ -45,7 +45,7 @@
     <handler name="oninit">
         <![CDATA[
             var items = this._table.innerList.subnodes;
-            canvas.stream_lc.lc_setSoundMuted = function(publicSID,isMuted) {
+            canvas.videoComp_lc.lc_setSoundMuted = function(publicSID,isMuted) {
                 if ($debug) Debug.write("lc_setSoundMuted: publicSID, isMuted",publicSID, isMuted);
 
                 for (var i=1; i<items.length; i++) {
