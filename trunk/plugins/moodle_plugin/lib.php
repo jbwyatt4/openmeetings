@@ -67,6 +67,8 @@ function openmeetings_update_instance($openmeetings) {
 		//Roomtype 0 means its and recording, we don't need to update a room for that
 		if ($openmeetings->type != 0) {
 			$openmeetings->room_id = $openmeetings_gateway->openmeetings_updateRoomWithModeration($openmeetings);
+		} else {
+			$openmeetings->room_id = 0;
 		}
 		
 	} else {
