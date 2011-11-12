@@ -33,9 +33,7 @@ To compile just the openmeetings JAR file:
 ant -f build_openmeetings_jar.xml
 }}}
 
-= Running JUnit Tests =
-
-see JUnitTestings how to run the JUnit tests using ANT or from inside Eclipse.
+To run Junit tests using ANT see JUnitTestings
 
 = Run, Develop, Test =
 
@@ -98,10 +96,14 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_8.png
 10) After the download is complete you will see a new Project in the Package Explorer Dialog of Eclipse<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_9.png
 
-== Step3 - Deploy and Run ==
+== Step3 - Deploy and Run =
 
 see the first chapter about the ANT tasks to compile the code.
 You will find a directory called *dist* which contains a regular openmeetings including red5. You can then use the usual process like described at InstallationOpenMeetings to run the code then.
+
+== Step4 Testing the Code using JUnit Tests ==
+
+see JUnitTestings how to run the JUnit tests using ANT or from inside Eclipse.
 
 = Links =
 
