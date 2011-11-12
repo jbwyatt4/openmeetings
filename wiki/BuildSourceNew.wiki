@@ -33,7 +33,7 @@ To compile just the openmeetings JAR file:
 ant -f build_openmeetings_jar.xml
 }}}
 
-To run Junit tests using ANT see JUnitTestings
+To run Junit tests using ANT see [JUnitTestings]
 
 = Run, Develop, Test =
 
@@ -103,7 +103,7 @@ You will find a directory called *dist* which contains a regular openmeetings in
 
 == Step4 Testing the Code using JUnit Tests ==
 
-see JUnitTestings how to run the JUnit tests using ANT or from inside Eclipse.
+see [JUnitTestings] how to run the JUnit tests using ANT or from inside Eclipse.
 
 = Links =
 
