@@ -5,6 +5,7 @@
       * [BuildSourceNew#Step1_-_Get_required_Software Step1 - Get required Software]
       * [BuildSourceNew#Step2_-_Download_the_Source Step2 - Download the Source]
       * [BuildSourceNew#Step3_-_Deploy_and_Run Step3 - Build and deploy]
+      * [BuildSourceNew#Step4_Testing_the_Code_using_JUnit_Tests Step4 Test using JUnit]
     * [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#How_to_create_.war How to create .war]
     * [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#How_to_build_a_distribution How to build a distribution]
     * [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#Links Links]
