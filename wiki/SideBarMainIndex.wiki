@@ -25,6 +25,8 @@
     * Customization
       * [BrandingAndColors Branding and Colors]
       * [CustomizingWebappName Customize Webapp name]
+      * [CustomazingMainMenu Changing main menu]
+      * [CustomizingDashboard Changing dashboard]
     * Security
       * [ClientAndServerSideSecuritySettings Restricted Access]
   * Integration
