@@ -1,0 +1,14 @@
+#summary One-sentence summary of this page.
+
+You can configure the tabs that are visible by default in the dashboard on the bottom:
+Goto Administration > Configuration
+
+|| Config-key || Values || Meaning ||
+|| default.dashboard.tab || 0,1,2 || Which tab should be shown by default, counting starts with 0 ||
+|| dashboard.show.myrooms || 0 or 1 || If the !MyRooms tab should be visible or not ||
+|| dashboard.show.chat || 0 or 1 || If the Chat tab should be visible or not ||
+|| dashboard.show.rssfeed || 0 or 1 || If the RSS-Feed tab should be visible or not ||
+|| rss_feed1 || http-URL || ATOM-Feed URL ||
+|| rss_feed2 || http-URL || ATOM-Feed URL ||
+
+Changes don't need any restart of Red5 to be online.
