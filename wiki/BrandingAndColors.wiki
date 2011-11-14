@@ -23,7 +23,7 @@ In the config.xml there are some configuration variables
 <currentappnamebugurl>http://code.google.com/p/openmeetings/issues/list</currentappnamebugurl>
 }}}
 
-Addtionally the browser-bar title can be configured in the Openmeetings Administration > Configuration.
+Addtionally the browser-bar title can be configured in the Openmeetings > Administration > Configuration.<br/>
 Config Key: {{{application.name}}}
 
 
