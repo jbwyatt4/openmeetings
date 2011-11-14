@@ -1,7 +1,7 @@
 #summary Howto rename webapp
 #labels Configuration
 
-Feature available since r4303 (Issue 1403)
+Feature available since r4303 (Issue 1403) Minimum !OpenMeetings Version 1.9.x
 
 === *Renaming `/openmeetings` _context_* ===
 If you want to have `http://yourcorp.com:5080/yourmeetings` instead of `http://yourcorp.com:5080/openmeetings` you need to do the following
