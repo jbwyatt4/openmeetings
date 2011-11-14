@@ -1,6 +1,10 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in !OpenMeetings 1.8.8 (released on Monday 14.11.2011) ==
+
+  * Fixes problem when participants draw simultaneously to whiteboard (In some use-cases where one participants does mouse-down where another users does mouse-up+down serveral times the resulting figure was incorrect)
+
 == Changes in !OpenMeetings 1.8.7 (released on Sunday 06.11.2011) ==
 
   * Fixes ENTER-Key/Event in Remote Desktop Control
