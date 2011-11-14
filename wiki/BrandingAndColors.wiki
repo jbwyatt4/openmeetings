@@ -5,5 +5,8 @@ To change the color scheme you can simply edit the config.xml, there are 3 color
 {{{
 <!--
 	These colors are the main colors and style the hole application
- --><basebgcolorizer>0x669AE6</basebgcolorizer><baseMousecolorizer>0x7BA8EA</baseMousecolorizer><baseMouseOvercolorizer>0x99BBEE</baseMouseOvercolorizer>
+ -->
+<basebgcolorizer>0x669AE6</basebgcolorizer>
+<baseMousecolorizer>0x7BA8EA</baseMousecolorizer>
+<baseMouseOvercolorizer>0x99BBEE</baseMouseOvercolorizer>
 }}}
