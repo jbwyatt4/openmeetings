@@ -23,6 +23,7 @@
     * Performance 
       * [PerformanceTuning JVM performance tuning]
     * Customization
+      * [BrandingAndColors Branding and Colors]
       * [CustomizingWebappName Customize Webapp name]
     * Security
       * [ClientAndServerSideSecuritySettings Restricted Access]
