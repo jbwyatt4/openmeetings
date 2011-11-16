@@ -10,7 +10,7 @@ If you want to have `http://yourcorp.com:5080/yourmeetings` instead of `http://y
   # rename `/opt/red5/webapps/openmeetings` to `/opt/red5/webapps/yourmeetings` (for ex. `mv /opt/red5/webapps/openmeetings /opt/red5/webapps/yourmeetings`)
   # open `/opt/red5/webapps/yourmeetings/config.xml` using your favorite text editor (for ex. `vim /opt/red5/webapps/yourmeetings/config.xml`)
   # find and modify `<webAppRootKey>openmeetings</webAppRootKey>` to be `<webAppRootKey>`*yourmeetings*`</webAppRootKey>`
-  # find and modify `<httpRootKey>openmeetings</httpRootKey>` to be `<httpRootKey>`*yourmeetings*`</httpRootKey>`
+  # find and modify `<httpRootKey>/openmeetings/</httpRootKey>` to be `<httpRootKey>`*/yourmeetings/*`</httpRootKey>`
 That's it
 
 === *Changing hard-coded application name in string labels* ===
@@ -23,3 +23,11 @@ To have _Your Application Name_ instead of _Openmeetings_ in *all* text labels y
   # `Save`
   # reload page or relogin
 All string will display _`Your Application Name`_ in place of _`Openmeetings`_
+
+Please _NOTE_ there are 3 additional properties in the config.xml file which should be modified for *TOTAL* Openmeetings clean up:
+{{{
+<currentappname>OpenMeetings</currentappname>
+<currentappnameurl>http://openmeetings.googlecode.com</currentappnameurl>
+<currentappnamebugurl>http://code.google.com/p/openmeetings/issues/list</currentappnamebugurl>
+}}}
+please modify them according to your needs. 
