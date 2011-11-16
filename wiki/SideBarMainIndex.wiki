@@ -24,10 +24,11 @@
       * [PerformanceTuning JVM performance tuning]
     * Customization
       * [BrandingAndColors Branding and Colors]
-      * [CustomizingWebappName Customize Webapp name]
-      * [CustomazingMainMenu Changing main menu]
-      * [CustomizingDashboard Changing dashboard]
-      * [GeneralConfigurationOptions General Configuration Keys]
+      * [CustomizingWebappName Webapp name/path]
+      * [CustomazingMainMenu Navigation]
+      * [CustomizingDashboard Dashboard]
+      * [CalendarSettings Calendar and timezone]
+      * [GeneralConfigurationOptions General Configuration]
     * Security
       * [ClientAndServerSideSecuritySettings Restricted Access]
   * Integration
