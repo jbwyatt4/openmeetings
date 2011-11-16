@@ -10,7 +10,7 @@ Goto Administration > Configuration and change the config-key: {{{default.timezo
 
 Valid timezone have to meet standards!
 
-== Changing first day in week for calendar from sunday to Monday ==
+== Changing first day in week for calendar from Sunday to Monday ==
 
 in the config.xml change the key:
 {{{
