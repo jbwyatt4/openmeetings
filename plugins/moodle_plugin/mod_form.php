@@ -6,11 +6,14 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once ($CFG->dirroot.'/course/moodleform_mod.php');
 
+$openmeetings_gateway = new openmeetings_gateway();
+$om_login = $openmeetings_gateway->openmeetings_loginuser();
+
 class mod_openmeetings_mod_form extends moodleform_mod {
 
 	function definition() {
 
-		global $COURSE;
+		global $COURSE, $openmeetings_gateway, $om_login;
 		$mform    =& $this->_form;
 
 		//-------------------------------------------------------------------------------
@@ -82,8 +85,7 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 		/// Adding the "Available Recordings to Shows" field
 		$recordings = array();
 			
-		$openmeetings_gateway = new openmeetings_gateway();
-		if ($openmeetings_gateway->openmeetings_loginuser()) {
+		if ($om_login) {
 		
 			$recordingsArray = $openmeetings_gateway->openmeetings_getRecordingsByExternalRooms();
 		
@@ -103,10 +105,18 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 		
 		}
 		
-		/// Some description
-		$mform->addElement('static', 'description', '', get_string('recordings_label', 'openmeetings'));
-		
-		$mform->addElement('select', 'room_recording_id', get_string('recordings_show', 'openmeetings'), $recordings);
+		//$mform->registerNoSubmitButton('download_rec');
+		$mform->registerNoSubmitButton('avi');
+		$mform->registerNoSubmitButton('flv');
+		$dgrp = array();
+		$dgrp[] =& $mform->createElement('static', 'description', '', get_string('recordings_label', 'openmeetings'));
+		$dgrp[] =& $mform->createElement('select', 'room_recording_id', get_string('recordings_show', 'openmeetings'), $recordings);
+		$dgrp[] =& $mform->createElement('submit', 'avi', get_string('download_avi', 'openmeetings'));
+		$dgrp[] =& $mform->createElement('submit', 'flv', get_string('download_flv', 'openmeetings'));
+		$mform->addGroup($dgrp, 'dgrp', get_string('recordings_show', 'openmeetings'), array(' '), false);
+		//$mform->setType('download_rec', PARAM_NOTAGS);
+		$mform->setType('avi', PARAM_NOTAGS);
+		$mform->setType('flv', PARAM_NOTAGS);
 		
 		//$mform->addRule('intro', get_string('required'), 'required', null, 'client');
 		//$mform->setHelpButton('intro', array('writing', 'richtext'), false, 'editorhelpbutton');
@@ -126,6 +136,20 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 		$this->add_action_buttons();
 
 	}
+}
+
+$mform = new mod_openmeetings_mod_form();
+
+if ($mform->no_submit_button_pressed() && $om_login) {
+	$type = isset($mform->get_submitted_data()->{'avi'}) ? "avi" :
+			isset($mform->get_submitted_data()->{'flv'}) ? "flv" : "none";
+	$filename = 'flvRecording_' . $mform->get_submitted_data()->{'room_recording_id'} . '.' . $type;
+	header('Content-disposition: attachment; filename=' . $filename);
+	header('Content-type: video/' . $type);
+	readfile($openmeetings_gateway->getUrl() . 'DownloadHandler?fileName=' . $filename
+                . '&moduleName=lzRecorderApp&parentPath=&room_id='
+                . '&sid=' . $openmeetings_gateway->session_id);
+	exit(0);
 }
 
 ?>
