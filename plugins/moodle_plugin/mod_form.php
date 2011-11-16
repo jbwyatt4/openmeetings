@@ -142,11 +142,11 @@ $mform = new mod_openmeetings_mod_form();
 
 if ($mform->no_submit_button_pressed() && $om_login) {
 	$type = isset($mform->get_submitted_data()->{'avi'}) ? "avi" :
-			isset($mform->get_submitted_data()->{'flv'}) ? "flv" : "none";
+			(isset($mform->get_submitted_data()->{'flv'}) ? "flv" : "none");
 	$filename = 'flvRecording_' . $mform->get_submitted_data()->{'room_recording_id'} . '.' . $type;
 	header('Content-disposition: attachment; filename=' . $filename);
 	header('Content-type: video/' . $type);
-	readfile($openmeetings_gateway->getUrl() . 'DownloadHandler?fileName=' . $filename
+	readfile($openmeetings_gateway->getUrl() . '/DownloadHandler?fileName=' . $filename
                 . '&moduleName=lzRecorderApp&parentPath=&room_id='
                 . '&sid=' . $openmeetings_gateway->session_id);
 	exit(0);
