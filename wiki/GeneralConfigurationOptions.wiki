@@ -1,0 +1,7 @@
+#summary List of general configuration options
+
+In Administration > Configuration there are a number of configuration values.
+
+|| key || default || meaning ||
+|| user.login.minimum.length || 4 || minimum chars required for the login to create a user ||
+|| user.pass.minimum.length || 4 || minimum chars required for the password to create a user ||
