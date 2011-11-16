@@ -43,4 +43,6 @@ $string['Recording_TYPE_2'] = 'Die Funktion zum Aufzeichnen der Konferenz ist ni
 $string['openmeetingsWebappnameLabel'] = 'OpenMeetings webapp name';
 $string['openmeetingsWebappnameDescription'] = 'Erweiterte Einstellung: Wenn sie die OpenMeetings Applikation umbenannt haben k&ouml;nnen Sie hier einen alternativen Namen eingeben.';
 
+$string['download_avi'] = 'Download .avi';
+$string['download_flv'] = 'Download .flv';
 ?>
