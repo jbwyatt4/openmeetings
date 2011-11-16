@@ -27,6 +27,7 @@
       * [CustomizingWebappName Customize Webapp name]
       * [CustomazingMainMenu Changing main menu]
       * [CustomizingDashboard Changing dashboard]
+      * [GeneralConfigurationOptions General Configuration Keys]
     * Security
       * [ClientAndServerSideSecuritySettings Restricted Access]
   * Integration
