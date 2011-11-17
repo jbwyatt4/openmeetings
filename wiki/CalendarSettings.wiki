@@ -22,3 +22,7 @@ in the config.xml change the key:
 -->
 <firstdayinweek>0</firstdayinweek>	
 }}}
+
+== Changing the default number of max participants of a conference room created via calendar ==
+
+Goto Administration > Configuration and change the config-key: {{{calendar.conference.rooms.default.size}}}
