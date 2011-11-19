@@ -13,7 +13,7 @@
 	
  -->
  
-<class name="editRecordStream"  extends="labelExplorerBox" labelid="51"
+<class name="editRecordStreamSWF10"  extends="labelExplorerBox" labelid="51"
 	width="300" height="250" x="14" y="-340" >
 
     <switch>
@@ -132,34 +132,51 @@
 	    	if ($debug) Debug.write(valCam,valMic,settings);
 			this.myvideocontainer.setAttribute('isremote',false);
 
-			var _micro = Microphone.getMicrophone(valMic);
-			var _camera = Camera.getCamera(valCam);
+			var _micro = null;
+			var _camera = null;
+			if (valMic != null) {
+			     _micro = Microphone.getMicrophone(valMic);
+			}
+			if (valCam != null) {
+				_camera = Camera.getCamera(valCam);
+			}
+			
 			if ($debug) Debug.write("_camera.setMode: ",videoview.width,videoview.height,canvas.framesPerSecond,true);
 
 			//Microphone.set
 			if ($debug) Debug.write("canvas.vaquality: ",canvas.vaquality, "canvas.microphoneRateBest: ",canvas.microphoneRateBest);
 			if (canvas.vaquality=="best") {
-				_micro.rate = canvas.microphoneRateBest;
-				if ($debug) Debug.write("_camera.setQuality BEST: ",this.isInterview,(canvas.bandwidthNeededBest*2),canvas.camQualityBest);
-				if (this.isInterview) {
-					_camera.setMode(videoview.width,videoview.height,24,true);
-					if ($debug) Debug.warn("IS INTERVIEW ");
-				    _camera.setQuality(0,98);
-				} else {
-					_camera.setMode(videoview.width,videoview.height,canvas.framesPerSecond,true);
-					if ($debug) Debug.warn("IS NO INTERVIEW ");
-					_camera.setQuality(canvas.bandwidthNeededBest,canvas.camQualityBest);
+				if (_micro != null) {
+				    _micro.rate = canvas.microphoneRateBest;
+				}
+				if (_camera != null) {
+    				if ($debug) Debug.write("_camera.setQuality BEST: ",this.isInterview,(canvas.bandwidthNeededBest*2),canvas.camQualityBest);
+    				if (this.isInterview) {
+    					_camera.setMode(videoview.width,videoview.height,24,true);
+    					if ($debug) Debug.warn("IS INTERVIEW ");
+    				    _camera.setQuality(0,98);
+    				} else {
+    					_camera.setMode(videoview.width,videoview.height,canvas.framesPerSecond,true);
+    					if ($debug) Debug.warn("IS NO INTERVIEW ");
+    					_camera.setQuality(canvas.bandwidthNeededBest,canvas.camQualityBest);
+    				}
 				}
 			} else {
-				_camera.setMode(videoview.width,videoview.height,canvas.framesPerSecond,true);
-				_micro.setRate(canvas.microphoneRateNormal);
-				_micro.setSilenceLevel(canvas.loudnessAcitviation);
-				if ($debug) Debug.write("_camera.setQuality NORMAL: ",canvas.bandwidthNeededNormal,canvas.camQualityNormal);
-				_camera.setQuality(canvas.bandwidthNeededNormal,canvas.camQualityNormal);
+				if (_camera != null) {
+    				_camera.setMode(videoview.width,videoview.height,canvas.framesPerSecond,true);
+    				if ($debug) Debug.write("_camera.setQuality NORMAL: ",canvas.bandwidthNeededNormal,canvas.camQualityNormal);
+                    _camera.setQuality(canvas.bandwidthNeededNormal,canvas.camQualityNormal);
+				} 
+				if (_micro != null) {
+    				_micro.setRate(canvas.microphoneRateNormal);
+    				_micro.setSilenceLevel(canvas.loudnessAcitviation);
+				}
 			}
 
-			//Microphone setUseEchoSupression(bool)
-		    _micro.setUseEchoSuppression(true);
+			if (_micro != null) {
+    			//Microphone setUseEchoSupression(bool)
+    		    _micro.setUseEchoSuppression(true);
+			}
 
             if ($debug) Debug.write("settings: ", settings);
             if ($debug) Debug.write("BroadcastId: ", this.currentClient.broadCastID);
@@ -411,6 +428,7 @@
             this.parent.remoteMessage[1] = "0";
             this.parent.remoteMessage[2] = this.parent.chosenSetting;
             //this.parent.getBroadCastId.doCall();
+            if ($debug) Debug.write(canvas.videoComp_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
             canvas.videoComp_lc.send(canvas.videoComp_lc_name, 'lc_getBroadCastId', this.parent.chosenSetting, this.parent.remoteMessage);
         </handler>
     </simpleLabelButton>
