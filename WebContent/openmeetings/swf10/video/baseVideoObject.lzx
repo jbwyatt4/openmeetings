@@ -243,7 +243,7 @@
     <method name="setVideouserProfilePic" args="value">
     	if ($debug) Debug.write("### setVideouserProfilePic ",value);
     	this.deleteVideoConfProfilePic(value);
-    	new lz.videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	new lz.videoUserProfilePicSWF10(this._chatvideoinner,{name:'userProfilePic',value:value});
     	this.showUserProfilePic = true;
     </method>    
     <method name="deleteVideoConfProfilePic" args="value">
@@ -450,7 +450,7 @@
                 	if ($debug) Debug.write("editRecordStream ################# baseVideObject ");
                     if(canvas.inner.editRecordStream != null) canvas.inner.editRecordStream.destroy();
                 	if (this.parent.parent.isInterview) {
-                		new lz.editRecordStream(canvas.inner,{
+                		new lz.editRecordStreamSWF10(canvas.inner,{
                                 name:"editRecordStream",
                 			    doDefaultAnimation:false,
                                 align:'center',valign:'middle',
@@ -458,7 +458,7 @@
                 			    myvideocontainer:parent.parent,
                                 isSyncUpdate:true});
                 	} else {
-                		new lz.editRecordStream(canvas.inner,{
+                		new lz.editRecordStreamSWF10(canvas.inner,{
                                 name:"editRecordStream",
                                 isSyncUpdate:true});
                 	}

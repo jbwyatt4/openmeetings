@@ -34,7 +34,7 @@
 
     <include href="swf10/video/" />
 
-    <include href="swf10/commonVideoViewContent.lzx" />
+    <include href="swf10/commonVideoViewContentSWF10.lzx" />
 
     <include href="swf10/hibAdapter.lzx" />
 
@@ -68,7 +68,7 @@
         loader.load(request);
         this.mainComponent.sprite.addChild(loader);
 
-        new lz.commonVideoViewContent(this, {name:'_videoComponent'});
+        new lz.commonVideoViewContentSWF10(this, {name:'_videoComponent'});
         new lz.hibAdapter(this);
 
     ]]></handler>

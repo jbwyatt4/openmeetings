@@ -71,6 +71,7 @@
 	</handler>
 
     <method name="onMicStatus" args="stats">
+    	if ($debug) Debug.write("onMicStatus 1: ",stats);
         this.sendMicroStatus.sendEvent(stats.info.code);
     </method>
 

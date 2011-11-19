@@ -2,7 +2,7 @@
 <library>
 
 
-<class name="commonVideoViewContent" extends="view">
+<class name="commonVideoViewContentSWF10" extends="view">
 
     <switch>
         <when property="$as3">
@@ -64,10 +64,16 @@
         this.setAttribute("videoHeight",videoHeight);
     </method>
 
-    <method name="createEditRecordStream" args="syncUpdate,isInterview">
-        if(canvas.inner.editRecordStream != null) canvas.inner.editRecordStream.destroy();
-        new lz.editRecordStream(canvas.inner,{name:"editRecordStream", isSyncUpdate:syncUpdate,isInterview:isInterview});
-    </method>
+	<method name="createEditRecordStream" args="syncUpdate,isInterview">
+		if($debug) Debug.info("createEditRecordStream,",syncUpdate,isInterview);
+		if (canvas.inner.editRecordStream != null)
+			canvas.inner.editRecordStream.destroy();
+		new lz.editRecordStreamSWF10(canvas.inner, {
+					name : "editRecordStream",
+					isSyncUpdate : syncUpdate,
+					isInterview : isInterview
+				});
+	</method>
 
     <method name="createVideoObject" args="publicSID,isBroadcasting,interviewPodId">
         if($debug) Debug.info("createVideoObject, publicSID: ",publicSID, "isBroadcasting: ", isBroadcasting);
