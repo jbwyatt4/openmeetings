@@ -55,8 +55,8 @@
 	</handler>
 
     <method name="onStatus" args="stats">
-        if ($debug) Debug.write("CamStatus: ",stats.info);
-        this.sendCameraStatus.sendEvent(stats.info.code);
+        if ($debug) Debug.write("CamStatus: ",stats);
+        this.sendCameraStatus.sendEvent(stats.code);
     </method>
 
     <method name="onActivity" args="event">
@@ -72,7 +72,7 @@
 
     <method name="onMicStatus" args="stats">
     	if ($debug) Debug.write("onMicStatus 1: ",stats);
-        this.sendMicroStatus.sendEvent(stats.info.code);
+        this.sendMicroStatus.sendEvent(stats.code);
     </method>
 
     <method name="onMicActivity" args="event">
