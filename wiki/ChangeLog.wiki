@@ -4,7 +4,11 @@
 
 == Changes in !OpenMeetings SugarCRM Plugin 1.2 (released on Monday 21.11.2011) ==
 
-  * Fixes Issues with SugarCRM 6.2.1
+  * changed workflow 
+  * easier installation (no manualy changes needet any more)
+  * easier use
+  * Smarty Template Engine
+  * ready for Sugarcrm 6
 
 == Changes in !OpenMeetings 1.8.8 (released on Monday 14.11.2011) ==
 
