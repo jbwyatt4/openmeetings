@@ -1,9 +1,9 @@
 #summary How to check which Openmeetings version running
 
-If you need to know what version of OpenMeetings you are running, you can check that by the file: openmeetings.jar
+If you need to know what version of !OpenMeetings you are running, you can check that by the file: openmeetings.jar
 
 
-Unzip: /webapps/openmeetings/WEB-INF/lib/openmeetings.jar (jars are zips)
+Unzip: /webapps/openmeetings/WEB-INF/lib/openmeetings.jar (jars are zips)<br/>
 In the resulting unziped folder open the file to read:
 /META-INF/MANIFEST.MF
 
