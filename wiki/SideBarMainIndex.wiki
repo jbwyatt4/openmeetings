@@ -31,6 +31,8 @@
       * [GeneralConfigurationOptions General Configuration]
     * Security
       * [ClientAndServerSideSecuritySettings Restricted Access]
+    * Misc
+      *[OpenMeetingsVersionInfo Get version info]
   * Integration
     * Modules and Plugins
       * [MoodlePlugins Moodle Module]
