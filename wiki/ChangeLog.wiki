@@ -1,6 +1,11 @@
 #summary Release Notes
 #labels Featured
 
+
+== Changes in !OpenMeetings SugarCRM Plugin 1.2 (released on Monday 21.11.2011) ==
+
+  * Fixes Issues with SugarCRM 6.2.1
+
 == Changes in !OpenMeetings 1.8.8 (released on Monday 14.11.2011) ==
 
   * Fixes problem when participants draw simultaneously to whiteboard (In some use-cases where one participants holds the mouse-down where another user does serveral mouse-up+down actions the resulting drawing was incorrect)
