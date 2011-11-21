@@ -1,0 +1,18 @@
+#summary How to check which Openmeetings version running
+
+If you need to know what exactly version you have running of OpenMeetings, you can check that by the file: openmeetings.jar
+
+
+Unzip: /webapps/openmeetings/WEB-INF/lib/openmeetings.jar (jars are zips)
+In the resulting unziped folder open the file to read:
+/META-INF/MANIFEST.MF
+
+You get something like this:
+{{{
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.6.0_26-b03-383-11A511 (Apple Inc.)
+Built-By: OpenMeetings - http://openmeetings.googlecode.com
+Built-On: 23-October-2011
+Svn-Revision: 4368
+}}}
