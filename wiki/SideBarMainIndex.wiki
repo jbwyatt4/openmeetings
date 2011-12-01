@@ -11,7 +11,7 @@
     * DB Sample Configurations
       * [ApacheDerbyDB Apache Derby]
       * [Configuration_IBM_DB2 IBM DB2]
-      * [Configuration_Oracle Oracle]
+      * Configuration_Oracle
       * [Configuration_Mysql MySQL]
       * [Configuration_Postgres Postgres]
     * Localization and languages
