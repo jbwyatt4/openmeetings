@@ -11,9 +11,9 @@
     * DB Sample Configurations
       * [ApacheDerbyDB Apache Derby]
       * [http://code.google.com/p/openmeetings/wiki/Configuration_IBM_DB2 IBM DB2]
-      * Configuration_Oracle
-      * Configuration_Mysql
-      * Configuration_Postgres
+      * [http://code.google.com/p/openmeetings/wiki/Configuration_Oracle Oracle]
+      * [http://code.google.com/p/openmeetings/wiki/Configuration_Mysql MySQL]
+      * [http://code.google.com/p/openmeetings /wiki/Configuration_Postgres Postgres]
     * Localization and languages
       * [Internationalisation]
       * LanguageEditor
