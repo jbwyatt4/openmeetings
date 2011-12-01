@@ -10,10 +10,10 @@
   * Configuration 
     * DB Sample Configurations
       * [ApacheDerbyDB Apache Derby]
-      * [Configuration_IBM_DB2 IBM DB2]
+      * Configuration_IBM_DB2
       * Configuration_Oracle
-      * [Configuration_Mysql MySQL]
-      * [Configuration_Postgres Postgres]
+      * Configuration_Mysql
+      * Configuration_Postgres
     * Localization and languages
       * [Internationalisation]
       * LanguageEditor
