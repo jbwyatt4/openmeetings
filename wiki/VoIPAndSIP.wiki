@@ -3,13 +3,4 @@
 
 Together with our Finish partner and the Open Source Department of Kvarken region we have done a VoIP integration by using an applet for the audio part.
 
-For further information, please contact our Finish partner [http://www.jnt.fi/ JNT]:
-
-<div>Janne Lillkvist</div>
-<div>Företagskundbetjäning </div>
-<div>Yritysasiakaspalvelu </div>
-
-<div>Alholmsgatan 3 Alholminkatu</div>
-<div>68600  JAKOBSTAD / PIETARSAARI </div>
-<div>Direct/GSM: +358 (0)6 786 8337 </div>
-<div>e-mail: janne.lillkvist@jnt.fi </div>
+For further information, please contact us: service@openmeetings.de
