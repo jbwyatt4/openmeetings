@@ -29,6 +29,7 @@
       * [CustomazingMainMenu Navigation]
       * [CustomizingDashboard Dashboard]
       * [CalendarSettings Calendar and timezone]
+      * [ScreenResolutions Screen resolutions]
       * [GeneralConfigurationOptions General Configuration]
     * Security
       * [ClientAndServerSideSecuritySettings Restricted Access]
