@@ -1,6 +1,28 @@
 #summary Release Notes
 #labels Featured
 
+== Changes in !OpenMeetings 1.9.0 (released on Tuesday 05.12.2011) ==
+
+  * Run OpenMeetings on SSL using HTTPS and RTMPS see guide RTMPSandHTTPS
+  * Rename the complete application webapp path see guide CustomizingWebappName
+  * rtmpT (rtmp over HTTP Tunneling) working again
+  * Save polls: You can now save polls, delete polls and close polls. Also poll results are displayed as pie-charts.
+  * Mute any user: You can mute yourself. Additionally moderators can also mute other microphones. Mute status is displayed in user-list and status icons in video pod and on top of the user list
+  * Give exclusive microphone: Mute everybody except yourself with a single click. The User can click on his video pod (or press F12), if he has the needed rights, his micro is unmuted while everybody else is muted. The moderator can additionally give the right to have the functionality to "Give exclusive microphone" to to any user and/or can also directly click on any other participant's video to "Give exclusive microphone" to this user.
+  * You can now see in your own video pod not only the green light but also the full activity meter indicating your loudness
+  * You can now choose between multiple resolutions for the video, remote video pods are synced to the size too. With different dimension (4:3, 16:9). Does also reduce needed bandwidth to use exactly the supported resolution and you can choose smaller video sizes to save bandwidth. You can also change the available resolutions and default selection in the config.xml
+  * Invalid invitation hashs now show in the error message why and in which time period they are exactly valid
+  * Refactored calendar server side code to use java.util.Timezone everywhere. The application now stores all times in the server time. Only the backup contains timestamps so you could potentially export in one time zone and import into a server of another without issues.
+  * Changed calendar E-Mail and fixed iCal invitation in Gmail to display correctly
+  * Calendar meeting reminder email is now send 15 minutes upfront (15 minutes can be changed in configuration)
+  * Default room size for conference rooms created via calendar is now 50 (default room size can be changed in configuration)
+  * Minimum length for user and password is not 4 (minimum length can be changed in configuration)
+  * Fix new FFMPEG param style (you can revert to use the old param style through the config_key "use.old.style.ffmpeg.map.option") see SwitchBetweenFFMPEG
+  * Max upload size can be configured new (max_upload_size)
+  * Fix calendar if first-day-in-week is configured to be Monday instead of Sunday (default)
+  * JUnit tests now run integrated in Eclipse and on the Nightly Build Server see JUnitTestings
+  * Apache RAT is integrated to handle some parts of the code audit when importing our code to Apache Incubator SVN
+  * Oracle available as DB configuration see Configuration_Oracle
 
 == Changes in !OpenMeetings SugarCRM Plugin 1.2 (released on Monday 21.11.2011) ==
 
