@@ -1,8 +1,0 @@
-#! /bin/sh
-echo "Removing package red5-openmeetings..."
-
-/etc/init.d/ooomeetings stop
-/etc/init.d/red5-openmeetings stop
-
-rm -r /usr/share/red5-openmeetings/postinst.done
-rm -r /usr/share/red5-openmeetings/webapps/openmeetings/upload
