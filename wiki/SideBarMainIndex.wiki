@@ -35,7 +35,7 @@
       * [ClientAndServerSideSecuritySettings Restricted Access]
     * Misc
       * [OpenMeetingsVersionInfo Get version info]
-      * {SwitchBetweenFFMPEG Switching between FFMPEG Versions]
+      * [SwitchBetweenFFMPEG Switching between FFMPEG Versions]
   * Integration
     * Modules and Plugins
       * [MoodlePlugins Moodle Module]
