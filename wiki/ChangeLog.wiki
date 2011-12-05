@@ -17,10 +17,10 @@
   * Calendar meeting reminder email is now send 15 minutes upfront (15 minutes can be changed in configuration)
   * Default room size for conference rooms created via calendar is now 50 (default room size can be changed in configuration)
   * Minimum length for user and password is not 4 (minimum length can be changed in configuration)
-  * Fix new FFMPEG param style (you can revert to use the old param style through the config_key "use.old.style.ffmpeg.map.option") see SwitchBetweenFFMPEG
+  * Fix new FFMPEG param style (you can revert to use the old param style through the config_key "use.old.style.ffmpeg.map.option") see [SwitchBetweenFFMPEG]
   * Max upload size can be configured new (max_upload_size)
   * Fix calendar if first-day-in-week is configured to be Monday instead of Sunday (default)
-  * JUnit tests now run integrated in Eclipse and on the Nightly Build Server see JUnitTestings
+  * JUnit tests now run integrated in Eclipse and on the Nightly Build Server see [JUnitTestings]
   * Apache RAT is integrated to handle some parts of the code audit when importing our code to Apache Incubator SVN
   * Oracle available as DB configuration see Configuration_Oracle
 
