@@ -7,7 +7,9 @@ FFMPEG has a change in its API (possible since GIT revision 88bfe4518)
 
 By default !OpenMeetings expects you to have a newer version of FFMPEG.
 
-If you want to switch to the old style you can change that using the config key: {{{use.old.style.ffmpeg.map.option}}}
+If you want to switch to the old style you can change that using the config key: 
+{{{use.old.style.ffmpeg.map.option}}}
+
 Set this value to {{{1}}} to have the old params in the API call to FFMPEG.
 
 
