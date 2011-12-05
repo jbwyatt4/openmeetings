@@ -5,7 +5,7 @@ _this is available since version 1.9.x_
 
 == Default Configuration ==
 
-FFMPEG has a change in its API (possible since GIT revision 88bfe4518)
+FFMPEG has a change in its API (possibly since GIT revision 88bfe4518)
 
 By default !OpenMeetings expects you to have a new version of FFMPEG on your !OpenMeetings server installed and it will use the new API style to communicate with FFMPEG.
 
