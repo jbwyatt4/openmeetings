@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+    
+<!---
+	View for recorded contents list.
+	When you select 'Recordings' on the top menu, this class shows the list.
+-->
+<class name="lzRecordContent" extends="baseContentView">	
+
+    <handler name="oninit">
+        _mainScrollBar.setAttribute("visibility","hidden");
+    </handler>
+    
+    <handler name="ontabcontentleave">
+        _mainScrollBar.setAttribute("visibility","visible");
+        this._recordingsViewMain.stopStream();
+    </handler>    
+        
+    <lzRecordNavigation name="_navigationArea" />
+    
+    <lzRecordingsViewMain name="_recordingsViewMain" />
+    
+    <lzRecordingsViewBottom name="_recordingsViewBottom" />
+
+</class>
+
+
+</library>
