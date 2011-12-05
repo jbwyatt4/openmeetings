@@ -1,5 +1,7 @@
 #summary Using OpenMeetings with RTMPS and HTTPS
 
+_available since !OpenMeetings 1.9.x_
+
 There are 3 ways the client communicates with the server:
   * The flash-client uses RTMP protocol to transfer Audio/Video and to send and receive the user data (login et cetera) to the server and back
   * The browser uses HTTP protocol to load the SWF and to upload and download the files (documents, pdfs, images) to the server and back.
