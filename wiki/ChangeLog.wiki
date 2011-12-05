@@ -3,7 +3,7 @@
 
 == Changes in !OpenMeetings 1.9.0 (released on Tuesday 05.12.2011) ==
 
-  * Run OpenMeetings on SSL using HTTPS and RTMPS see [RTMPSandHTTPS]
+  * Run !OpenMeetings on SSL using HTTPS and RTMPS see [RTMPSandHTTPS]
   * Rename the complete application webapp path see [CustomizingWebappName]
   * rtmpT (rtmp over HTTP Tunneling) working again
   * Save polls: You can now save polls, delete polls and close polls. Also poll results are displayed as pie-charts.
