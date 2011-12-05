@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
+    
+	<!--  Session clear  -->    
+    <bean id="openmeetings.SessionClearJob" class="org.openmeetings.app.quartz.scheduler.SessionClearJob" />
+    
+	<bean id="sessionClearJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject"><ref bean="openmeetings.SessionClearJob"/></property>
+	    <property name="targetMethod"><value>doIt</value></property>
+	    <property name="concurrent" value="false"/>
+	</bean>
+	
+	<bean id="triggerSessionClear" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<!-- see the example of method invoking job above -->    
+			<ref bean="sessionClearJob"/>
+		</property>
+		<property name="startDelay">
+			<!-- 5 seconds -->
+			<value>5000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- repeat every 300 seconds == 5 minutes -->
+			<value>300000</value>
+		</property>
+	</bean>
+	
+	<!--  Recording  -->    
+	<bean id="openmeetings.RecordingJob" class="org.openmeetings.app.quartz.scheduler.RecordingJob"/>
+    
+	<bean id="quartzRecordingCheck" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject"><ref bean="openmeetings.RecordingJob"/></property>
+	    <property name="targetMethod"><value>doIt</value></property>
+	    <property name="concurrent" value="false"/>
+	</bean>
+	
+	<bean id="triggerRecording" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="quartzRecordingCheck"/>
+		</property>
+		<property name="startDelay">
+			<!-- 5 seconds -->
+			<value>5000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- repeat every 3 seconds -->
+			<value>3000</value>
+		</property>
+	</bean>
+
+	<!--  Meeting Reminder  -->    
+	<bean id="openmeetings.MeetingReminderJob" class="org.openmeetings.app.quartz.scheduler.MeetingReminderJob"/>
+	
+	<bean id="meetingReminderClear" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject"><ref bean="openmeetings.MeetingReminderJob"/></property>
+	    <property name="targetMethod"><value>doIt</value></property>
+	    <property name="concurrent" value="false"/>
+	</bean>
+	
+	<bean id="triggerMeetingReminder" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<!-- see the example of method invoking job above -->    
+			<ref bean="meetingReminderClear"/>
+		</property>
+		<property name="startDelay">
+			<!-- 5 seconds -->
+			<value>5000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- repeat every 100 seconds -->
+			<value>100000</value>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref local="triggerSessionClear" />
+	      <ref local="triggerRecording" />
+	      <ref local="triggerMeetingReminder" />
+	    </list>
+	  </property>
+	</bean>    
+</beans>

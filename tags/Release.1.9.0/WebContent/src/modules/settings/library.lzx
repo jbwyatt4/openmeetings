@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+	<resource name="image_loading_placeholder_rsc" 
+			  src="resources/loading_symbol.swf" />
+	
+	<resource name="private_message_select_part_rsc" 
+			  src="resources/select_part.png" />	
+			  
+	<resource name="private_message_send_rsc" 
+			  src="resources/folder_sent_mail.png" />	 
+			  
+	<resource name="private_message_receive_rsc" 
+			  src="resources/mail-closed-alt-receive.png" />	
+			   
+	<resource name="private_message_add_rsc" 
+			  src="resources/mail-closed-add.png" />	
+			  
+	<resource name="private_message_trash_rsc" 
+			  src="resources/trash.png" />	
+	
+	<resource name="private_message_folder_add_rsc" 
+			  src="resources/folder_new.png" />		
+	
+	<resource name="private_message_folder_rsc" 
+			  src="resources/folder.png" />	
+			  
+	<resource name="private_message_inbox_rsc" 
+			  src="resources/folder_inbox.png" />	
+			  
+	<resource name="user_contact_calendar_add_rsc" 
+              src="resources/calendar-add.png" />  
+			  
+	<resource name="user_contact_calendar_delete_rsc" 
+              src="resources/calendar-delete.png" /> 
+              
+    <resource name="user_contact_calendar_system_undo_rsc" 
+              src="resources/system-undo.png" />   
+   
+    <include href="privatemessages/" />
+    <include href="usercontacts/" />
+    <include href="searchuserprofile/" />
+    
+    <include href="viewUserProfile.lzx" />
+    <include href="userSettings.lzx" />
+    <include href="editUserProfile.lzx" />
+
+</library>

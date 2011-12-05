@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+    <resource name="flv_recorder_play_rsc" src="resources/webstart_play.png" />
+    <resource name="flv_recorder_play_small_rsc" src="resources/webstart_play_small.png" />
+    <resource name="flv_recorder_stop_small_rsc" src="resources/webstart_stop_small.png" />
+    <resource name="flv_progress_pointer_rsc" src="resources/progress_pointer.swf" />
+    <resource name="flv_progress_pointer_big_rsc" src="resources/progress_pointer_big.swf" />
+    
+    <resource name="flv_download_rsc" src="resources/tool_drop_target.png" />
+    
+    <resource name="icon_flv_recording_video_end_rsc" src="resources/icon_flv_recording_video_end.png" />
+    <resource name="icon_flv_recording_video_start_rsc" src="resources/icon_flv_recording_video_start.png" />
+    
+    <resource name="recorder_show_log_rsc" src="resources/messagebox_info.png" />
+    
+    <include href="baseChooseIconFLVView.lzx" />
+    <include href="messageRecordingWin.lzx" />
+    <include href="dynamicFLVName.lzx" />
+    <include href="dragItemFLVExplorer.lzx" />
+    <include href="lzRecordContent.lzx" />
+    <include href="lzRecordNavigation.lzx" />
+    <include href="contentviews/" />
+    <include href="treeitems/" />
+
+</library>
