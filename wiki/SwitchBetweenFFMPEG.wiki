@@ -1,4 +1,4 @@
-#summary Howto switch between different version of FFMPEG
+#summary Howto switch between different versions of FFMPEG
 #labels Configuration
 
 _this is available since version 1.9.x_
