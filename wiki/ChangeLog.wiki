@@ -16,7 +16,7 @@
   * Changed calendar E-Mail and fixed iCal invitation in Gmail to display correctly
   * Calendar meeting reminder email is now send 15 minutes upfront (15 minutes can be changed in configuration)
   * Default room size for conference rooms created via calendar is now 50 (default room size can be changed in configuration)
-  * Minimum length for user and password is not 4 (minimum length can be changed in configuration)
+  * Minimum length for user and password is now 4 (minimum length can be changed in configuration)
   * Fix new FFMPEG param style (you can revert to use the old param style through the config_key "use.old.style.ffmpeg.map.option") see [SwitchBetweenFFMPEG]
   * Max upload size can be configured new (max_upload_size)
   * Fix calendar if first-day-in-week is configured to be Monday instead of Sunday (default)
