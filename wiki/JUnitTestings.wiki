@@ -17,8 +17,9 @@ ant test
 ant -Dtestcases=TestError* test
 }}}
   # running tests from Eclipse IDE:
+    * copy src/META-INF/*yourdb`_`*persistence.xml to src/META-INF/persistence.xml
     * Start Eclipse
-    * Load workspace with Openmeetings project
+    * Load workspace with Openmeetings project (or refresh existing project)
     * Select "Debug Configurations..."
 http://openmeetings.googlecode.com/svn/docs/junit/DebugConfigurations.png
     * Create New Junit configuration, give it a name and select test class
