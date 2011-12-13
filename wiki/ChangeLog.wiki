@@ -3,7 +3,7 @@
 
 == Changes in !OpenMeetings 1.9.1 (released on Tueasday 13.12.2011) ==
 
-  * Fixes JAR conflict that leads to startup problems on some machines (javax.persistence.* Exception)
+  * Fixes JAR conflict that leads to startup problems on some machines (javax.persistence.`*` Exception)
 
 == Changes in !OpenMeetings 1.9.0 (released on Tuesday 05.12.2011) ==
 
