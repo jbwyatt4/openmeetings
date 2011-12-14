@@ -1,7 +1,0 @@
-# vim:ft=sh:nowrap
-RUN_HOME=/usr/share/red5-openmeetings
-RUN_USER=root
-RUN_GROUP=root
-
-# SOFFICE_PORT=8100
-# SOFFICE_ARGS="-nologo -headless -nofirststartwizard -accept=socket,host=localhost,port=$SOFFICE_PORT;urp;StarOffice.ServiceManager"
