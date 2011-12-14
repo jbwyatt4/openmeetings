@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE library SYSTEM "/project.dtd">
+<library>
+
+<!-- admin modules -->
+<!-- -->
+	<include href="useradmin/" />
+	<include href="orgadmin/" />
+	<include href="roomadmin/" />
+	<include href="confadmin/" />
+	<include href="languageseditor/" />
+	<include href="ldap/" />
+	<!-- -->
+	<include href="backup/" />
+    <include href="connections/" />
+
+</library>
