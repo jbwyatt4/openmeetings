@@ -26,11 +26,12 @@ To compile the client you can also use ant:
 ant                           # compiles a complete package into the folder dist
 ant compile.laszlo.main       # compiles the client into main.swf8.swf 
 ant compile.laszlo.main.debug # compiles the debug-client into maindebug.swf8.swf
+ant -Ddb=<name of DB>         # will copy <name of DB>_persistense.xml to persistense.xml (for ex. ant -Ddb=mysql will set mysql as default DB)
 }}}
 
 To compile just the openmeetings JAR file:
 {{{
-ant -f build_openmeetings_jar.xml
+ant jar.only
 }}}
 
 To run Junit tests using ANT see [JUnitTestings]
