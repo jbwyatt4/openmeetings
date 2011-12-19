@@ -1,5 +1,8 @@
 #sidebar SideBarMainIndex
 
+<b><font color="#FF0000">**** !OpenMeetings moves to Apache Foundation, updated your bookmarks to the new project page:<br/><a href="http://incubator.apache.org/openmeetings/">http://incubator.apache.org/openmeetings/</a> ****</font></b>
+----
+
 == Install, Upgrade, Changelog ==
 
 Follow our guide to [InstallationOpenMeetings install OpenMeetings], or to [UpdateOpenMeetings upgrade OpenMeetings], we publish our latest changes in the [ChangeLog  Changelog].
