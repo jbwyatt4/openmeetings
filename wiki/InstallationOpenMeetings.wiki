@@ -1,6 +1,9 @@
 #summary Installation OpenMeetings
 #labels Featured
 
+<b><font color="#FF0000">**** !OpenMeetings moves to Apache Foundation, updated your bookmarks to the new project page:<br/><a href="http://incubator.apache.org/openmeetings/">http://incubator.apache.org/openmeetings/</a> ****</font></b>
+----
+
 To update from past versions or migrate see UpdateOpenMeetings, for payed services see [http://www.openmeetings.de/hosting-and-service/ Service and Hosting]
 
 [http://openmeetings.googlecode.com/files/openmeetings_1_9_1_r4707.zip http://openmeetings.googlecode.com/svn/docs/installation_instructions.png]
