@@ -1,5 +1,21 @@
 #summary former news
 
+  * Updated SOAP/REST API Docs at http://incubator.apache.org/openmeetings/SoapRestAPI.html, at 15.12.2011
+  * Apache !OpenMeetings Website at Apache Incubator see http://incubator.apache.org/openmeetings, at 15.12.2011
+  * !OpenMeetings 1.9.1 released, see ChangeLog, at 13.12.2011
+  * [http://opensourcewebconferencing.blogspot.com/2011/12/openmeetings-190-available.html OpenMeetings 1.9.0 released], see ChangeLog, at 05.12.2011
+  * [http://demo.openmeetings.de Demo server] updated to r4665, at 03.12.2011
+  * Running !OpenMeetings on Oracle DB, see [http://code.google.com/p/openmeetings/wiki/Configuration_Oracle Configuration Oracle], at 01.12.2011
+  * !OpenMeetings SugarCRM Plugin 1.2 released, see ChangeLog, at 21.11.2011 
+  * !OpenMeetings 1.8.8 released, see ChangeLog, at 14.11.2011 
+  * !OpenMeetings accepted for Apache Incubation, see [http://opensourcewebconferencing.blogspot.com/2011/11/openmeetings-accepted-for-apache.html article in our blog], at 12.11.2011
+  * !OpenMeetings 1.8.7 released, see ChangeLog, at 06.11.2011 
+  * !OpenMeetings 1.8.6 released, see ChangeLog, at 30.10.2011
+  * !OpenMeetings 1.8.5 released, see ChangeLog, at 22.10.2011
+  * !OpenMeetings Moodle Mod 1.3 released, see ChangeLog, at 19.10.2011 
+  * !OpenMeetings 1.8.4 released, see ChangeLog, at 08.10.2011 
+  * Moodle Mod 1.2 released, see ChangeLog, at 04.10.2011
+  * !OpenMeetings in EU-Project, see [http://www.osor.eu/studies/finland-and-sweden-collaborate-using-oss] at 20.09.2011
   * !OpenMeetings 1.8 released see ChangeLog, at 14.09.2011
   * Demo Server updated to r4227, at 13.09.2011
   * Demo Server updated to r4162, at 03.09.2011
