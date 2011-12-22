@@ -3,4 +3,6 @@
 
 <b><font color="#FF0000">**** !OpenMeetings moves to Apache Foundation, update your bookmarks to the new project page:<br/><a href="http://incubator.apache.org/openmeetings/">http://incubator.apache.org/openmeetings/</a> ****</font></b>
 
+
+New Issue tracker is located: https://issues.apache.org/jira/browse/OPENMEETINGS
 ----
