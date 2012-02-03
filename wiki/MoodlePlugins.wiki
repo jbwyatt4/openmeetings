@@ -1,73 +1,8 @@
-#summary Moodle Plugin Description
 #labels Featured
+OpenMeetings moves to Apache Foundation, update your bookmarks to the new project page:
 
-<wiki:toc max_depth="10" />
+http://incubator.apache.org/openmeetings/
 
-== Demo ==
+New Issue tracker is located: https://issues.apache.org/jira/browse/OPENMEETINGS
 
-  * http://moodle.openmeetings.de (_updated at 02.10.2011 to r4343_)
-  _you don't need to register to get into this Course_ 
-
-== Video Showing the installation and integration (no Audio in this Video) of !OpenMeetings Moodle Mod ==
-<wiki:video url="http://www.youtube.com/watch?v=qA2e4rajvL0"/>
-
-== URLs ==
-
-  * Download see http://code.google.com/p/openmeetings/downloads/list
-  * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Technical-Review Technical-Review]
-  * Demo: http://moodle.openmeetings.de (You can login as Guest)
-  * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Source-Locations Source-Locations]
-
-== Help And Support ==
-
-  * Mailing List: http://groups.google.com/group/openmeetings-user
-  * [Jobs More Developers and Freelancers]
-
-=== Installation ===
-
-  * For Moodle Mod 1.2 you need at least OpenMeetings 1.8.3
-  * The Moodle Plugin 0.9 is the last module that is build against Moodle 1.9.xx, later versions require Moodle 2.x.x. However Moodle Mod 0.9 is still compatible with latest !OpenMeetings Version.
-  * Download see http://code.google.com/p/openmeetings/downloads/list
-  * Unpack the content into $MOODLE_ROOT/mod/
-  * goto http://$YOUR_MOODLE_HOST/$MOODLE_WWW_ROOT/admin => watch the Table populated
-  * Goto the Admin-Panel of the Plugin (Module->Activities->!OpenMeetings) and alter the Settings, see:
-
-http://openmeetings.googlecode.com/svn/docs/moodle_plugin_conference.png
-
-=== Usage ===
-
-  * Create/Goto a Course
-  * Turn editing on
-  * Add a new Activity "!OpenMeetings", give it a name and store/access the Room
-
-=== Additional Information ===
-
-The Plugin does not use all customization and configuration values of OpenMeetings. Its currently limited to 4x4 Users and the Language is set global, the Color-Theme is the Default one configured in !OpenMeetings. This might change in the future.
-
-Future Features:
-  * Access Files of Conference Rooms from outside the Meeting room (Upload view Files before the meeting/preparing)
-  * Manage all available Rooms through the admin interface
-  * Configurable number of Participants
-  * Auto load language from Course/Portal Settings
-  * Advanced Error Handlers
-  * Add Recordings of Meetings to Course-Page
-
-== Technical-Review ==
-
-  * The Plugins are build using the SoapMethods.
-  * You can also use these rooms directly from inside !OpenMeetings.
-  * The nusoap-php-library is NOT the original one. It is modified 
-== Source-Locations ==
-
-  * The Sources of the the Conference-Plugin can be found [http://openmeetings.googlecode.com/svn/trunk/plugins/openmeetings_moodleplugin/openmeetings/ here]
-
-== Debug, Problems and Some Tipps ==
-
-If you encounter problems with the Plugin try to:
-  * Enable Debug in Moodle 
-  * Goto the File $MOODLE_HOME/mod/openmeetings/view.php uncomment the echo, sothat the URL to the OpenMeetings Room will be printed in the Browser. Check that URL manually, it should work to also use that link and copy it directly into the Browsers bar.
-
-If you have this error *wsdl error: Getting http://<public-ip>:5080/openmeetings/services/UserService?wsdl - HTTP ERROR: cURL ERROR: 7: couldn't connect to host
-url: http://<public-ip>:5080/openmeetings/services/UserService?wsdl* then it means that your moodle server is not able to connect to the openmeetings server. Try to login via ssh to the moodle server and ping the openmeetings host.
-
-  * You need an !OpenMeetings user with user level "SOAP-Only" or "admin", usual !OpenMeetings user (for example signing up at demo.openmeetings.de) will NOT work!
+New Mailing Lists located at: http://incubator.apache.org/openmeetings/mail-lists.html 
