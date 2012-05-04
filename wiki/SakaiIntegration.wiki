@@ -36,20 +36,11 @@ We understand that the demo is in Spanish so i made a little tutorial to enter w
 
 1-Click in the square to log in as Diego:
 
-http://demo.samoo.es/access/content/public/Imagenes%20publicas/Enter.jpg
-
 2-Click in the square to select the course:
-
-http://demo.samoo.es/access/content/public/Imagenes%20publicas/SelectCourse.jpg
 
 3-Click in the square to select the videoconference tool:
 
-http://demo.samoo.es/access/content/public/Imagenes%20publicas/SelectTool.jpg
-
 4-Test the integration:
-
-http://demo.samoo.es/access/content/public/Imagenes%20publicas/TestIntegration.jpg
-
 
 
 You can also change the language to English in Sakai's preferences.
