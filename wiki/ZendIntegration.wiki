@@ -19,6 +19,6 @@ download ZIP : https://github.com/mjebrini/openmeetingsapi/zipball/master
 <br>
 This library written by: 
 <br>
-Mohammed Jebrini <me@jebrini.net>
+Mohammed Jebrini <mohammed.jebrini@gmail>
 <br>
 website : http://www.jebrini.net 
